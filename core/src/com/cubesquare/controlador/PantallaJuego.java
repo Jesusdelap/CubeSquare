@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.cubesquare.herramientas.Fabricas;
 import com.cubesquare.modelo.entidades.ActorJugador;
+import com.cubesquare.modelo.entidades.ActorPincho;
 import com.cubesquare.modelo.entidades.ActorSuelo;
 
 public class PantallaJuego extends PantallaBase {
@@ -18,6 +19,7 @@ public class PantallaJuego extends PantallaBase {
     private World world;
     private ActorSuelo suelo;
     private ActorJugador jugador;
+    private ActorPincho pincho;
 
     public PantallaJuego(Main game) {
         super(game);
@@ -32,6 +34,8 @@ public class PantallaJuego extends PantallaBase {
 
         suelo = Fabricas.sueloFactory(world);
         jugador = new ActorJugador( world, new Texture("cubo.png"), new Vector2(2,5 ));
+        pincho = new ActorPincho( world, new Texture("pincho.png"), new Vector2(2,1 ));
+        escenario.addActor(pincho);
         escenario.addActor(suelo);
         escenario.addActor(jugador);
     }
