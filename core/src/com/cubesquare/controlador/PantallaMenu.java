@@ -21,7 +21,7 @@ public class PantallaMenu extends PantallaBase {
 	private Stage escenario;
 	private Texture cubo;
 	private Image img;
-	private TextButton btnJuego;
+	private TextButton btnJuego,btnSalir;
 	private Skin skin;
 
 
@@ -46,25 +46,39 @@ public class PantallaMenu extends PantallaBase {
 
 		btnJuego = new TextButton("Play", skin);
 		btnJuego.setSize(200, 80);
-		btnJuego.setPosition(40, 140);
+		btnJuego.setPosition(40, 220);
 
-		btnJuego.addListener( new ClickListener() {
-			public void clicked(InputEvent event, float x, float y) {
-				System.out.println("clickeado");
+        btnJuego.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+				System.out.println("clickeado btnJuego");
 				PantallaMenu.super.getGame().setScreen(PantallaMenu.super.getGame().getPantallaJuego());
 			};
 		});
+
+        btnSalir  = new TextButton("Salir", skin);
+        btnSalir.setSize(200, 80);
+        btnSalir.setPosition(btnJuego.getX(), btnJuego.getY()-90);
+
+        btnSalir.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("clickeado btnSalir");
+                System.exit(0);
+            };
+        });
 
 
 
 
 		escenario.addActor(btnJuego);
+        escenario.addActor(btnSalir);
 		escenario.addActor(img);
 		Gdx.input.setInputProcessor(escenario);
 	}
 
 	/**
-	 *Se llama cada vez que se actualiza la pantalla 30 o 60 veces por segundo dependiedo del dispositivo
+	 *Se llama cada vez que se actualiza la pantalla (30 o 60 veces por segundo dependiedo del dispositivo)
 	 *
 	 * @author Jesús Peña
 	 *
@@ -80,6 +94,15 @@ public class PantallaMenu extends PantallaBase {
 		escenario.draw();
 	}
 
+
+    /**
+     *Este metodo se ejecuta al cerrar la pantalla,
+     * destrulle todos los recursos utilizados
+     *
+     * @author Jesús Peña
+     *
+     * @return void
+     */
 	@Override
 	public void dispose () {
 		cubo.dispose();

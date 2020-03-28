@@ -31,7 +31,7 @@ public class ActorJugador extends Actor implements Destruible {
         body = world.createBody(def);
 
         PolygonShape box = new PolygonShape();
-        box.setAsBox(1, 1);
+        box.setAsBox(0.5f, 0.5f);
         fixture = body.createFixture(box, 1);
         fixture.setUserData("cube");
         box.dispose();

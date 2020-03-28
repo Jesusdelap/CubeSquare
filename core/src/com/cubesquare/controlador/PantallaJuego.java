@@ -28,10 +28,10 @@ public class PantallaJuego extends PantallaBase {
     public void show() {
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
         world = new World(new Vector2(0, 0),true);
-        world.setGravity(new Vector2(0,-10));
+        world.setGravity(new Vector2(0,-15));
 
         suelo = Fabricas.sueloFactory(world);
-        jugador = new ActorJugador( world, new Texture("cubo.png"), new Vector2(2,2 ));
+        jugador = new ActorJugador( world, new Texture("cubo.png"), new Vector2(2,5 ));
         escenario.addActor(suelo);
         escenario.addActor(jugador);
     }
