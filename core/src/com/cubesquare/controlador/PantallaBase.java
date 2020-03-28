@@ -11,9 +11,6 @@ public abstract class PantallaBase implements Screen {
      */
     protected Main game;
 
-
-
-
     public PantallaBase(Main game) {
         this.game = game;
     }

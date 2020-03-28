@@ -11,21 +11,21 @@ public class Main extends Game {
     private AssetManager manager;
     private PantallaBase pantallaMenu,pantallaJuego;
 
-
-
     @Override
     public void create() {
         //Se cargan los assets
         manager = new AssetManager();
         manager.load("cubo.png", Texture.class);
+        manager.load("floor.png", Texture.class);
+        manager.load("spike.png", Texture.class);
         manager.finishLoading();
 
-        //inicializas las pantallas
+        //Se inicializan las pantallas
         pantallaMenu = new PantallaMenu(this);
         pantallaJuego = new PantallaJuego(this);
 
-        //cargas el menu
-        setScreen( pantallaMenu);
+        //Se carga el menu
+        setScreen(pantallaMenu);
 
     }
 

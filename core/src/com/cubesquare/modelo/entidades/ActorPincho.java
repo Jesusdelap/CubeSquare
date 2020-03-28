@@ -12,19 +12,19 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class ActorPincho extends Actor implements Destruible {
 
-    private World world;
+    private World mundo;
     private Texture texture;
     private Vector2 vector2;
     private Body body;
     private Fixture fixture;
 
     public ActorPincho(World world, Texture texture, Vector2 vector2) {
-        this.world = world;
+        this.mundo = world;
         this.texture = texture;
         this.vector2 = vector2;
 
         BodyDef def = new BodyDef();
-        def.position.set(vector2.x + 0.5f, vector2.y - 0.5f);
+        def.position.set(vector2.x , vector2.y+0.5f);
         body = world.createBody(def);
 
         PolygonShape triangulo = new PolygonShape();
@@ -35,12 +35,14 @@ public class ActorPincho extends Actor implements Destruible {
         triangulo.set(vertices);
 
         fixture = body.createFixture(triangulo, 1);
-        fixture.setUserData("pico");
+        fixture.setUserData("pincho");
         triangulo.dispose();
 
-        setSize( 100, 100);
+        setSize( (vector2.x - 0.5f)*100, vector2.y*100);
         setPosition(vector2.x*100, vector2.y*100);
     }
+
+
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
@@ -51,7 +53,7 @@ public class ActorPincho extends Actor implements Destruible {
     @Override
     public void destroy() {
         body.destroyFixture(fixture);
-        world.destroyBody(body);
+        mundo.destroyBody(body);
     }
 
 

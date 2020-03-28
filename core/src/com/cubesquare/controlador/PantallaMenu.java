@@ -10,10 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class PantallaMenu extends PantallaBase {
@@ -24,11 +26,9 @@ public class PantallaMenu extends PantallaBase {
 	private TextButton btnJuego,btnSalir;
 	private Skin skin;
 
-
 	public PantallaMenu(Main game) {
 		super(game);
 		escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
-
 	}
 
 	/**
@@ -41,12 +41,18 @@ public class PantallaMenu extends PantallaBase {
 	@Override
 	public void show() {
 
-		img = new Image(super.getGame().getManager().get("cubo.png",Texture.class));
 		skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+
+		Label titulo =new Label(" CubeSquare",skin);
+		titulo.setPosition(Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()-100);
+		titulo.setFontScale(2);
 
 		btnJuego = new TextButton("Play", skin);
 		btnJuego.setSize(200, 80);
-		btnJuego.setPosition(40, 220);
+		btnJuego.setPosition(titulo.getX(), titulo.getY()-100);
+
+		img = new Image(super.getGame().getManager().get("cubo.png",Texture.class));
+		img.setPosition(btnJuego.getX()-150,btnJuego.getY()-50);
 
         btnJuego.addCaptureListener(new ChangeListener() {
             @Override
@@ -70,7 +76,7 @@ public class PantallaMenu extends PantallaBase {
 
 
 
-
+		escenario.addActor(titulo);
 		escenario.addActor(btnJuego);
         escenario.addActor(btnSalir);
 		escenario.addActor(img);

@@ -10,51 +10,52 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import javax.xml.soap.Text;
-
 public class ActorJugador extends Actor implements Destruible {
 
-    private World world;
+    private World mundo;
     private Texture texture;
     private Vector2 vector2;
     private Body body;
     private Fixture fixture;
 
     public ActorJugador(World world, Texture texture, Vector2 vector2) {
-        this.world = world;
+        this.mundo = world;
         this.texture = texture;
         this.vector2 = vector2;
 
         BodyDef def = new BodyDef();
-        def.position.set(vector2.x +0.5f,vector2.y- 0.5f);
+        def.position.set(vector2.x,vector2.y);
         def.type = BodyDef.BodyType.DynamicBody;
         body = world.createBody(def);
 
         PolygonShape box = new PolygonShape();
         box.setAsBox(0.5f, 0.5f);
-        fixture = body.createFixture(box, 1);
-        fixture.setUserData("cube");
+        fixture = body.createFixture(box, 3);
+        fixture.setUserData("cubo");
         box.dispose();
 
         setSize( 100, 100);
-        setPosition(vector2.x*100, vector2.y*100);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-
         setPosition((body.getPosition().x - 0.5f) * 100, (body.getPosition().y - 0.5f) * 100);
-
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 
     @Override
     public void destroy() {
         body.destroyFixture(fixture);
-        world.destroyBody(body);
+        mundo.destroyBody(body);
     }
-    public void jump() {
 
+   /* @Override
+    public void act(float delta) {
+        float velocidadEjeY = body.getLinearVelocity().y;
+        body.setLinearVelocity(8, velocidadEjeY);
+    }*/
+
+    public void jump() {
         Vector2 position = body.getPosition();
        // body.applyLinearImpulse(0, es.danirod.jddprototype.game.Constants.IMPULSE_JUMP, position.x, position.y, true);
 
