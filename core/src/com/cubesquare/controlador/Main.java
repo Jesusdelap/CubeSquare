@@ -18,6 +18,7 @@ public class Main extends Game {
         manager.load("cubo.png", Texture.class);
         manager.load("floor.png", Texture.class);
         manager.load("spike.png", Texture.class);
+        manager.load("pincho.png", Texture.class);
         manager.finishLoading();
 
         //Se inicializan las pantallas

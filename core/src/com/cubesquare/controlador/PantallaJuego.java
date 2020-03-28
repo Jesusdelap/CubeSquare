@@ -7,7 +7,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.cubesquare.herramientas.Fabricas;
 import com.cubesquare.modelo.entidades.ActorJugador;
@@ -22,6 +26,8 @@ public class PantallaJuego extends PantallaBase {
     private ActorJugador jugador;
     private ActorPincho pincho;
     private OrthographicCamera camara;
+    private TextButton btnJuego;
+    private Skin skin;
 
     public PantallaJuego(Main game) {
         super(game);
@@ -33,17 +39,31 @@ public class PantallaJuego extends PantallaBase {
     @Override
     public void show() {
 
+        skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        btnJuego = new TextButton("Menu", skin);
+        btnJuego.setSize(90, 40);
+        btnJuego.setPosition(Gdx.graphics.getWidth()-100, Gdx.graphics.getHeight()-50);
+        btnJuego.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("clickeado btnMenu");
+                PantallaJuego.super.getGame().setScreen(PantallaJuego.super.getGame().getPantallaMenu());
+            };
+        });
+
        // mundo.setGravity(new Vector2(0, -10));
 
         Texture texturaJugador = game.getManager().get("cubo.png");
         Texture texturaPincho = game.getManager().get("spike.png");
 
         suelo = Fabricas.sueloFactory(mundo);
-        jugador = new ActorJugador(mundo, texturaJugador, new Vector2(2.5f, 6));
-        pincho = new ActorPincho(mundo, texturaPincho, new Vector2(2, 1));
+        jugador = new ActorJugador(mundo, texturaJugador, new Vector2(2, 6));
+        pincho = new ActorPincho(mundo, texturaPincho, new Vector2(2.1f, 1));
         escenario.addActor(pincho);
         escenario.addActor(suelo);
         escenario.addActor(jugador);
+        escenario.addActor(btnJuego);
+        Gdx.input.setInputProcessor(escenario);
     }
 
     @Override
@@ -57,10 +77,16 @@ public class PantallaJuego extends PantallaBase {
     }
 
     @Override
-    public void dispose() {
-        escenario.dispose();
+    public void hide() {
+        escenario.clear();
         suelo.destroy();
         jugador.destroy();
+    }
+
+    @Override
+    public void dispose() {
+        skin.dispose();
+        escenario.dispose();
         mundo.dispose();
     }
 }

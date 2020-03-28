@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class ActorSuelo extends Actor implements Destruible {
 
-    private Texture floor;
+    private Texture texture;
 
     private World world;
 
@@ -22,7 +22,7 @@ public class ActorSuelo extends Actor implements Destruible {
 
     public ActorSuelo(World world, Texture floor, float width, Vector2 vector2) {
         this.world = world;
-        this.floor = floor;
+        this.texture = floor;
 
 
         BodyDef def = new BodyDef();
@@ -56,7 +56,7 @@ public class ActorSuelo extends Actor implements Destruible {
     @Override
     public void draw(Batch batch, float parentAlpha) {
 
-        batch.draw(floor, getX(), getY(), getWidth(), getHeight());
+        batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 
     @Override
@@ -68,7 +68,7 @@ public class ActorSuelo extends Actor implements Destruible {
     @Override
     public String toString() {
         return "ActorSuelo{" +
-                "floor=" + floor +
+                "floor=" + texture +
                 ", world=" + world +
                 ", body=" + body +
                 ", leftBody=" + leftBody +

@@ -31,15 +31,15 @@ public class ActorPincho extends Actor implements Destruible {
         Vector2[] vertices = new Vector2[3];
         vertices[0] = new Vector2(-0.5f, -0.5f);
         vertices[1] = new Vector2(0.5f, -0.5f);
-        vertices[2] = new Vector2(0, 0.5f);
+        vertices[2] = new Vector2(0, 0.59f);
         triangulo.set(vertices);
 
         fixture = body.createFixture(triangulo, 1);
         fixture.setUserData("pincho");
         triangulo.dispose();
 
-        setSize( (vector2.x - 0.5f)*100, vector2.y*100);
-        setPosition(vector2.x*100, vector2.y*100);
+        setSize( 100, 100);
+        setPosition((vector2.x - 0.5f)*100, vector2.y*100);
     }
 
 
