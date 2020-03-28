@@ -53,4 +53,12 @@ public abstract class PantallaBase implements Screen {
     public void dispose() {
         // This method is invoked when the game closes.
     }
+
+    public Main getGame() {
+        return game;
+    }
+
+    public void setGame(Main game) {
+        this.game = game;
+    }
 }
