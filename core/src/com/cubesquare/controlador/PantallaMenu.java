@@ -35,20 +35,24 @@ public class PantallaMenu extends PantallaBase {
 	public void show() {
 		cubo = new Texture("cubo.png");
 		img = new Image(cubo);
-		escenario.addActor(img);
-		skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-		btnJuego = new TextButton("Play", skin);
+		//skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+
+		/*btnJuego = new TextButton("Play", skin);
 		btnJuego.setSize(200, 80);
 		btnJuego.setPosition(40, 140);
 
 		btnJuego.addCaptureListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				// Take me to the game screen!
 				juego.setScreen(juego.gameScreen);
 			}
 		});
+
+
+		*/
+		//escenario.addActor(btnJuego);
+		escenario.addActor(img);
 	}
 
 	@Override
