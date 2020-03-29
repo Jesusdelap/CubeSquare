@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.cubesquare.herramientas.Constantes;
 
 public class ActorJugador extends Actor implements Destruible {
 
@@ -42,18 +43,17 @@ public class ActorJugador extends Actor implements Destruible {
         box.setAsBox(0.5f, 0.5f);
         fixture = body.createFixture(box, 3);
         fixture.setUserData("cubo");
-
         box.dispose();
 
-        setSize( 100, 100);
+        //mide 1*1 el personaje
+        setSize( Constantes.PIXELS_IN_METER_X, Constantes.PIXELS_IN_METER_Y);
 
     }
     @Override
     public void act(float delta) {
 
         if(!fin){
-            float velY = body.getLinearVelocity().y;
-            body.setLinearVelocity(2, velY);
+            body.setLinearVelocity(2f, body.getLinearVelocity().y);
             if (Gdx.input.justTouched() || saltoContinuo) {
                 saltoContinuo = false;
                 cuboSalto();
@@ -62,7 +62,7 @@ public class ActorJugador extends Actor implements Destruible {
     }
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        setPosition((body.getPosition().x - 0.5f) * 100, (body.getPosition().y - 0.5f) * 100);
+        setPosition((body.getPosition().x - 0.5f) * Constantes.PIXELS_IN_METER_X, (body.getPosition().y - 0.5f) *Constantes.PIXELS_IN_METER_Y);
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 

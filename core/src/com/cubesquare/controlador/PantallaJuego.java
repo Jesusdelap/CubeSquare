@@ -20,10 +20,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.cubesquare.herramientas.Constantes;
 import com.cubesquare.herramientas.Fabricas;
 import com.cubesquare.modelo.entidades.ActorJugador;
 import com.cubesquare.modelo.entidades.ActorPincho;
 import com.cubesquare.modelo.entidades.ActorSuelo;
+import com.cubesquare.modelo.entidades.Destruible;
+
+import java.util.ArrayList;
 
 public class PantallaJuego extends PantallaBase {
 
@@ -36,12 +40,16 @@ public class PantallaJuego extends PantallaBase {
     private TextButton btnJuego;
     private Skin skin;
     private Body body;
+    private float distancia;
+    private ArrayList<Actor> arrayMapa;
 
     public PantallaJuego(Main game) {
         super(game);
-        escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        System.out.println("pixeles por metro en eje x"+Constantes.PIXELS_IN_METER_X);
+        System.out.println("pixeles por metro en eje y"+Constantes.PIXELS_IN_METER_Y);
+        escenario = new Stage(new FitViewport( Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
         mundo = new World(new Vector2(0, -10), true); // Nuevo mundo de gravedad en eje Y = -10
-        //camara = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
     }
 
     @Override
@@ -59,16 +67,20 @@ public class PantallaJuego extends PantallaBase {
             };
         });
 
-       // mundo.setGravity(new Vector2(0, -10));
+        // mundo.setGravity(new Vector2(0, -10));
 
         Texture texturaJugador = game.getManager().get("cubo.png");
-        Texture texturaPincho = game.getManager().get("spike.png");
-
         suelo = Fabricas.sueloFactory(mundo);
         jugador = new ActorJugador(mundo, texturaJugador, new Vector2(1, 1.5f));
-        //pincho = new ActorPincho(mundo, texturaPincho, new Vector2(2.1f, 1));
-        pincho = new ActorPincho(mundo, texturaPincho, new Vector2(5f, 1));
-        escenario.addActor(pincho);
+
+
+        arrayMapa= Fabricas.mapaFactory(10,new Vector2(5f, 1),mundo,game.getManager());
+
+        for (Actor a:arrayMapa) {
+            escenario.addActor(a);
+        }
+
+
         escenario.addActor(suelo);
         escenario.addActor(jugador);
         escenario.addActor(btnJuego);
@@ -82,7 +94,7 @@ public class PantallaJuego extends PantallaBase {
                     return false;
                 }
                 return (userDataA.equals(userA) && userDataB.equals(userB))||
-                (userDataA.equals(userB) && userDataB.equals(userA));}
+                        (userDataA.equals(userB) && userDataB.equals(userA));}
             @Override
             public void beginContact(Contact contact) {
                 if(choque(contact,"cubo","suelo")){
@@ -121,19 +133,26 @@ public class PantallaJuego extends PantallaBase {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         escenario.act();
         mundo.step(delta, 6, 2);
-        //camara.update();
+
 
         if(!jugador.isFin()){
-        escenario.getCamera().translate(2*delta*100f,0,0);
+            distancia = 2f*delta*Constantes.PIXELS_IN_METER_X+distancia;
+            escenario.getCamera().translate(2f*delta*Constantes.PIXELS_IN_METER_X,0,0);
         }
         escenario.draw();
 
     }
     @Override
     public void hide() {
+        escenario.getCamera().translate(-distancia,0,0);
+        distancia=0;
         escenario.clear();
         suelo.destroy();
         jugador.destroy();
+        for (Actor a:arrayMapa) {
+            Destruible d = (Destruible) a;
+            d.destroy();
+        }
 
     }
 
@@ -142,7 +161,7 @@ public class PantallaJuego extends PantallaBase {
         skin.dispose();
         escenario.dispose();
         mundo.dispose();
+
     }
-
-
 }
+
