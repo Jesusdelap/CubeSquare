@@ -5,7 +5,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -28,12 +35,13 @@ public class PantallaJuego extends PantallaBase {
     private OrthographicCamera camara;
     private TextButton btnJuego;
     private Skin skin;
+    private Body body;
 
     public PantallaJuego(Main game) {
         super(game);
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         mundo = new World(new Vector2(0, -10), true); // Nuevo mundo de gravedad en eje Y = -10
-        camara = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //camara = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     @Override
@@ -57,13 +65,54 @@ public class PantallaJuego extends PantallaBase {
         Texture texturaPincho = game.getManager().get("spike.png");
 
         suelo = Fabricas.sueloFactory(mundo);
-        jugador = new ActorJugador(mundo, texturaJugador, new Vector2(2, 6));
-        pincho = new ActorPincho(mundo, texturaPincho, new Vector2(2.1f, 1));
+        jugador = new ActorJugador(mundo, texturaJugador, new Vector2(1, 1.5f));
+        //pincho = new ActorPincho(mundo, texturaPincho, new Vector2(2.1f, 1));
+        pincho = new ActorPincho(mundo, texturaPincho, new Vector2(5f, 1));
         escenario.addActor(pincho);
         escenario.addActor(suelo);
         escenario.addActor(jugador);
         escenario.addActor(btnJuego);
         Gdx.input.setInputProcessor(escenario);
+
+        mundo.setContactListener(new ContactListener() {
+            private boolean choque(Contact contact, Object userA, Object userB) {
+                Object userDataA = contact.getFixtureA().getUserData();
+                Object userDataB = contact.getFixtureB().getUserData();
+                if (userDataA == null || userDataB == null) {
+                    return false;
+                }
+                return (userDataA.equals(userA) && userDataB.equals(userB))||
+                (userDataA.equals(userB) && userDataB.equals(userA));}
+            @Override
+            public void beginContact(Contact contact) {
+                if(choque(contact,"cubo","suelo")){
+                    jugador.setSaltando(false);
+                    if(Gdx.input.isTouched()){
+                        jugador.setSaltoContinuo(true);
+                    }
+                }
+                if(choque(contact,"cubo","pincho")){
+                    jugador.setFin(true);
+
+
+                }
+            }
+
+            @Override
+            public void endContact(Contact contact) {
+
+            }
+
+            @Override
+            public void preSolve(Contact contact, Manifold oldManifold) {
+
+            }
+
+            @Override
+            public void postSolve(Contact contact, ContactImpulse impulse) {
+
+            }
+        });
     }
 
     @Override
@@ -72,15 +121,20 @@ public class PantallaJuego extends PantallaBase {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         escenario.act();
         mundo.step(delta, 6, 2);
-        camara.update();
-        escenario.draw();
-    }
+        //camara.update();
 
+        if(!jugador.isFin()){
+        escenario.getCamera().translate(2*delta*100f,0,0);
+        }
+        escenario.draw();
+
+    }
     @Override
     public void hide() {
         escenario.clear();
         suelo.destroy();
         jugador.destroy();
+
     }
 
     @Override
@@ -89,4 +143,6 @@ public class PantallaJuego extends PantallaBase {
         escenario.dispose();
         mundo.dispose();
     }
+
+
 }

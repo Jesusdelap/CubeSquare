@@ -33,7 +33,7 @@ public class ActorSuelo extends Actor implements Destruible {
         PolygonShape box = new PolygonShape();
         box.setAsBox(width / 2, 0.5f);
         fixture = body.createFixture(box, 1);
-        fixture.setUserData("floor");
+        fixture.setUserData("suelo");
         box.dispose();
 
         BodyDef leftDef = new BodyDef();
