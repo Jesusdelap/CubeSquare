@@ -6,14 +6,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.cubesquare.controlador.PantallaJuego;
 import com.cubesquare.herramientas.Constantes;
 
 public class ActorJugador extends Actor implements Destruible {
@@ -52,20 +49,19 @@ public class ActorJugador extends Actor implements Destruible {
     @Override
     public void act(float delta) {
 
-        if(!fin){
+        if(!fin && (!PantallaJuego.getBtnMenu().getClickListener().isPressed())){
             body.setLinearVelocity(6f, body.getLinearVelocity().y);
             if (Gdx.input.justTouched() || saltoContinuo) {
                 saltoContinuo = false;
                 cuboSalto();
             }
         }
+        if (PantallaJuego.getBtnMenu().getClickListener().isPressed()){
+            body.setLinearVelocity(0,body.getLinearVelocity().y);
+        }
         if (this.isSaltando()){
             body.applyForceToCenter(0,-20*1.2f,true);
         }
-
-
-
-
     }
     @Override
     public void draw(Batch batch, float parentAlpha) {

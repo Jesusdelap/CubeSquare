@@ -25,11 +25,9 @@ public class ActorSuelo extends Actor implements Destruible {
         this.world = world;
         this.texture = floor;
 
-
         BodyDef def = new BodyDef();
         def.position.set(vector2.x + width / 2,vector2.y- 0.5f);
         body = world.createBody(def);
-
 
         PolygonShape box = new PolygonShape();
         box.setAsBox(width / 2, 0.5f);
