@@ -42,9 +42,9 @@ public class ActorSuelo extends Actor implements Destruible {
         leftBody = world.createBody(leftDef);
 
         PolygonShape leftBox = new PolygonShape();
-        leftBox.setAsBox(0.02f, 0.50f);
+        leftBox.setAsBox(0.00f, 0.48f);
         leftFixture = leftBody.createFixture(leftBox, 1);
-        leftFixture.setUserData("spike");
+        leftFixture.setUserData("pincho");
         leftBox.dispose();
 
 

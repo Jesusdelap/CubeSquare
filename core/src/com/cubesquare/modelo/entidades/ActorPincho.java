@@ -32,7 +32,7 @@ public class ActorPincho extends Actor implements Destruible {
         Vector2[] vertices = new Vector2[3];
         vertices[0] = new Vector2(-0.5f, -0.5f);
         vertices[1] = new Vector2(0.5f, -0.5f);
-        vertices[2] = new Vector2(0, 0.59f);
+        vertices[2] = new Vector2(0, 0.50f);
         triangulo.set(vertices);
 
         fixture = body.createFixture(triangulo, 1);

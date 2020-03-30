@@ -41,7 +41,7 @@ public class ActorJugador extends Actor implements Destruible {
 
         PolygonShape box = new PolygonShape();
         box.setAsBox(0.5f, 0.5f);
-        fixture = body.createFixture(box, 3);
+        fixture = body.createFixture(box, 2.6f);
         fixture.setUserData("cubo");
         box.dispose();
 
@@ -53,7 +53,7 @@ public class ActorJugador extends Actor implements Destruible {
     public void act(float delta) {
 
         if(!fin){
-            body.setLinearVelocity(8f, body.getLinearVelocity().y);
+            body.setLinearVelocity(6f, body.getLinearVelocity().y);
             if (Gdx.input.justTouched() || saltoContinuo) {
                 saltoContinuo = false;
                 cuboSalto();
@@ -62,6 +62,10 @@ public class ActorJugador extends Actor implements Destruible {
         if (this.isSaltando()){
             body.applyForceToCenter(0,-20*1.2f,true);
         }
+
+
+
+
     }
     @Override
     public void draw(Batch batch, float parentAlpha) {
@@ -73,6 +77,7 @@ public class ActorJugador extends Actor implements Destruible {
     public void destroy() {
         body.destroyFixture(fixture);
         mundo.destroyBody(body);
+
     }
 
 

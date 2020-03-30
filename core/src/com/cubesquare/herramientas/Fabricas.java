@@ -15,8 +15,8 @@ import java.util.ArrayList;
 public class Fabricas {
 
 
-    public static ActorSuelo sueloFactory(World world, Texture floor, float x, float width, float y){
-        return new ActorSuelo(world, floor, width, new Vector2(x,y));
+    public static ActorSuelo sueloFactory(World world, Texture floor, float width,Vector2 vector2){
+        return new ActorSuelo(world, floor, width, vector2);
     }
     public static ActorSuelo sueloFactory(World world){
         return new ActorSuelo(world,new Texture("floor.png") , 1000, new Vector2(0,1));
@@ -26,7 +26,7 @@ public class Fabricas {
         return new ActorJugador(world,texture, vector2);
     }
     public static ActorJugador ActorFactory(World world,Texture texture){
-        return new ActorJugador(world, texture,new Vector2(1,1.5f));
+        return new ActorJugador(world, texture,new Vector2(3,1.5f));
     }
     public static ActorPincho pinchoFactory(World world, Texture texture, Vector2 vector2){
         return new ActorPincho(world, texture,vector2);
@@ -35,11 +35,13 @@ public class Fabricas {
     public static ArrayList<Actor> mapaFactory(int numeroObstaculos, Vector2 posicionInicial,World world, AssetManager manager){
         ArrayList<Actor> mapa = new ArrayList<Actor>();
 
+
+        posicionInicial.y =posicionInicial.y +1;
+        mapa.add(sueloFactory(world,manager.get("floor.png",Texture.class),4,posicionInicial));
+        posicionInicial.x =posicionInicial.x +6;
+        posicionInicial.y =posicionInicial.y -1;
         for (int i=0; i<=numeroObstaculos; i++){
-            posicionInicial.x =posicionInicial.x + Beans.numeroAleatorio(6,3);
-            System.out.println(  posicionInicial.x+
-                    "  "+ posicionInicial.y
-            );
+            posicionInicial.x =posicionInicial.x + Beans.numeroAleatorio(12,6);
             mapa.add(pinchoFactory(world,manager.get("spike.png",Texture.class),posicionInicial));
         }
         return mapa;

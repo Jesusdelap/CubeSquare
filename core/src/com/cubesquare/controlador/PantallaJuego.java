@@ -43,9 +43,9 @@ public class PantallaJuego extends PantallaBase {
 
     public PantallaJuego(Main game) {
         super(game);
-        System.out.println("pixeles por metro en eje x"+Constantes.PIXELS_IN_METER_X);
-        System.out.println("pixeles por metro en eje y"+Constantes.PIXELS_IN_METER_Y);
-        escenario = new Stage(new FitViewport( Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
+        System.out.println("pixeles por metro en eje x" + Constantes.PIXELS_IN_METER_X);
+        System.out.println("pixeles por metro en eje y" + Constantes.PIXELS_IN_METER_Y);
+        escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         mundo = new World(new Vector2(0, -10), true); // Nuevo mundo de gravedad en eje Y = -10
 
     }
@@ -56,28 +56,28 @@ public class PantallaJuego extends PantallaBase {
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         btnJuego = new TextButton("Menu", skin);
         btnJuego.setSize(90, 40);
-        btnJuego.setPosition(Gdx.graphics.getWidth()-100, Gdx.graphics.getHeight()-50);
+        btnJuego.setPosition(Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() - 50);
         btnJuego.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("clickeado btnMenu");
                 PantallaJuego.super.getGame().setScreen(PantallaJuego.super.getGame().getPantallaMenu());
-            };
+            }
+
+            ;
         });
 
         // mundo.setGravity(new Vector2(0, -10));
 
-        Texture texturaJugador = game.getManager().get("cubo.png");
         suelo = Fabricas.sueloFactory(mundo);
-        jugador = new ActorJugador(mundo, texturaJugador, new Vector2(1, 1.5f));
+        jugador = Fabricas.ActorFactory(mundo, game.getManager().get("cubo.png", Texture.class));
 
 
-        arrayMapa= Fabricas.mapaFactory(10,new Vector2(5f, 1),mundo,game.getManager());
+        arrayMapa= Fabricas.mapaFactory(10,new Vector2(10, 1),mundo,game.getManager());
 
        for (Actor a:arrayMapa) {
             escenario.addActor(a);
         }
-
 
         escenario.addActor(suelo);
         escenario.addActor(jugador);
@@ -91,19 +91,21 @@ public class PantallaJuego extends PantallaBase {
                 if (userDataA == null || userDataB == null) {
                     return false;
                 }
-                return (userDataA.equals(userA) && userDataB.equals(userB))||
-                        (userDataA.equals(userB) && userDataB.equals(userA));}
+                return (userDataA.equals(userA) && userDataB.equals(userB)) ||
+                        (userDataA.equals(userB) && userDataB.equals(userA));
+            }
+
             @Override
             public void beginContact(Contact contact) {
-                if(choque(contact,"cubo","suelo")){
+                if (choque(contact, "cubo", "suelo")) {
                     jugador.setSaltando(false);
-                    if(Gdx.input.isTouched()){
+                    if (Gdx.input.isTouched()) {
                         jugador.setSaltoContinuo(true);
                     }
                 }
-                if(choque(contact,"cubo","pincho")){
+                if (choque(contact, "cubo", "pincho")) {
                     jugador.setFin(true);
-
+                    PantallaJuego.super.getGame().setScreen(PantallaJuego.super.getGame().getPantallaMenu());
 
                 }
             }
@@ -127,32 +129,39 @@ public class PantallaJuego extends PantallaBase {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 1, 1);
+        Gdx.gl.glClearColor(0, 0.2f, 0.8f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         escenario.act();
         mundo.step(delta, 6, 2);
 
 
-        if(jugador.getX()>100 && !jugador.isFin()){
-            velocidad = 6f*delta*Constantes.PIXELS_IN_METER_X;
-            escenario.getCamera().translate(velocidad,0,0);
+        if (!jugador.isFin()) {
+            velocidad = 6f * delta * Constantes.PIXELS_IN_METER_X * 0.99446f;
+            escenario.getCamera().translate(velocidad, 0, 0);
         }
         escenario.draw();
 
     }
+
     @Override
     public void hide() {
+        try {
 
-        Gdx.input.setInputProcessor(null);
-        escenario.clear();
-        suelo.destroy();
-        jugador.destroy();
-        escenario.getCamera().position.set(escenario.getCamera().viewportWidth/2,escenario.getCamera().viewportHeight/2, 0);
-        escenario.getCamera().update();
 
-        for (Actor a:arrayMapa) {
-            Destruible d = (Destruible) a;
-            d.destroy();
+            Gdx.input.setInputProcessor(null);
+            escenario.clear();
+            suelo.destroy();
+            jugador.destroy();
+            escenario.getCamera().position.set(escenario.getCamera().viewportWidth / 2, escenario.getCamera().viewportHeight / 2, 0);
+            escenario.getCamera().update();
+
+
+            for (Actor a : arrayMapa) {
+                Destruible d = (Destruible) a;
+                d.destroy();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
