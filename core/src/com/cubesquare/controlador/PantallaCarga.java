@@ -31,11 +31,13 @@ public class PantallaCarga extends PantallaBase {
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if(game.getManager().update()){
+        if(game.getManager().isFinished()){
             PantallaCarga.super.getGame().finCarga();
+            System.out.println("CARGADO");
         } else {
             int progreso = (int) (game.getManager().getProgress() * 100);
             carga.setText("Cargando... " + progreso + "%");
+            System.out.println("cargando");
         }
 
         escenario.act();

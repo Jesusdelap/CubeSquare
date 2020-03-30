@@ -71,11 +71,11 @@ public class PantallaJuego extends PantallaBase {
         suelo = Fabricas.sueloFactory(mundo);
         jugador = Fabricas.ActorFactory(mundo, game.getManager().get("cubo.png", Texture.class));
 
-      /*  arrayMapa= Fabricas.mapaFactory(10,new Vector2(10, 1),mundo,game.getManager());
+        arrayMapa= Fabricas.mapaFactory(10,new Vector2(10, 1),mundo,game.getManager());
 
        for (Actor a:arrayMapa) {
             escenario.addActor(a);
-        }*/
+        }
 
         escenario.addActor(suelo);
         escenario.addActor(jugador);
