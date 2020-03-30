@@ -53,11 +53,14 @@ public class ActorJugador extends Actor implements Destruible {
     public void act(float delta) {
 
         if(!fin){
-            body.setLinearVelocity(2f, body.getLinearVelocity().y);
+            body.setLinearVelocity(8f, body.getLinearVelocity().y);
             if (Gdx.input.justTouched() || saltoContinuo) {
                 saltoContinuo = false;
                 cuboSalto();
             }
+        }
+        if (this.isSaltando()){
+            body.applyForceToCenter(0,-20*1.2f,true);
         }
     }
     @Override
@@ -72,19 +75,11 @@ public class ActorJugador extends Actor implements Destruible {
         mundo.destroyBody(body);
     }
 
-   /* @Override
-    public void act(float delta) {
-        float velocidadEjeY = body.getLinearVelocity().y;
-        body.setLinearVelocity(8, velocidadEjeY);
-    }*/
-
 
     public void cuboSalto() {
         if(!saltando){
             Vector2 vectorBody = body.getPosition();
-            //Vector2 vector2Body = body.getPosition();
-            // body.applyLinearImpulse(vectorBody,vector2Body,true);
-            body.applyLinearImpulse(0,18,vectorBody.x,vectorBody.y,true);
+            body.applyLinearImpulse(0,20,vectorBody.x,vectorBody.y,true);
             saltando = true;
         }
     }

@@ -5,13 +5,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -20,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cubesquare.herramientas.Constantes;
 import com.cubesquare.herramientas.Fabricas;
 import com.cubesquare.modelo.entidades.ActorJugador;
@@ -40,7 +38,7 @@ public class PantallaJuego extends PantallaBase {
     private TextButton btnJuego;
     private Skin skin;
     private Body body;
-    private float distancia;
+    private float velocidad;
     private ArrayList<Actor> arrayMapa;
 
     public PantallaJuego(Main game) {
@@ -76,7 +74,7 @@ public class PantallaJuego extends PantallaBase {
 
         arrayMapa= Fabricas.mapaFactory(10,new Vector2(5f, 1),mundo,game.getManager());
 
-        for (Actor a:arrayMapa) {
+       for (Actor a:arrayMapa) {
             escenario.addActor(a);
         }
 
@@ -135,20 +133,23 @@ public class PantallaJuego extends PantallaBase {
         mundo.step(delta, 6, 2);
 
 
-        if(!jugador.isFin()){
-            distancia = 2f*delta*Constantes.PIXELS_IN_METER_X+distancia;
-            escenario.getCamera().translate(2f*delta*Constantes.PIXELS_IN_METER_X,0,0);
+        if(jugador.getX()>100 && !jugador.isFin()){
+            velocidad = 6f*delta*Constantes.PIXELS_IN_METER_X;
+            escenario.getCamera().translate(velocidad,0,0);
         }
         escenario.draw();
 
     }
     @Override
     public void hide() {
-        escenario.getCamera().translate(-distancia,0,0);
-        distancia=0;
+
+        Gdx.input.setInputProcessor(null);
         escenario.clear();
         suelo.destroy();
         jugador.destroy();
+        escenario.getCamera().position.set(escenario.getCamera().viewportWidth/2,escenario.getCamera().viewportHeight/2, 0);
+        escenario.getCamera().update();
+
         for (Actor a:arrayMapa) {
             Destruible d = (Destruible) a;
             d.destroy();

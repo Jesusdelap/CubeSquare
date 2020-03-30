@@ -29,6 +29,7 @@ public class PantallaMenu extends PantallaBase {
 	public PantallaMenu(Main game) {
 		super(game);
 		escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
+		System.out.println("Resolucion: "+Gdx.graphics.getWidth()+"x"+Gdx.graphics.getHeight());
 	}
 
 	/**
@@ -44,12 +45,12 @@ public class PantallaMenu extends PantallaBase {
 		skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
 		Label titulo =new Label(" CubeSquare",skin);
-		titulo.setPosition(Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()-100);
+		titulo.setPosition((escenario.getWidth()/2)-titulo.getWidth()/2, escenario.getHeight()-150);
 		titulo.setFontScale(2);
 
 		btnJuego = new TextButton("Play", skin);
-		btnJuego.setSize(200, 80);
-		btnJuego.setPosition(titulo.getX(), titulo.getY()-100);
+		btnJuego.setSize((float) (escenario.getWidth()*0.2), (float) (escenario.getWidth()*0.1));
+		btnJuego.setPosition(titulo.getX(), titulo.getY()-150);
 
 		img = new Image(super.getGame().getManager().get("cubo.png",Texture.class));
 		img.setPosition(btnJuego.getX()-150,btnJuego.getY()-50);
@@ -63,8 +64,8 @@ public class PantallaMenu extends PantallaBase {
 		});
 
         btnSalir  = new TextButton("Salir", skin);
-        btnSalir.setSize(200, 80);
-        btnSalir.setPosition(btnJuego.getX(), btnJuego.getY()-90);
+        btnSalir.setSize((float) (escenario.getWidth()*0.2), (float) (escenario.getWidth()*0.1));
+        btnSalir.setPosition(btnJuego.getX(), btnJuego.getY()-150);
 
         btnSalir.addCaptureListener(new ChangeListener() {
             @Override
@@ -73,8 +74,6 @@ public class PantallaMenu extends PantallaBase {
                 System.exit(0);
             };
         });
-
-
 
 		escenario.addActor(titulo);
 		escenario.addActor(btnJuego);
@@ -100,8 +99,12 @@ public class PantallaMenu extends PantallaBase {
 		escenario.draw();
 	}
 
+	@Override
+	public void hide() {
+		Gdx.input.setInputProcessor(null);
+	}
 
-    /**
+	/**
      *Este metodo se ejecuta al cerrar la pantalla,
      * destrulle todos los recursos utilizados
      *
