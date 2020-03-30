@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -66,9 +67,6 @@ public class PantallaJuego extends PantallaBase {
 
             ;
         });
-
-        // mundo.setGravity(new Vector2(0, -10));
-
         suelo = Fabricas.sueloFactory(mundo);
         jugador = Fabricas.ActorFactory(mundo, game.getManager().get("cubo.png", Texture.class));
 
@@ -105,8 +103,19 @@ public class PantallaJuego extends PantallaBase {
                 }
                 if (choque(contact, "cubo", "pincho")) {
                     jugador.setFin(true);
-                    PantallaJuego.super.getGame().setScreen(PantallaJuego.super.getGame().getPantallaMenu());
+                    //PantallaJuego.super.getGame().setScreen(PantallaJuego.super.getGame().getPantallaMenu());
+                    escenario.addAction(
+                            Actions.sequence(
+                                    Actions.delay(0.1f),
+                                    Actions.run(new Runnable() {
 
+                                        @Override
+                                        public void run() {
+                                            PantallaJuego.super.getGame().setScreen(PantallaJuego.super.getGame().getPantallaDerrota());
+                                        }
+                                    })
+                            )
+                    );
                 }
             }
 

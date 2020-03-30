@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class Main extends Game {
 
     private AssetManager manager;
-    private PantallaBase pantallaMenu,pantallaJuego;
+    private PantallaBase pantallaMenu,pantallaJuego,pantallaDerrota,pantallaCarga;
 
     @Override
     public void create() {
@@ -24,7 +24,8 @@ public class Main extends Game {
         //Se inicializan las pantallas
         pantallaMenu = new PantallaMenu(this);
         pantallaJuego = new PantallaJuego(this);
-
+        pantallaDerrota = new PantallaDerrota((this));
+        pantallaCarga = new PantallaCarga(this);
         //Se carga el menu
         setScreen(pantallaMenu);
 
@@ -55,6 +56,19 @@ public class Main extends Game {
         this.pantallaJuego = pantallaJuego;
     }
 
+    public PantallaBase getPantallaDerrota() {
+        return pantallaDerrota;
+    }
 
+    public void setPantallaDerrota(PantallaBase pantallaDerrota) {
+        this.pantallaDerrota = pantallaDerrota;
+    }
 
+    public PantallaBase getPantallaCarga() {
+        return pantallaCarga;
+    }
+
+    public void setPantallaCarga(PantallaBase pantallaCarga) {
+        this.pantallaCarga = pantallaCarga;
+    }
 }

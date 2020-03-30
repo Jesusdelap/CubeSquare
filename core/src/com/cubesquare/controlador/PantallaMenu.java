@@ -49,7 +49,7 @@ public class PantallaMenu extends PantallaBase {
 		titulo.setFontScale(2);
 
 		btnJuego = new TextButton("Play", skin);
-		btnJuego.setSize((float) (escenario.getWidth()*0.2), (float) (escenario.getWidth()*0.1));
+		btnJuego.setSize((float) (escenario.getWidth()*0.2), (float) (escenario.getHeight()*0.1));
 		btnJuego.setPosition(titulo.getX(), titulo.getY()-150);
 
 		img = new Image(super.getGame().getManager().get("cubo.png",Texture.class));
@@ -64,7 +64,7 @@ public class PantallaMenu extends PantallaBase {
 		});
 
         btnSalir  = new TextButton("Salir", skin);
-        btnSalir.setSize((float) (escenario.getWidth()*0.2), (float) (escenario.getWidth()*0.1));
+        btnSalir.setSize((float) (escenario.getWidth()*0.2), (float) (escenario.getHeight()*0.1));
         btnSalir.setPosition(btnJuego.getX(), btnJuego.getY()-150);
 
         btnSalir.addCaptureListener(new ChangeListener() {
