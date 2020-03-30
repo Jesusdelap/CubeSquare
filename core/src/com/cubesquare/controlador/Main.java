@@ -13,6 +13,9 @@ public class Main extends Game {
 
     @Override
     public void create() {
+        pantallaCarga = new PantallaCarga(this);
+        setScreen(pantallaCarga);
+
         //Se cargan los assets
         manager = new AssetManager();
         manager.load("cubo.png", Texture.class);
@@ -20,14 +23,8 @@ public class Main extends Game {
         manager.load("spike.png", Texture.class);
         manager.load("pincho.png", Texture.class);
         manager.finishLoading();
-
-        //Se inicializan las pantallas
-        pantallaMenu = new PantallaMenu(this);
-        pantallaJuego = new PantallaJuego(this);
-        pantallaDerrota = new PantallaDerrota((this));
-        pantallaCarga = new PantallaCarga(this);
         //Se carga el menu
-        setScreen(pantallaMenu);
+
 
     }
 
@@ -70,5 +67,14 @@ public class Main extends Game {
 
     public void setPantallaCarga(PantallaBase pantallaCarga) {
         this.pantallaCarga = pantallaCarga;
+    }
+
+    public void finCarga(){
+
+        pantallaMenu = new PantallaMenu(this);
+        pantallaJuego = new PantallaJuego(this);
+        pantallaDerrota = new PantallaDerrota((this));
+
+        setScreen(pantallaMenu);
     }
 }
