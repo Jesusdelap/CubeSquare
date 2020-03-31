@@ -10,9 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.cubesquare.herramientas.Beans;
-import com.cubesquare.herramientas.Constantes;
-
-import java.awt.datatransfer.FlavorEvent;
 
 public class PantallaDerrota extends PantallaBase {
 
@@ -31,7 +28,7 @@ public class PantallaDerrota extends PantallaBase {
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         p =(PantallaJuego) (game.getPantallaJuego());
         System.out.println(p.getDistanciaRecorrida());
-        textoDerrota = new Label("Distancia recorrida"+Beans.truncarNumeros(Beans.PxToMetters_X(p.getDistanciaRecorrida())),skin);
+        textoDerrota = new Label("Distancia recorrida"+Beans.truncarNumeros(Beans.pxToMetters_X(p.getDistanciaRecorrida())),skin);
         textoDerrota.setPosition((escenario.getWidth()/2)-textoDerrota.getWidth(), escenario.getHeight()-150);
         textoDerrota.setFontScale(2);
 

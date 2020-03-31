@@ -13,10 +13,10 @@ public class Beans {
             return 0;
         }
     }
-    public static float PxToMetters_X(float px){
+    public static float pxToMetters_X(float px){
         return px/Constantes.PIXELS_IN_METER_X;
     }
-    public static float PxToMetters_Y(float px){
+    public static float pxToMetters_Y(float px){
         return px/Constantes.PIXELS_IN_METER_Y;
     }
     public static float mettersToPx_X(float metros){

@@ -13,6 +13,7 @@ public class PantallaCarga extends PantallaBase {
     private Label carga;
     private Skin skin;
 
+
     public PantallaCarga(Main game) {
         super(game);
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
@@ -22,6 +23,8 @@ public class PantallaCarga extends PantallaBase {
     }
     @Override
     public void show() {
+
+        System.out.println("pantalla de carga");
         carga.setSize((float) (escenario.getWidth()*0.2), (float) (escenario.getHeight()*0.1));
         carga.setPosition(carga.getWidth(), carga.getHeight());
         carga.setFontScale(2);
@@ -31,9 +34,8 @@ public class PantallaCarga extends PantallaBase {
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if(game.getManager().isFinished()){
+        if(game.getManager().update()){
             PantallaCarga.super.getGame().finCarga();
-            System.out.println("CARGADO");
         } else {
             int progreso = (int) (game.getManager().getProgress() * 100);
             carga.setText("Cargando... " + progreso + "%");

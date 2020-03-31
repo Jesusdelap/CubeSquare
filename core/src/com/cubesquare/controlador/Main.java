@@ -9,7 +9,9 @@ import com.badlogic.gdx.graphics.Texture;
 public class Main extends Game {
 
     private AssetManager manager;
-    private PantallaBase pantallaMenu,pantallaJuego,pantallaDerrota,pantallaCarga;
+    private PantallaBase pantallaMenu,pantallaJuego,pantallaDerrota,pantallaCarga,pantallaBienvenida;
+
+
 
     @Override
     public void create() {
@@ -22,10 +24,18 @@ public class Main extends Game {
         manager.load("floor.png", Texture.class);
         manager.load("spike.png", Texture.class);
         manager.load("pincho.png", Texture.class);
+
+
+
+
+    }
+    public void finCarga(){
         manager.finishLoading();
-        //Se carga el menu
-
-
+        pantallaMenu = new PantallaMenu(this);
+        pantallaJuego = new PantallaJuego(this);
+        pantallaDerrota = new PantallaDerrota(this);
+        pantallaBienvenida = new PantallaBienvenida(this);
+        setScreen(pantallaBienvenida);
     }
 
 
@@ -69,12 +79,4 @@ public class Main extends Game {
         this.pantallaCarga = pantallaCarga;
     }
 
-    public void finCarga(){
-
-        pantallaMenu = new PantallaMenu(this);
-        pantallaJuego = new PantallaJuego(this);
-        pantallaDerrota = new PantallaDerrota(this);
-
-        setScreen(pantallaMenu);
-    }
 }
