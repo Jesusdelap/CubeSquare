@@ -28,22 +28,24 @@ public class PantallaJuego extends PantallaBase {
 
     private Stage escenario, escenarioControles;
     private World mundo;
-    private ActorSuelo suelo;
     private ActorJugador jugador;
     private static TextButton btnMenu;
     private Skin skin;
-    private float velocidad;
     private ArrayList<Actor> arrayMapa;
+
+    private float velocidad;
+    private float distanciaRecorrida;
 
     public PantallaJuego(Main game) {
         super(game);
-        System.out.println("pixeles por metro en eje x" + Constantes.PIXELS_IN_METER_X);
-        System.out.println("pixeles por metro en eje y" + Constantes.PIXELS_IN_METER_Y);
+        velocidad = 6f  * Constantes.PIXELS_IN_METER_X* 0.99446f;
 
         escenarioControles = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        mundo = new World(new Vector2(0, -12), true); // Nuevo mundo de gravedad en eje Y = -10
 
-        mundo = new World(new Vector2(0, -10), true); // Nuevo mundo de gravedad en eje Y = -10
+        System.out.println("pixeles por metro en eje x" + Constantes.PIXELS_IN_METER_X);
+        System.out.println("pixeles por metro en eje y" + Constantes.PIXELS_IN_METER_Y);
     }
 
     public static TextButton getBtnMenu() {
@@ -52,10 +54,8 @@ public class PantallaJuego extends PantallaBase {
 
     @Override
     public void show() {
-
+        distanciaRecorrida = 0;
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-
-        Gdx.input.setInputProcessor(escenarioControles);
 
         btnMenu = new TextButton("Menu", skin);
         btnMenu.setSize(90, 40);
@@ -68,7 +68,7 @@ public class PantallaJuego extends PantallaBase {
                 PantallaJuego.super.getGame().setScreen(PantallaJuego.super.getGame().getPantallaMenu());
             }
         });
-        suelo = Fabricas.sueloFactory(mundo);
+
         jugador = Fabricas.ActorFactory(mundo, game.getManager().get("cubo.png", Texture.class));
 
         arrayMapa= Fabricas.mapaFactory(10,new Vector2(10, 1),mundo,game.getManager());
@@ -77,9 +77,10 @@ public class PantallaJuego extends PantallaBase {
             escenario.addActor(a);
         }
 
-        escenario.addActor(suelo);
         escenario.addActor(jugador);
         escenarioControles.addActor(btnMenu);
+        Gdx.input.setInputProcessor(escenarioControles);
+
 
         mundo.setContactListener(new ContactListener() {
             private boolean choque(Contact contact, Object userA, Object userB) {
@@ -104,7 +105,7 @@ public class PantallaJuego extends PantallaBase {
                     jugador.setFin(true);
                     escenario.addAction(
                             Actions.sequence(
-                                    Actions.delay(0.1f),
+                                    Actions.delay(0.05f),
                                     Actions.run(new Runnable() {
 
                                         @Override
@@ -132,6 +133,8 @@ public class PantallaJuego extends PantallaBase {
 
             }
         });
+
+
     }
 
     @Override
@@ -144,11 +147,12 @@ public class PantallaJuego extends PantallaBase {
 
 
         if (!jugador.isFin() && (!PantallaJuego.getBtnMenu().getClickListener().isPressed())) {
-            velocidad = 6f * delta * Constantes.PIXELS_IN_METER_X * 0.99446f;
-            escenario.getCamera().translate(velocidad, 0, 0);
+
+            escenario.getCamera().translate(velocidad*delta, 0, 0);
         }
         escenario.draw();
         escenarioControles.draw();
+        distanciaRecorrida=velocidad*delta+distanciaRecorrida;
     }
 
     @Override
@@ -157,7 +161,6 @@ public class PantallaJuego extends PantallaBase {
             Gdx.input.setInputProcessor(null);
             escenario.clear();
             escenarioControles.clear();
-            suelo.destroy();
             jugador.destroy();
             escenario.getCamera().position.set(escenario.getCamera().viewportWidth / 2, escenario.getCamera().viewportHeight / 2, 0);
             escenario.getCamera().update();
@@ -177,6 +180,10 @@ public class PantallaJuego extends PantallaBase {
         escenario.dispose();
         mundo.dispose();
         escenarioControles.dispose();
+    }
+
+    public float getDistanciaRecorrida() {
+        return distanciaRecorrida;
     }
 }
 

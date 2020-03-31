@@ -35,7 +35,7 @@ public class Fabricas {
     public static ArrayList<Actor> mapaFactory(int numeroObstaculos, Vector2 posicionInicial,World world, AssetManager manager){
         ArrayList<Actor> mapa = new ArrayList<Actor>();
 
-
+        mapa.add(Fabricas.sueloFactory(world));
         posicionInicial.y =posicionInicial.y +1;
         mapa.add(sueloFactory(world,manager.get("floor.png",Texture.class),4,posicionInicial));
         posicionInicial.x =posicionInicial.x +6;

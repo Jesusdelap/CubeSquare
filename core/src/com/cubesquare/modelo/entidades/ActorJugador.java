@@ -107,4 +107,19 @@ public class ActorJugador extends Actor implements Destruible {
         this.fin = fin;
     }
 
+
+    @Override
+    public String toString() {
+        return "ActorJugador{" +
+                "mundo=" + mundo +
+                ", texture=" + texture +
+                ", vector2=" + vector2 +
+                ", body=" + body +
+                ", fixture=" + fixture +
+                ", saltando=" + saltando +
+                ", saltoContinuo=" + saltoContinuo +
+                ", fin=" + fin +
+                 super.toString()+
+                 '}';
+    }
 }

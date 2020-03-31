@@ -57,5 +57,15 @@ public class ActorPincho extends Actor implements Destruible {
         mundo.destroyBody(body);
     }
 
-
+    @Override
+    public String toString() {
+        return "ActorPincho{" +
+                "mundo=" + mundo +
+                ", texture=" + texture +
+                ", vector2=" + vector2 +
+                ", body=" + body +
+                ", fixture=" + fixture +
+                super.toString()+
+                '}';
+    }
 }

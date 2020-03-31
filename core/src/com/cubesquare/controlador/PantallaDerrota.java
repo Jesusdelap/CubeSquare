@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.cubesquare.herramientas.Beans;
+import com.cubesquare.herramientas.Constantes;
 
 import java.awt.datatransfer.FlavorEvent;
 
@@ -17,7 +19,8 @@ public class PantallaDerrota extends PantallaBase {
     private Stage escenario;
     private TextButton btnReinicio,btnSalir;
     private Skin skin;
-
+    PantallaJuego p;
+    Label textoDerrota;
     public PantallaDerrota(Main game) {
         super(game);
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
@@ -26,8 +29,9 @@ public class PantallaDerrota extends PantallaBase {
     public void show() {
 
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-
-        Label textoDerrota = new Label("¡Derrota!",skin);
+        p =(PantallaJuego) (game.getPantallaJuego());
+        System.out.println(p.getDistanciaRecorrida());
+        textoDerrota = new Label("Distancia recorrida"+Beans.truncarNumeros(Beans.mettersToPx_X(p.getDistanciaRecorrida())),skin);
         textoDerrota.setPosition((escenario.getWidth()/2)-textoDerrota.getWidth(), escenario.getHeight()-150);
         textoDerrota.setFontScale(2);
 
@@ -69,7 +73,9 @@ public class PantallaDerrota extends PantallaBase {
     }
     @Override
     public void hide() {
-        // This method is invoked when the screen is no more displayed.
+        p = null;
+        textoDerrota.setText(null);
+
     }
 
     @Override
