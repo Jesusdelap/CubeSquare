@@ -31,7 +31,7 @@ public class PantallaDerrota extends PantallaBase {
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         p =(PantallaJuego) (game.getPantallaJuego());
         System.out.println(p.getDistanciaRecorrida());
-        textoDerrota = new Label("Distancia recorrida"+Beans.truncarNumeros(Beans.mettersToPx_X(p.getDistanciaRecorrida())),skin);
+        textoDerrota = new Label("Distancia recorrida"+Beans.truncarNumeros(Beans.PxToMetters_X(p.getDistanciaRecorrida())),skin);
         textoDerrota.setPosition((escenario.getWidth()/2)-textoDerrota.getWidth(), escenario.getHeight()-150);
         textoDerrota.setFontScale(2);
 
