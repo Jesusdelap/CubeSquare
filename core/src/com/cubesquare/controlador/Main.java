@@ -73,7 +73,7 @@ public class Main extends Game {
 
         pantallaMenu = new PantallaMenu(this);
         pantallaJuego = new PantallaJuego(this);
-        pantallaDerrota = new PantallaDerrota((this));
+        pantallaDerrota = new PantallaDerrota(this);
 
         setScreen(pantallaMenu);
     }

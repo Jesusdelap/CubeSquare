@@ -1,10 +1,29 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Estudios\\ProyectoC\\Cliente\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\values_values.arsc.flat",
+            "outputFile": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\values_values.arsc.flat",
             "map": [
                 {
-                    "source": "D:\\Estudios\\ProyectoC\\Cliente\\CubeSquare\\android\\res\\values\\color.xml",
+                    "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "19",
+                        "endLines": "9",
+                        "endColumns": "12",
+                        "endOffsets": "484"
+                    },
+                    "to": {
+                        "startLines": "4",
+                        "startColumns": "4",
+                        "startOffsets": "159",
+                        "endLines": "11",
+                        "endColumns": "12",
+                        "endOffsets": "617"
+                    }
+                },
+                {
+                    "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\values\\color.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +40,7 @@
                     }
                 },
                 {
-                    "source": "D:\\Estudios\\ProyectoC\\Cliente\\CubeSquare\\android\\res\\values\\strings.xml",
+                    "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\values\\strings.xml",
                     "from": {
                         "startLines": "3",
                         "startColumns": "4",
@@ -35,25 +54,6 @@
                         "startOffsets": "111",
                         "endColumns": "47",
                         "endOffsets": "154"
-                    }
-                },
-                {
-                    "source": "D:\\Estudios\\ProyectoC\\Cliente\\CubeSquare\\android\\res\\values\\styles.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "19",
-                        "endLines": "9",
-                        "endColumns": "12",
-                        "endOffsets": "484"
-                    },
-                    "to": {
-                        "startLines": "4",
-                        "startColumns": "4",
-                        "startOffsets": "159",
-                        "endLines": "11",
-                        "endColumns": "12",
-                        "endOffsets": "617"
                     }
                 }
             ]

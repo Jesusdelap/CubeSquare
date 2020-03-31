@@ -27,7 +27,7 @@ public class PantallaDerrota extends PantallaBase {
 
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-        Label textoDerrota = new Label("¡Derrora!",skin);
+        Label textoDerrota = new Label("¡Derrota!",skin);
         textoDerrota.setPosition((escenario.getWidth()/2)-textoDerrota.getWidth(), escenario.getHeight()-150);
         textoDerrota.setFontScale(2);
 
