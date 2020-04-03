@@ -12,11 +12,8 @@ public class Main extends Game {
     private PantallaBase pantallaMenu,pantallaJuego,pantallaDerrota,pantallaCarga,pantallaBienvenida;
 
 
-
     @Override
     public void create() {
-        pantallaCarga = new PantallaCarga(this);
-        setScreen(pantallaCarga);
 
         //Se cargan los assets
         manager = new AssetManager();
@@ -24,13 +21,21 @@ public class Main extends Game {
         manager.load("floor.png", Texture.class);
         manager.load("spike.png", Texture.class);
         manager.load("pincho.png", Texture.class);
+        manager.load("sonido.png", Texture.class);
+        manager.load("sonidodesactivado.png", Texture.class);
+        manager.load("fondoEspacio.png", Texture.class);
+        manager.load("titulo.png", Texture.class);
+        manager.load("sueloTransparente.png", Texture.class);
+        manager.load("sonidos/cancionmenu.ogg", Music.class);
+        manager.load("sonidos/cancionjuego.ogg", Music.class);
+        manager.load("sonidos/choque.wav", Sound.class);
+        manager.load("sonidos/gameover.wav", Sound.class);
 
-
-
-
+        pantallaCarga = new PantallaCarga(this);
+        setScreen(pantallaCarga);
     }
+
     public void finCarga(){
-        manager.finishLoading();
         pantallaMenu = new PantallaMenu(this);
         pantallaJuego = new PantallaJuego(this);
         pantallaDerrota = new PantallaDerrota(this);
@@ -43,40 +48,20 @@ public class Main extends Game {
         return manager;
     }
 
-    public void setManager(AssetManager manager) {
-        this.manager = manager;
-    }
 
     public PantallaBase getPantallaMenu() {
         return pantallaMenu;
     }
 
-    public void setPantallaMenu(PantallaBase pantallaMenu) {
-        this.pantallaMenu = pantallaMenu;
-    }
 
     public PantallaBase getPantallaJuego() {
         return pantallaJuego;
     }
 
-    public void setPantallaJuego(PantallaBase pantallaJuego) {
-        this.pantallaJuego = pantallaJuego;
-    }
 
     public PantallaBase getPantallaDerrota() {
         return pantallaDerrota;
     }
 
-    public void setPantallaDerrota(PantallaBase pantallaDerrota) {
-        this.pantallaDerrota = pantallaDerrota;
-    }
-
-    public PantallaBase getPantallaCarga() {
-        return pantallaCarga;
-    }
-
-    public void setPantallaCarga(PantallaBase pantallaCarga) {
-        this.pantallaCarga = pantallaCarga;
-    }
 
 }

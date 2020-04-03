@@ -15,7 +15,7 @@ public class PantallaBienvenida extends PantallaBase {
         super(game);
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-        carga = new Label("¡Bienvenido! Pulsa click o Enter para continuar.", skin);
+        carga = new Label(" ¡BIENVENIDO A CUBESQUARE! \n\nToca la pantalla para comenzar", skin);
     }
     public void show(){
         carga.setSize((float) (escenario.getWidth()*0.3), (float) (escenario.getHeight()*0.3));

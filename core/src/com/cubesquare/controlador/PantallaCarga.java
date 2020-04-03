@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -24,18 +25,17 @@ public class PantallaCarga extends PantallaBase {
     @Override
     public void show() {
 
-        System.out.println("pantalla de carga");
         carga.setSize((float) (escenario.getWidth()*0.2), (float) (escenario.getHeight()*0.1));
         carga.setPosition(carga.getWidth(), carga.getHeight());
         carga.setFontScale(2);
         escenario.addActor(carga);
     }
     public void render (float delta) {
-        Gdx.gl.glClearColor(0, 0, 1, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if(game.getManager().update()){
-            PantallaCarga.super.getGame().finCarga();
+            game.finCarga();
         } else {
             int progreso = (int) (game.getManager().getProgress() * 100);
             carga.setText("Cargando... " + progreso + "%");
