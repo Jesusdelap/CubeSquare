@@ -80,7 +80,7 @@ public class PantallaJuego extends PantallaBase {
 
         //ACTIVAMOS SONIDO SI SU VARIABLE DE CONTROL LO INDICA
         if (PantallaMenu.isSonido()) {
-            // cancionJuego.setVolume(0.3f);
+            //cancionJuego.setVolume(0.3f);
             cancionJuego.play();
         }
 

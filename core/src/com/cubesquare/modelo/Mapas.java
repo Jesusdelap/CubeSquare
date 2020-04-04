@@ -79,17 +79,34 @@ public class Mapas {
         posicionRelatiba.x= posicionRelatiba.x+3f;
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
         // pincho+ subida de suelo
-         posicionRelatiba.x= posicionRelatiba.x+6f;
+         posicionRelatiba.x= posicionRelatiba.x+8f;
         posicionRelatiba.y--;
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
-        posicionRelatiba.x++;
-         mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 50, 1,posicionRelatiba));
+        posicionRelatiba.x= posicionRelatiba.x+0.5f;
+         mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 12.5f, 1,posicionRelatiba));
          posicionRelatiba.y++;
-          posicionRelatiba.x= posicionRelatiba.x+4.3f;
+          posicionRelatiba.x= posicionRelatiba.x+2.3f;
          //Doble Pincho
           mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
          posicionRelatiba.x= posicionRelatiba.x+0.7f;
          mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
+
+
+         //secuencia
+        posicionRelatiba.x= posicionRelatiba.x+7f;
+        mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
+
+        //Escalon abajo doble y dos pinchos
+        posicionRelatiba.y--;
+        posicionRelatiba.x= posicionRelatiba.x+8f;
+        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 12.5f, 1,posicionRelatiba));
+        posicionRelatiba.x= posicionRelatiba.x+2.5f;
+        posicionRelatiba.y++;
+        mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
+
+
+
+
 
         return mapa;
     }
