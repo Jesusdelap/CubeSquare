@@ -21,33 +21,33 @@ public class ActorSuelo extends Actor implements Destruible {
 
     private Fixture fixture, leftFixture;
 
-    public ActorSuelo(World world, Texture floor, float width, Vector2 vector2) {
+    public ActorSuelo(World world, Texture floor, float width,float height, Vector2 vector2) {
         this.world = world;
         this.texture = floor;
 
         BodyDef def = new BodyDef();
-        def.position.set(vector2.x + width / 2,vector2.y- 0.5f);
+        def.position.set(vector2.x + width/2,vector2.y+ height/2);
         body = world.createBody(def);
 
         PolygonShape box = new PolygonShape();
-        box.setAsBox(width / 2, 0.5f);
+        box.setAsBox(width / 2, height/2);
         fixture = body.createFixture(box, 1);
         fixture.setUserData("suelo");
         box.dispose();
 
         BodyDef leftDef = new BodyDef();
-        leftDef.position.set(vector2.x, vector2.y - 0.50f);
+        leftDef.position.set(vector2.x ,vector2.y);
         leftBody = world.createBody(leftDef);
 
         PolygonShape leftBox = new PolygonShape();
-        leftBox.setAsBox(0.00f, 0.48f);
+        leftBox.setAsBox(0.00f, height/2);
         leftFixture = leftBody.createFixture(leftBox, 1);
         leftFixture.setUserData("pincho");
         leftBox.dispose();
 
 
-        setSize(width * Constantes.PIXELS_IN_METER_X, Constantes.PIXELS_IN_METER_Y);
-        setPosition(vector2.x * Constantes.PIXELS_IN_METER_X, (vector2.y - 1) *Constantes.PIXELS_IN_METER_Y);
+        setSize(width * Constantes.PIXELS_IN_METER_X, height*Constantes.PIXELS_IN_METER_Y);
+        setPosition(vector2.x * Constantes.PIXELS_IN_METER_X, vector2.y*Constantes.PIXELS_IN_METER_Y);
 
     }
 
@@ -62,6 +62,8 @@ public class ActorSuelo extends Actor implements Destruible {
     public void destroy() {
         body.destroyFixture(fixture);
         world.destroyBody(body);
+        leftBody.destroyFixture(leftFixture);
+        world.destroyBody(leftBody);
     }
 
     @Override

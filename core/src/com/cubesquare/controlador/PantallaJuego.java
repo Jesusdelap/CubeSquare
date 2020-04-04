@@ -21,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.cubesquare.herramientas.Constantes;
 import com.cubesquare.herramientas.Fabricas;
+import com.cubesquare.modelo.Mapas;
 import com.cubesquare.modelo.entidades.ActorJugador;
 import com.cubesquare.modelo.entidades.Destruible;
 
@@ -30,6 +31,7 @@ public class PantallaJuego extends PantallaBase {
 
     private Stage escenario, escenarioControles;
     private World mundo;
+    private Mapas mapas;
     private ActorJugador jugador;
     private static TextButton btnMenu;
     private Skin skin;
@@ -64,12 +66,15 @@ public class PantallaJuego extends PantallaBase {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(escenarioControles);
+
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-        /*//CREAMOS FONDO Y LO AÑADIMOS
+        /*
         fondo = new Image(game.getManager().get("fondoEspacio.png", Texture.class));
         fondo.setFillParent(true);
-        escenario.addActor(fondo);*/
+        fondo.toBack();
+        escenario.addActor(fondo);
+        */
 
         //ACTIVAMOS SONIDO SI SU VARIABLE DE CONTROL LO INDICA
         if (PantallaMenu.isSonido()) {
@@ -78,6 +83,8 @@ public class PantallaJuego extends PantallaBase {
         }
 
         distanciaRecorrida = 0;
+
+
 
         //CREAMOS BOTON MENU Y ASOCIAMOS UN LISTENER QUE PARARA EL JUEGO Y NOS LLEVARA A LA PANTALLA MENU
         btnMenu = new TextButton("Menu", skin);
@@ -97,14 +104,20 @@ public class PantallaJuego extends PantallaBase {
 
         //CREAMOS JUGADOR Y MAPA Y LOS AÑADIMOS AL ESCENARIO
         jugador = Fabricas.ActorFactory(mundo, game.getManager().get("cubo.png", Texture.class));
-        arrayMapa = Fabricas.mapaFactory(10, new Vector2(10, 1), mundo, game.getManager());
+        //arrayMapa = Fabricas.mapaFactory(10, new Vector2(10, 1), mundo, game.getManager());
+        System.out.println("antes de mapas");
+        //inicializamos el mapa
+        mapas = new Mapas( new Vector2(17,3),mundo,game.getManager());
+        arrayMapa = mapas.mapaFacil();
+        System.out.println("despues de mapas");
 
+        // Añadimos los actores al escenario
         for (Actor a : arrayMapa) {
             escenario.addActor(a);
         }
-
         escenario.addActor(jugador);
         escenarioControles.addActor(btnMenu);
+
 
         //CREAMOS LISTENER PARA CONTROLAR LAS COLISIONES DE LOS ACTORES
         mundo.setContactListener(new ContactListener() {
@@ -125,7 +138,9 @@ public class PantallaJuego extends PantallaBase {
                     if (Gdx.input.isTouched()) {
                         jugador.setSaltoContinuo(true);
                     }
+
                 }
+
                 if (choque(contact, "cubo", "pincho")) {
                     //((OrthographicCamera) escenario.getCamera()).position.set(jugador.getX(),jugador.getY(),0);
                     //((OrthographicCamera) escenario.getCamera()).zoom-=0.3f;

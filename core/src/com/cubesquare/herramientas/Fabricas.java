@@ -15,18 +15,18 @@ import java.util.ArrayList;
 public class Fabricas {
 
 
-    public static ActorSuelo sueloFactory(World world, Texture floor, float width,Vector2 vector2){
-        return new ActorSuelo(world, floor, width, vector2);
+    public static ActorSuelo sueloFactory(World world, Texture floor, float width,float h,Vector2 vector2){
+        return new ActorSuelo(world, floor, width,h, vector2);
     }
     public static ActorSuelo sueloFactory(World world){
-        return new ActorSuelo(world,new Texture("floor.png") , 1000, new Vector2(0,1));
+        return new ActorSuelo(world,new Texture("floor.png") , 1000,3, new Vector2(0,0));
     }
 
     public static ActorJugador ActorFactory(World world, Texture texture,Vector2 vector2){
         return new ActorJugador(world,texture, vector2);
     }
     public static ActorJugador ActorFactory(World world,Texture texture){
-        return new ActorJugador(world, texture,new Vector2(3,1.5f));
+        return new ActorJugador(world, texture,new Vector2(3,3.5f));
     }
     public static ActorPincho pinchoFactory(World world, Texture texture, Vector2 vector2){
         return new ActorPincho(world, texture,vector2);
@@ -37,7 +37,7 @@ public class Fabricas {
 
         mapa.add(Fabricas.sueloFactory(world));
         posicionInicial.y =posicionInicial.y +1;
-        mapa.add(sueloFactory(world,manager.get("floor.png",Texture.class),4,posicionInicial));
+        mapa.add(sueloFactory(world,manager.get("floor.png",Texture.class),4,4,posicionInicial));
         posicionInicial.x =posicionInicial.x +6;
         posicionInicial.y =posicionInicial.y -1;
         for (int i=0; i<=numeroObstaculos; i++){
@@ -46,5 +46,6 @@ public class Fabricas {
         }
         return mapa;
     }
+
 
 }

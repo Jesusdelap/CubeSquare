@@ -155,7 +155,7 @@ public class PantallaMenu extends PantallaBase {
         //CREAMOS SUELO Y CUBO PARA QUE INTERACCIONEN INDEFINIDAMENTE EN LA PANTALLA DE MENÚ
         posicionCubo = new Vector2(5, 10);
         posicionSuelo = new Vector2(0, 1.5f);
-        suelo = Fabricas.sueloFactory(mundoMenu, new Texture("sueloTransparente.png"), Gdx.graphics.getWidth(), posicionSuelo);
+        suelo = Fabricas.sueloFactory(mundoMenu, new Texture("sueloTransparente.png"), Gdx.graphics.getWidth(),0, posicionSuelo);
         cubo = Fabricas.ActorFactory(mundoMenu, game.getManager().get("cubo.png", Texture.class), posicionCubo);
         cubo.setSaltando(true);
 
@@ -193,6 +193,8 @@ public class PantallaMenu extends PantallaBase {
 
             }
         });
+
+
 
         //AÑADIMOS TODOS LOS ACTORES AL ESCENARIO
         escenario.addActor(fondo);

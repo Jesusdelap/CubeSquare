@@ -60,9 +60,9 @@ public class ActorJugador extends Actor implements Destruible {
             if (PantallaJuego.getBtnMenu().getClickListener().isPressed()){
                 body.setLinearVelocity(0,body.getLinearVelocity().y);
             }
-            if (this.isSaltando()){
+            //if (this.isSaltando()){ al quitar este if se soluciona el problema de que flote en la caida
                 body.applyForceToCenter(0,-20*1.2f,true);
-            }
+            //}
         }else {
             cuboSalto();
         }
