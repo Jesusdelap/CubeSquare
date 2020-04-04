@@ -53,13 +53,13 @@ public class Mapas {
 
         mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 12, 1,new Vector2(posicionRelatiba.x, posicionRelatiba.y-1)));
         posicionRelatiba.x= posicionRelatiba.x+3f;
-        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 9, 1,new Vector2(posicionRelatiba.x, posicionRelatiba.y)));
+        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 9, 1,posicionRelatiba));
         posicionRelatiba.x= posicionRelatiba.x+3f;
         posicionRelatiba.y++;
-        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 6, 1,new Vector2(posicionRelatiba.x, posicionRelatiba.y)));
+        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 6, 1,posicionRelatiba));
         posicionRelatiba.y++;
         posicionRelatiba.x= posicionRelatiba.x+3f;
-        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 3, 1,new Vector2(posicionRelatiba.x, posicionRelatiba.y)));
+        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 3, 1,posicionRelatiba));
         // rompe
 
         // pincho decorativo
@@ -73,7 +73,7 @@ public class Mapas {
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
         //Suelo+pincho al final
         posicionRelatiba.x= posicionRelatiba.x+5f;
-        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 3.5f, 1,new Vector2(posicionRelatiba.x, posicionRelatiba.y)));
+        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 3.5f, 1,posicionRelatiba));
         posicionRelatiba.y++;
 
         posicionRelatiba.x= posicionRelatiba.x+3f;
@@ -83,7 +83,7 @@ public class Mapas {
         posicionRelatiba.y--;
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
         posicionRelatiba.x++;
-         mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 50, 1,new Vector2(posicionRelatiba.x, posicionRelatiba.y)));
+         mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 50, 1,posicionRelatiba));
          posicionRelatiba.y++;
           posicionRelatiba.x= posicionRelatiba.x+4.3f;
          //Doble Pincho

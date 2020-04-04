@@ -74,7 +74,9 @@ public class PantallaJuego extends PantallaBase {
         fondo.setFillParent(true);
         fondo.toBack();
         escenario.addActor(fondo);
-        */
+
+         */
+
 
         //ACTIVAMOS SONIDO SI SU VARIABLE DE CONTROL LO INDICA
         if (PantallaMenu.isSonido()) {
