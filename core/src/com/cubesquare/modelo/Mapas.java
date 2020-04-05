@@ -60,22 +60,23 @@ public class Mapas {
         posicionRelatiba.y++;
         posicionRelatiba.x= posicionRelatiba.x+3f;
         mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 3, 1,posicionRelatiba));
-        // rompe
+
 
         // pincho decorativo
         posicionRelatiba.y = posicionRelatiba.y-3;
         posicionRelatiba.x= posicionRelatiba.x+3.5f;
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
+
         //Dos pinchos cerca
-        posicionRelatiba.x= posicionRelatiba.x+8f;
+        posicionRelatiba.x= posicionRelatiba.x+8.5f;
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
         posicionRelatiba.x= posicionRelatiba.x+4f;
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
+
         //Suelo+pincho al final
-        posicionRelatiba.x= posicionRelatiba.x+5f;
+        posicionRelatiba.x= posicionRelatiba.x+4.5f;
         mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 3.5f, 1,posicionRelatiba));
         posicionRelatiba.y++;
-
         posicionRelatiba.x= posicionRelatiba.x+3f;
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
         // pincho+ subida de suelo
@@ -83,16 +84,16 @@ public class Mapas {
         posicionRelatiba.y--;
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
         posicionRelatiba.x= posicionRelatiba.x+0.5f;
-         mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 12.5f, 1,posicionRelatiba));
-         posicionRelatiba.y++;
-          posicionRelatiba.x= posicionRelatiba.x+2.3f;
-         //Doble Pincho
-          mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
-         posicionRelatiba.x= posicionRelatiba.x+0.7f;
-         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
+        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 12.5f, 1,posicionRelatiba));
+        posicionRelatiba.y++;
+        posicionRelatiba.x= posicionRelatiba.x+2.3f;
 
+        //Doble Pincho
+        mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
+        posicionRelatiba.x= posicionRelatiba.x+0.7f;
+        mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
 
-         //secuencia
+        //secuencia
         posicionRelatiba.x= posicionRelatiba.x+7f;
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
 
@@ -100,10 +101,21 @@ public class Mapas {
         posicionRelatiba.y--;
         posicionRelatiba.x= posicionRelatiba.x+8f;
         mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 12.5f, 1,posicionRelatiba));
-        posicionRelatiba.x= posicionRelatiba.x+2.5f;
+        posicionRelatiba.x= posicionRelatiba.x+3f;
         posicionRelatiba.y++;
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
+        posicionRelatiba.x= posicionRelatiba.x+3.5f;
+        mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
+        posicionRelatiba.x++;
 
+        // Subida y pincho a un metro
+        posicionRelatiba.y--;
+        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 12.5f, 2,posicionRelatiba));
+        posicionRelatiba.x= posicionRelatiba.x+2f;
+        posicionRelatiba.y=posicionRelatiba.y+2;
+        mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
+        posicionRelatiba.x= posicionRelatiba.x+5.5f;
+        mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
 
 
 
