@@ -22,20 +22,9 @@ public class Mapas {
     }
     public ArrayList<Actor> mapaAleatorio(int numeroObstaculos){
         ArrayList<Actor> mapa = new ArrayList<Actor>();
-        int incremento_X;
-        mapa.add(Fabricas.sueloFactory(mundo));
-        posicionRelatiba.x = posicionRelatiba.x + Beans.numeroAleatorio(6,6);
-        for (int i=0; i<=numeroObstaculos; i++){
-            if (Beans.numeroAleatorio(10,0)>=2){
-                mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
-                incremento_X=Beans.numeroAleatorio(2,3);
-            }else{
-                incremento_X = Beans.numeroAleatorio(3,2);
-                mapa.add(Fabricas.sueloFactory(mundo,manager.get("floor.png", Texture.class),incremento_X,1, posicionRelatiba));
-            }
-            posicionRelatiba.x = posicionRelatiba.x +incremento_X+Beans.numeroAleatorio(4,2);
 
-        }
+        mapa.add(Fabricas.sueloFactory(mundo));
+
         return mapa;
     }
 
@@ -75,13 +64,10 @@ public class Mapas {
 
         //Suelo+pincho al final
         posicionRelatiba.x= posicionRelatiba.x+4.5f;
-        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 3.5f, 1,posicionRelatiba));
-        posicionRelatiba.y++;
-        posicionRelatiba.x= posicionRelatiba.x+3f;
-        mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
+        sueloPinchoFinal(mapa);
+
         // pincho+ subida de suelo
          posicionRelatiba.x= posicionRelatiba.x+8f;
-        posicionRelatiba.y--;
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
         posicionRelatiba.x= posicionRelatiba.x+0.5f;
         mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 12.5f, 1,posicionRelatiba));
@@ -110,7 +96,8 @@ public class Mapas {
 
         // Subida y pincho a un metro
         posicionRelatiba.y--;
-        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 12.5f, 2,posicionRelatiba));
+        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 11f, 2,posicionRelatiba));
+        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 12.5f, 1,posicionRelatiba));
         posicionRelatiba.x= posicionRelatiba.x+2f;
         posicionRelatiba.y=posicionRelatiba.y+2;
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
@@ -118,10 +105,11 @@ public class Mapas {
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
 
 
-
-
         return mapa;
     }
+
+
+
 
     public ArrayList<Actor> mapavacio(){
         ArrayList<Actor> mapa = new ArrayList<Actor>();
@@ -130,10 +118,40 @@ public class Mapas {
     }
 
 
+    //Metodos para Ayudar a la creacion de niveles
+
+    public void sueloPinchoFinal( ArrayList<Actor> mapa ){
+
+        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 3.5f, 1,posicionRelatiba));
+        posicionRelatiba.y++;
+        posicionRelatiba.x= posicionRelatiba.x+3f;
+        mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
+        posicionRelatiba.y--;
+    }
 
 
 
 
+    public void addObstaculosAleatorios( ArrayList<Actor> mapa , int numeroObstaculos){
+
+        int incremento_X;
+        posicionRelatiba.x = posicionRelatiba.x + Beans.numeroAleatorio(6,6);
+        for (int i=0; i<=numeroObstaculos; i++){
+            if (Beans.numeroAleatorio(10,0)>=2){
+                incremento_X=Beans.numeroAleatorio(2,3);
+                mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
+            }else if(Beans.numeroAleatorio(10,0)==1){
+                sueloPinchoFinal(mapa);
+                incremento_X=2;
+            }else {
+                incremento_X = Beans.numeroAleatorio(3,2);
+                mapa.add(Fabricas.sueloFactory(mundo,manager.get("floor.png", Texture.class),incremento_X,1, posicionRelatiba));
+            }
+
+            posicionRelatiba.x = posicionRelatiba.x +incremento_X+Beans.numeroAleatorio(4,2);
+        }
+
+    }
 
 
 

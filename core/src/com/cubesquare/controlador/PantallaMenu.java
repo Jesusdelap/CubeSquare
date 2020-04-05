@@ -30,7 +30,7 @@ import com.cubesquare.modelo.entidades.ActorSuelo;
 public class PantallaMenu extends PantallaBase {
 
     private Stage escenario;
-    private TextButton btnJuego, btnSalir;
+    private TextButton btnJuego,btnSalir;
     private Skin skin;
     private Music cancionMenu;
 
@@ -39,7 +39,7 @@ public class PantallaMenu extends PantallaBase {
     private ActorJugador cubo;
     private Vector2 posicionCubo;
     private Vector2 posicionSuelo;
-    private Image fondo, titulo;
+    private Image fondo,titulo;
 
     private Texture btnSonidoActivado, btnSonidoDesactivado;
     private Button btnSonido;
@@ -67,7 +67,8 @@ public class PantallaMenu extends PantallaBase {
         cancionMenu = game.getManager().get("sonidos/cancionmenu.ogg");
         cancionMenu.setLooping(true);
 
-        System.out.println("Resolucion: " + Gdx.graphics.getWidth() + "x" + Gdx.graphics.getHeight());
+        System.out.println("Resolucion: " + Gdx.graphics.getWidth() + " X:" + Gdx.graphics.getHeight());
+
     }
 
     @Override
