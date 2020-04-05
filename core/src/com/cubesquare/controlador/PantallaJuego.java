@@ -41,14 +41,15 @@ public class PantallaJuego extends PantallaBase {
 
     private float velocidad;
     private float distanciaRecorrida;
-    private Image fondo;
+    //private Image fondo;
 
     public PantallaJuego(Main game) {
         super(game);
         velocidad = 6f * Constantes.PIXELS_IN_METER_X * 0.99446f;
 
-        escenarioControles = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        escenarioControles = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         mundo = new World(new Vector2(0, -12), true); // Nuevo mundo de gravedad en eje Y = -10
 
         cancionJuego = game.getManager().get("sonidos/cancionjuego.ogg");
@@ -73,9 +74,11 @@ public class PantallaJuego extends PantallaBase {
         fondo = new Image(game.getManager().get("fondoEspacio.png", Texture.class));
         fondo.setFillParent(true);
         fondo.toBack();
-        escenario.addActor(fondo);
-
+        escenarioControles.addActor(fondo);
          */
+
+
+
 
 
         //ACTIVAMOS SONIDO SI SU VARIABLE DE CONTROL LO INDICA
@@ -137,10 +140,6 @@ public class PantallaJuego extends PantallaBase {
             public void beginContact(Contact contact) {
                 if (choque(contact, "cubo", "suelo")) {
                     jugador.setSaltando(false);
-                    if (Gdx.input.isTouched()) {
-                        jugador.setSaltoContinuo(true);
-                    }
-
                 }
 
                 if (choque(contact, "cubo", "pincho")) {
@@ -169,6 +168,11 @@ public class PantallaJuego extends PantallaBase {
 
             @Override
             public void endContact(Contact contact) {
+
+                if (choque(contact, "cubo", "suelo")) {
+                    jugador.setSaltando(true);
+
+                }
 
             }
 
@@ -232,6 +236,14 @@ public class PantallaJuego extends PantallaBase {
         mundo.dispose();
         escenarioControles.dispose();
     }
+
+    @Override
+    public void pause() {
+        PantallaMenu.setPantallaMenu(true);
+        game.setScreen(game.getPantallaMenu());
+    }
+
+
 
     public float getDistanciaRecorrida() {
         return distanciaRecorrida;

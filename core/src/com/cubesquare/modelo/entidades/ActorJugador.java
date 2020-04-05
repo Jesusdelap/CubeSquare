@@ -22,7 +22,7 @@ public class ActorJugador extends Actor implements Destruible {
     private Body body;
     private Fixture fixture;
     private boolean saltando;
-    private boolean saltoContinuo;
+    //private boolean saltoContinuo;
     private boolean fin;
 
 
@@ -52,8 +52,8 @@ public class ActorJugador extends Actor implements Destruible {
         if (!PantallaMenu.isPantallaMenu()){
             if(!fin && (!PantallaJuego.getBtnMenu().getClickListener().isPressed())){
                 body.setLinearVelocity(6f, body.getLinearVelocity().y);
-                if (Gdx.input.justTouched() || saltoContinuo) {
-                    saltoContinuo = false;
+                if (Gdx.input.isTouched() ) {
+                    //saltoContinuo = false;
                     cuboSalto();
                 }
             }
@@ -97,10 +97,6 @@ public class ActorJugador extends Actor implements Destruible {
         this.saltando = saltando;
     }
 
-
-    public void setSaltoContinuo(boolean saltoContinuo) {
-        this.saltoContinuo = saltoContinuo;
-    }
     public boolean isFin() {
         return fin;
     }
@@ -119,7 +115,6 @@ public class ActorJugador extends Actor implements Destruible {
                 ", body=" + body +
                 ", fixture=" + fixture +
                 ", saltando=" + saltando +
-                ", saltoContinuo=" + saltoContinuo +
                 ", fin=" + fin +
                  super.toString()+
                  '}';
