@@ -94,8 +94,8 @@ public class PantallaJuego extends PantallaBase {
 
         //CREAMOS BOTON MENU Y ASOCIAMOS UN LISTENER QUE PARARA EL JUEGO Y NOS LLEVARA A LA PANTALLA MENU
         btnMenu = new TextButton("Menu", skin);
-        btnMenu.setSize(90, 40);
-        btnMenu.setPosition(escenarioControles.getWidth() - 100, escenarioControles.getHeight() - 50);
+        btnMenu.setSize(Constantes.PIXELS_IN_METER_X*1.50f, Constantes.PIXELS_IN_METER_Y*0.6f);
+        btnMenu.setPosition(escenarioControles.getWidth() - (btnMenu.getWidth()+Constantes.PIXELS_IN_METER_X/5), escenarioControles.getHeight() -(btnMenu.getHeight()+Constantes.PIXELS_IN_METER_Y/5) );
 
         btnMenu.addCaptureListener(new ChangeListener() {
             @Override

@@ -98,6 +98,8 @@ public class PantallaMenu extends PantallaBase {
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("clickeado btnJuego");
                 cancionMenu.stop();
+                PantallaJuego p =(PantallaJuego) (game.getPantallaJuego());
+                p.setTipoDeJuego(0);
                 pantallaMenu = false;
                 getGame().setScreen(PantallaMenu.super.getGame().getPantallaJuego());
             }
@@ -114,7 +116,6 @@ public class PantallaMenu extends PantallaBase {
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("clickeado btnJuegoNiveles");
                 PantallaJuego p =(PantallaJuego) (game.getPantallaJuego());
-                p.setTipoDeJuego(0);
                 cancionMenu.stop();
                 getGame().setScreen(PantallaMenu.super.getGame().getPantallaSelectorNivel());
             }

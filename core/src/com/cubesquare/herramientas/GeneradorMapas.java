@@ -104,7 +104,7 @@ public class GeneradorMapas {
         posicionRelatiba.x= posicionRelatiba.x+5.5f;
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
         posicionRelatiba.y= posicionRelatiba.y-2f;
-
+        posicionRelatiba.x= posicionRelatiba.x+10f;
         addObstaculosAleatorios( mapa , 50);
 
 

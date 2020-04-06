@@ -28,7 +28,7 @@ ADDED from D:\Estudios\ProyectoC\Cliente\CubeSquare\android\AndroidManifest.xml:
 	android:appCategory
 		ADDED from D:\Estudios\ProyectoC\Cliente\CubeSquare\android\AndroidManifest.xml:9:9-35
 	android:icon
-		ADDED from D:\Estudios\ProyectoC\Cliente\CubeSquare\android\AndroidManifest.xml:7:9-45
+		ADDED from D:\Estudios\ProyectoC\Cliente\CubeSquare\android\AndroidManifest.xml:7:9-37
 	android:allowBackup
 		ADDED from D:\Estudios\ProyectoC\Cliente\CubeSquare\android\AndroidManifest.xml:6:9-35
 	android:theme
