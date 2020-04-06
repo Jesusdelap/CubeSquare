@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class Main extends Game {
 
     private AssetManager manager;
-    private PantallaBase pantallaMenu,pantallaJuego,pantallaDerrota,pantallaCarga,pantallaBienvenida;
+    private PantallaBase pantallaMenu,pantallaJuego,pantallaDerrota,pantallaCarga,pantallaBienvenida,pantallaSelectorNivel;
 
 
     @Override
@@ -40,6 +40,7 @@ public class Main extends Game {
         pantallaJuego = new PantallaJuego(this);
         pantallaDerrota = new PantallaDerrota(this);
         pantallaBienvenida = new PantallaBienvenida(this);
+        pantallaSelectorNivel = new PantallaSelectorNivel(this);
         setScreen(pantallaBienvenida);
     }
 
@@ -64,4 +65,7 @@ public class Main extends Game {
     }
 
 
+    public PantallaBase getPantallaSelectorNivel() {
+        return pantallaSelectorNivel;
+    }
 }

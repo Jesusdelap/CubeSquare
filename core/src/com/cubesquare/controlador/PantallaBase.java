@@ -15,6 +15,8 @@ public abstract class PantallaBase implements Screen {
         this.game = game;
     }
 
+
+
     @Override
     public void show() {
         // This method is invoked when a screen is displayed.

@@ -14,14 +14,13 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.cubesquare.herramientas.Constantes;
 import com.cubesquare.herramientas.Fabricas;
-import com.cubesquare.modelo.Mapas;
+import com.cubesquare.herramientas.GeneradorMapas;
 import com.cubesquare.modelo.entidades.ActorJugador;
 import com.cubesquare.modelo.entidades.Destruible;
 
@@ -31,7 +30,7 @@ public class PantallaJuego extends PantallaBase {
 
     private Stage escenario, escenarioControles;
     private World mundo;
-    private Mapas mapas;
+    private GeneradorMapas generadorMapas;
     private ActorJugador jugador;
     private static TextButton btnMenu;
     private Skin skin;
@@ -42,6 +41,8 @@ public class PantallaJuego extends PantallaBase {
     private float velocidad;
     private float distanciaRecorrida;
     //private Image fondo;
+
+    private int tipoDeJuego; // si el tipo es 0 es infinito, si tiene un numero corresponde al nivel
 
     public PantallaJuego(Main game) {
         super(game);
@@ -66,8 +67,8 @@ public class PantallaJuego extends PantallaBase {
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(escenarioControles);
 
+        Gdx.input.setInputProcessor(escenarioControles);
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
         /*
@@ -110,18 +111,13 @@ public class PantallaJuego extends PantallaBase {
         //CREAMOS JUGADOR Y MAPA Y LOS AÑADIMOS AL ESCENARIO
         jugador = Fabricas.ActorFactory(mundo, game.getManager().get("cubo.png", Texture.class));
         //arrayMapa = Fabricas.mapaFactory(10, new Vector2(10, 1), mundo, game.getManager());
-        System.out.println("antes de mapas");
-        //inicializamos el mapa
-        mapas = new Mapas( new Vector2(17,3),mundo,game.getManager());
-        arrayMapa = mapas.mapaFacil();
-        System.out.println("despues de mapas");
 
-        // Añadimos los actores al escenario
-        for (Actor a : arrayMapa) {
-            escenario.addActor(a);
-        }
-        escenario.addActor(jugador);
-        escenarioControles.addActor(btnMenu);
+
+        //inicializamos el mapa
+        generadorMapas = new GeneradorMapas( new Vector2(17,3),mundo,game.getManager());
+        arrayMapa = Fabricas.mapaFactory(tipoDeJuego,generadorMapas);
+
+
 
 
         //CREAMOS LISTENER PARA CONTROLAR LAS COLISIONES DE LOS ACTORES
@@ -186,6 +182,13 @@ public class PantallaJuego extends PantallaBase {
 
             }
         });
+
+        // Añadimos los actores al escenario
+        for (Actor a : arrayMapa) {
+            escenario.addActor(a);
+        }
+        escenario.addActor(jugador);
+        escenarioControles.addActor(btnMenu);
     }
 
     @Override
@@ -229,24 +232,32 @@ public class PantallaJuego extends PantallaBase {
     }
 
     @Override
+    public void pause() {
+        PantallaMenu.setPantallaMenu(true);
+        game.setScreen(game.getPantallaMenu());
+        cancionJuego.pause();
+    }
+
+    @Override
     public void dispose() {
         jugador.destroy();
         skin.dispose();
         escenario.dispose();
         mundo.dispose();
         escenarioControles.dispose();
+        cancionJuego.dispose();
     }
-
-    @Override
-    public void pause() {
-        PantallaMenu.setPantallaMenu(true);
-        game.setScreen(game.getPantallaMenu());
-    }
-
-
 
     public float getDistanciaRecorrida() {
         return distanciaRecorrida;
     }
-}
 
+    public int getTipoDeJuego() {
+        return tipoDeJuego;
+    }
+
+    public void setTipoDeJuego(int tipoDeJuego) {
+        this.tipoDeJuego = tipoDeJuego;
+    }
+
+}

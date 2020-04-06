@@ -32,20 +32,13 @@ public class Fabricas {
         return new ActorPincho(world, texture,vector2);
     }
 
-    public static ArrayList<Actor> mapaFactory(int numeroObstaculos, Vector2 posicionInicial,World world, AssetManager manager){
-        ArrayList<Actor> mapa = new ArrayList<Actor>();
+    public static ArrayList<Actor> mapaFactory(int tipoDeJuego,GeneradorMapas generadorMapas){
 
-        mapa.add(Fabricas.sueloFactory(world));
-        posicionInicial.y =posicionInicial.y +1;
-        mapa.add(sueloFactory(world,manager.get("floor.png",Texture.class),4,4,posicionInicial));
-        posicionInicial.x =posicionInicial.x +6;
-        posicionInicial.y =posicionInicial.y -1;
-        for (int i=0; i<=numeroObstaculos; i++){
-            posicionInicial.x =posicionInicial.x + Beans.numeroAleatorio(12,6);
-            mapa.add(pinchoFactory(world,manager.get("spike.png",Texture.class),posicionInicial));
+        switch (tipoDeJuego){
+            case 0:return generadorMapas.mapaAleatorio(100);
+            case 1:return generadorMapas.mapaFacil();
+            default: return generadorMapas.mapavacio();
         }
-        return mapa;
+
     }
-
-
 }

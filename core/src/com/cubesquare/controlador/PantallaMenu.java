@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.cubesquare.herramientas.Constantes;
 import com.cubesquare.herramientas.Fabricas;
 import com.cubesquare.modelo.entidades.ActorJugador;
 import com.cubesquare.modelo.entidades.ActorSuelo;
@@ -30,7 +31,7 @@ import com.cubesquare.modelo.entidades.ActorSuelo;
 public class PantallaMenu extends PantallaBase {
 
     private Stage escenario;
-    private TextButton btnJuego,btnSalir;
+    private TextButton btnJuego,btnJuegoNiveles, btnSalir;
     private Skin skin;
     private Music cancionMenu;
 
@@ -84,13 +85,13 @@ public class PantallaMenu extends PantallaBase {
 
         //IMAGEN CON EL TÍTULO DEL JUEGO
         titulo = new Image(game.getManager().get("titulo.png", Texture.class));
-        titulo.setPosition((escenario.getWidth() / 2) - titulo.getWidth() / 2, escenario.getHeight() - 320);
+        titulo.setPosition((escenario.getWidth() / 2) - titulo.getWidth() / 2, escenario.getHeight() - 360);
 
 
         //BOTÓN JUEGO
-        btnJuego = new TextButton("Play", skin);
-        btnJuego.setSize((float) (escenario.getWidth() * 0.2), (float) (escenario.getHeight() * 0.1));
-        btnJuego.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, titulo.getY() - 150);
+        btnJuego = new TextButton("Juego Infinito", skin);
+        btnJuego.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
+        btnJuego.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, titulo.getY() -Constantes.PIXELS_IN_METER_Y);
 
         btnJuego.addCaptureListener(new ChangeListener() {
             @Override
@@ -98,7 +99,24 @@ public class PantallaMenu extends PantallaBase {
                 System.out.println("clickeado btnJuego");
                 cancionMenu.stop();
                 pantallaMenu = false;
-                PantallaMenu.super.getGame().setScreen(PantallaMenu.super.getGame().getPantallaJuego());
+                getGame().setScreen(PantallaMenu.super.getGame().getPantallaJuego());
+            }
+
+            ;
+        });
+        //BOTÓN JUEGONiveles
+        btnJuegoNiveles = new TextButton("Juego por niveles", skin);
+        btnJuegoNiveles.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
+        btnJuegoNiveles.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, (btnJuego.getY()-btnJuego.getHeight()) -Constantes.PIXELS_IN_METER_Y/4);
+
+        btnJuegoNiveles.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("clickeado btnJuegoNiveles");
+                PantallaJuego p =(PantallaJuego) (game.getPantallaJuego());
+                p.setTipoDeJuego(0);
+                cancionMenu.stop();
+                getGame().setScreen(PantallaMenu.super.getGame().getPantallaSelectorNivel());
             }
 
             ;
@@ -107,8 +125,8 @@ public class PantallaMenu extends PantallaBase {
 
         //BOTÓN SALIR
         btnSalir = new TextButton("Salir", skin);
-        btnSalir.setSize((float) (escenario.getWidth() * 0.2), (float) (escenario.getHeight() * 0.1));
-        btnSalir.setPosition(btnJuego.getX(), btnJuego.getY() - 150);
+        btnSalir.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
+        btnSalir.setPosition(btnJuego.getX(), (btnJuegoNiveles.getY()-btnJuegoNiveles.getHeight()) -Constantes.PIXELS_IN_METER_Y/4);
 
         btnSalir.addCaptureListener(new ChangeListener() {
             @Override
@@ -202,6 +220,7 @@ public class PantallaMenu extends PantallaBase {
         escenario.addActor(suelo);
         escenario.addActor(titulo);
         escenario.addActor(btnJuego);
+        escenario.addActor(btnJuegoNiveles);
         escenario.addActor(btnSalir);
         escenario.addActor(cubo);
         escenario.addActor(btnSonido);
@@ -231,6 +250,16 @@ public class PantallaMenu extends PantallaBase {
         cubo.destroy();
     }
 
+    @Override
+    public void pause() {
+        cancionMenu.pause();
+    }
+
+    @Override
+    public void resume() {
+        cancionMenu.play();
+    }
+
 
     @Override
     public void dispose() {
@@ -240,5 +269,7 @@ public class PantallaMenu extends PantallaBase {
         mundoMenu.dispose();
         escenario.dispose();
         skin.dispose();
+        cancionMenu.dispose();
+
     }
 }
