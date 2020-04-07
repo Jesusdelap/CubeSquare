@@ -28,7 +28,7 @@ ADDED from D:\Documentos\ProyectoDAM\CubeSquare\android\AndroidManifest.xml:5:5-
 	android:appCategory
 		ADDED from D:\Documentos\ProyectoDAM\CubeSquare\android\AndroidManifest.xml:9:9-35
 	android:icon
-		ADDED from D:\Documentos\ProyectoDAM\CubeSquare\android\AndroidManifest.xml:7:9-45
+		ADDED from D:\Documentos\ProyectoDAM\CubeSquare\android\AndroidManifest.xml:7:9-43
 	android:allowBackup
 		ADDED from D:\Documentos\ProyectoDAM\CubeSquare\android\AndroidManifest.xml:6:9-35
 	android:theme
