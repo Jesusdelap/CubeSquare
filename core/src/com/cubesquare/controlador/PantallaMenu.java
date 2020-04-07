@@ -44,7 +44,8 @@ public class PantallaMenu extends PantallaBase {
 
     private Texture btnSonidoActivado, btnSonidoDesactivado;
     private Button btnSonido;
-    private static boolean sonido = true;
+    private boolean cayendo=true;
+    private static boolean sonido = false;
     private static boolean pantallaMenu = true;
 
     public static void setPantallaMenu(boolean pantallaMenu) {
@@ -59,7 +60,7 @@ public class PantallaMenu extends PantallaBase {
         return sonido;
     }
 
-    public PantallaMenu(Main game) {
+    public PantallaMenu(CubeSquare game) {
         super(game);
 
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
@@ -89,14 +90,14 @@ public class PantallaMenu extends PantallaBase {
 
 
         //BOTÓN JUEGO
-        btnJuego = new TextButton("Juego Infinito", skin);
+        btnJuego = new TextButton("Juego infinito", skin);
         btnJuego.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
         btnJuego.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, titulo.getY() -Constantes.PIXELS_IN_METER_Y);
 
         btnJuego.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("clickeado btnJuego");
+                System.out.println("clickeado btnJuegoInfinito");
                 cancionMenu.stop();
                 pantallaMenu = false;
                 getGame().setScreen(PantallaMenu.super.getGame().getPantallaJuego());
@@ -104,7 +105,7 @@ public class PantallaMenu extends PantallaBase {
 
             ;
         });
-        //BOTÓN JUEGONiveles
+        //BOTÓN JUEGONIVELES
         btnJuegoNiveles = new TextButton("Juego por niveles", skin);
         btnJuegoNiveles.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
         btnJuegoNiveles.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, (btnJuego.getY()-btnJuego.getHeight()) -Constantes.PIXELS_IN_METER_Y/4);
@@ -115,7 +116,6 @@ public class PantallaMenu extends PantallaBase {
                 System.out.println("clickeado btnJuegoNiveles");
                 PantallaJuego p =(PantallaJuego) (game.getPantallaJuego());
                 p.setTipoDeJuego(0);
-                cancionMenu.stop();
                 getGame().setScreen(PantallaMenu.super.getGame().getPantallaSelectorNivel());
             }
 
@@ -172,7 +172,13 @@ public class PantallaMenu extends PantallaBase {
         }
 
         //CREAMOS SUELO Y CUBO PARA QUE INTERACCIONEN INDEFINIDAMENTE EN LA PANTALLA DE MENÚ
-        posicionCubo = new Vector2(5, 10);
+        if(cayendo){
+            posicionCubo = new Vector2(5, 10);
+            cayendo=false;
+        }else{
+            posicionCubo = new Vector2(5, 1.6f);
+        }
+
         posicionSuelo = new Vector2(0, 1.5f);
         suelo = Fabricas.sueloFactory(mundoMenu, new Texture("sueloTransparente.png"), Gdx.graphics.getWidth(),0, posicionSuelo);
         cubo = Fabricas.ActorFactory(mundoMenu, game.getManager().get("cubo.png", Texture.class), posicionCubo);
@@ -257,7 +263,9 @@ public class PantallaMenu extends PantallaBase {
 
     @Override
     public void resume() {
-        cancionMenu.play();
+        if (sonido) {
+            cancionMenu.play();
+        }
     }
 
 

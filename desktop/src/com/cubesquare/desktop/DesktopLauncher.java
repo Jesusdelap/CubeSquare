@@ -3,8 +3,7 @@ package com.cubesquare.desktop;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.cubesquare.controlador.Main;
-import com.cubesquare.controlador.PantallaMenu;
+import com.cubesquare.controlador.CubeSquare;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -13,6 +12,6 @@ public class DesktopLauncher {
 		config.height=720;
 		config.addIcon("cubo16x16.png", Files.FileType.Local);
 		config.addIcon("cubo32x32.png", Files.FileType.Local);
-		new LwjglApplication(new Main(), config);
+		new LwjglApplication(new CubeSquare(), config);
 	}
 }

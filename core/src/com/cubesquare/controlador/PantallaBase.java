@@ -9,9 +9,9 @@ public abstract class PantallaBase implements Screen {
      * every screen can be connected to the game, because every screen can access the game
      * instance.
      */
-    protected Main game;
+    protected CubeSquare game;
 
-    public PantallaBase(Main game) {
+    public PantallaBase(CubeSquare game) {
         this.game = game;
     }
 
@@ -53,11 +53,11 @@ public abstract class PantallaBase implements Screen {
         // This method is invoked when the game closes.
     }
 
-    public Main getGame() {
+    public CubeSquare getGame() {
         return game;
     }
 
-    public void setGame(Main game) {
+    public void setGame(CubeSquare game) {
         this.game = game;
     }
 }
