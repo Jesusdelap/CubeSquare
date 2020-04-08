@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.cubesquare.herramientas.Constantes;
 import com.cubesquare.herramientas.Fabricas;
 import com.cubesquare.modelo.entidades.ActorJugador;
 import com.cubesquare.modelo.entidades.ActorSuelo;
@@ -60,13 +61,13 @@ public class PantallaSelectorNivel extends PantallaBase{
 
             //IMAGEN CON EL TÍTULO DEL JUEGO
             titulo = new Image(game.getManager().get("titulo.png", Texture.class));
-            titulo.setPosition((escenario.getWidth() / 2) - titulo.getWidth() / 2, escenario.getHeight() - 320);
+            titulo.setPosition((escenario.getWidth() / 2) - titulo.getWidth() / 2, escenario.getHeight() - 360);
 
 
             //BOTÓN NIVEL
             btnNivel1 = new TextButton("Nivel 1", skin);
             btnNivel1.setSize((float) (escenario.getWidth() * 0.2), (float) (escenario.getHeight() * 0.1));
-            btnNivel1.setPosition((escenario.getWidth() / 2) - btnNivel1.getWidth() / 2, titulo.getY() - 150);
+            btnNivel1.setPosition((escenario.getWidth() / 2) - btnNivel1.getWidth() / 2, titulo.getY() - Constantes.PIXELS_IN_METER_Y);
 
             btnNivel1.addCaptureListener(new ChangeListener() {
                 @Override
@@ -85,8 +86,7 @@ public class PantallaSelectorNivel extends PantallaBase{
             //BOTÓN SALIR
             btnSalir = new TextButton("Volver al menu", skin);
             btnSalir.setSize((float) (escenario.getWidth() * 0.2), (float) (escenario.getHeight() * 0.1));
-            btnSalir.setPosition(btnNivel1.getX(), btnNivel1.getY() - 150);
-
+            btnSalir.setPosition(btnNivel1.getX(), (btnNivel1.getY()-btnNivel1.getHeight()) -Constantes.PIXELS_IN_METER_Y/4);
             btnSalir.addCaptureListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {

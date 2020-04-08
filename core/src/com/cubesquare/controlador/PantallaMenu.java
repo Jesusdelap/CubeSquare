@@ -45,7 +45,7 @@ public class PantallaMenu extends PantallaBase {
     private Texture btnSonidoActivado, btnSonidoDesactivado;
     private Button btnSonido;
     private boolean cayendo=true;
-    private static boolean sonido = false;
+    private static boolean sonido = true;
     private static boolean pantallaMenu = true;
 
     public static void setPantallaMenu(boolean pantallaMenu) {

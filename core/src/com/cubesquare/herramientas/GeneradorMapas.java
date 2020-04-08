@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cubesquare.herramientas.Beans;
 import com.cubesquare.herramientas.Fabricas;
 
@@ -29,10 +30,15 @@ public class GeneradorMapas {
     }
 
     public ArrayList<Actor> mapaFacil(){
-
-        //Posicion inical recomendada (17,3)
         ArrayList<Actor> mapa = new ArrayList<Actor>();
+
+        // -------------FONDO
+        //Image fondo = new Image(manager.get("fondoestrella1.png", Texture.class));
+        //mapa.add(fondo);
+        //Posicion inical recomendada (17,3)
+
         //creamos suelo base
+
         mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 1000, 2,new Vector2(0,0)));
         //creamos primera fase del nivel, Crescendo
 
@@ -145,10 +151,11 @@ public class GeneradorMapas {
                 mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
             }else if(Beans.numeroAleatorio(10,0)==1){
                 sueloPinchoFinal(mapa);
-                incremento_X=2;
+                incremento_X=4;
             }else {
-                incremento_X = Beans.numeroAleatorio(3,2);
+                incremento_X = Beans.numeroAleatorio(3,5);
                 mapa.add(Fabricas.sueloFactory(mundo,manager.get("floor.png", Texture.class),incremento_X,1, posicionRelatiba));
+                posicionRelatiba.x=posicionRelatiba.x+3;
             }
 
             posicionRelatiba.x = posicionRelatiba.x +incremento_X+Beans.numeroAleatorio(4,2);

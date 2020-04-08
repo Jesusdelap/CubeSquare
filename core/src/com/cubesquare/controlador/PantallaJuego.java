@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -40,7 +41,8 @@ public class PantallaJuego extends PantallaBase {
 
     private float velocidad;
     private float distanciaRecorrida;
-    //private Image fondo;
+    private Image fondo;
+
 
     private int tipoDeJuego; // si el tipo es 0 es infinito, si tiene un numero corresponde al nivel
 
@@ -70,16 +72,13 @@ public class PantallaJuego extends PantallaBase {
         Gdx.input.setInputProcessor(escenarioControles);
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-        /*
-        fondo = new Image(game.getManager().get("fondoEspacio.png", Texture.class));
+        //Creamos el fondo
+        fondo = new Image(game.getManager().get("fondoestrella1.png", Texture.class));
         fondo.setFillParent(true);
-        fondo.toBack();
-        escenarioControles.addActor(fondo);
-         */
 
         //ACTIVAMOS SONIDO SI SU VARIABLE DE CONTROL LO INDICA
         if (PantallaMenu.isSonido()) {
-            cancionJuego.setVolume(0.3f);
+            cancionJuego.setVolume(0.5f);
             cancionJuego.play();
         }
 
@@ -103,7 +102,6 @@ public class PantallaJuego extends PantallaBase {
 
         //CREAMOS JUGADOR Y MAPA Y LOS AÑADIMOS AL ESCENARIO
         jugador = Fabricas.ActorFactory(mundo, game.getManager().get("cubo.png", Texture.class));
-        //arrayMapa = Fabricas.mapaFactory(10, new Vector2(10, 1), mundo, game.getManager());
 
         //inicializamos el mapa
         generadorMapas = new GeneradorMapas( new Vector2(17,3),mundo,game.getManager());
@@ -174,6 +172,8 @@ public class PantallaJuego extends PantallaBase {
             escenario.addActor(a);
         }
         escenario.addActor(jugador);
+
+        escenarioControles.addActor(fondo);
         escenarioControles.addActor(btnMenu);
     }
 
@@ -189,8 +189,9 @@ public class PantallaJuego extends PantallaBase {
             escenario.getCamera().translate(velocidad * delta, 0, 0);
         }
 
-        escenario.draw();
         escenarioControles.draw();
+        escenario.draw();
+
         distanciaRecorrida = velocidad * delta + distanciaRecorrida;
     }
 
