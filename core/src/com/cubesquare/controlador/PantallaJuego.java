@@ -35,7 +35,7 @@ public class PantallaJuego extends PantallaBase {
     private static TextButton btnMenu;
     private Skin skin;
     private ArrayList<Actor> arrayMapa;
-    private Sound sonidoChoque, gameOver;
+    private Sound sonidoChoque;
     private Music cancionJuego;
 
     private float velocidad;
@@ -44,10 +44,9 @@ public class PantallaJuego extends PantallaBase {
 
     private int tipoDeJuego; // si el tipo es 0 es infinito, si tiene un numero corresponde al nivel
 
-    public PantallaJuego(Main game) {
+    public PantallaJuego(CubeSquare game) {
         super(game);
         velocidad = 6f * Constantes.PIXELS_IN_METER_X * 0.99446f;
-
 
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         escenarioControles = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
@@ -55,7 +54,7 @@ public class PantallaJuego extends PantallaBase {
 
         cancionJuego = game.getManager().get("sonidos/cancionjuego.ogg");
         sonidoChoque = game.getManager().get("sonidos/choque.wav");
-        gameOver = game.getManager().get("sonidos/gameover.wav");
+
 
         System.out.println("pixeles por metro en eje x" + Constantes.PIXELS_IN_METER_X);
         System.out.println("pixeles por metro en eje y" + Constantes.PIXELS_IN_METER_Y);
@@ -78,10 +77,6 @@ public class PantallaJuego extends PantallaBase {
         escenarioControles.addActor(fondo);
          */
 
-
-
-
-
         //ACTIVAMOS SONIDO SI SU VARIABLE DE CONTROL LO INDICA
         if (PantallaMenu.isSonido()) {
             cancionJuego.setVolume(0.3f);
@@ -89,8 +84,6 @@ public class PantallaJuego extends PantallaBase {
         }
 
         distanciaRecorrida = 0;
-
-
 
         //CREAMOS BOTON MENU Y ASOCIAMOS UN LISTENER QUE PARARA EL JUEGO Y NOS LLEVARA A LA PANTALLA MENU
         btnMenu = new TextButton("Menu", skin);
@@ -112,13 +105,9 @@ public class PantallaJuego extends PantallaBase {
         jugador = Fabricas.ActorFactory(mundo, game.getManager().get("cubo.png", Texture.class));
         //arrayMapa = Fabricas.mapaFactory(10, new Vector2(10, 1), mundo, game.getManager());
 
-
         //inicializamos el mapa
         generadorMapas = new GeneradorMapas( new Vector2(17,3),mundo,game.getManager());
         arrayMapa = Fabricas.mapaFactory(tipoDeJuego,generadorMapas);
-
-
-
 
         //CREAMOS LISTENER PARA CONTROLAR LAS COLISIONES DE LOS ACTORES
         mundo.setContactListener(new ContactListener() {
@@ -139,18 +128,15 @@ public class PantallaJuego extends PantallaBase {
                 }
 
                 if (choque(contact, "cubo", "pincho")) {
-                    //((OrthographicCamera) escenario.getCamera()).position.set(jugador.getX(),jugador.getY(),0);
-                    //((OrthographicCamera) escenario.getCamera()).zoom-=0.3f;
                     if (PantallaMenu.isSonido()) {
                         cancionJuego.stop();
-                        gameOver.play();
                         sonidoChoque.play();
                     }
                     jugador.setFin(true);
 
                     escenario.addAction(
                             Actions.sequence(
-                                    Actions.delay(2),
+                                    Actions.delay(0.5f),
                                     Actions.run(new Runnable() {
                                         @Override
                                         public void run() {
@@ -220,7 +206,6 @@ public class PantallaJuego extends PantallaBase {
 
             cancionJuego.stop();
             sonidoChoque.stop();
-            gameOver.stop();
 
             for (Actor a : arrayMapa) {
                 Destruible d = (Destruible) a;
@@ -235,7 +220,7 @@ public class PantallaJuego extends PantallaBase {
     public void pause() {
         PantallaMenu.setPantallaMenu(true);
         game.setScreen(game.getPantallaMenu());
-        cancionJuego.pause();
+        cancionJuego.stop();
     }
 
     @Override
@@ -250,10 +235,6 @@ public class PantallaJuego extends PantallaBase {
 
     public float getDistanciaRecorrida() {
         return distanciaRecorrida;
-    }
-
-    public int getTipoDeJuego() {
-        return tipoDeJuego;
     }
 
     public void setTipoDeJuego(int tipoDeJuego) {

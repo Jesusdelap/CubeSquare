@@ -11,7 +11,7 @@ public class PantallaBienvenida extends PantallaBase {
     private Stage escenario;
     private Label carga;
     private Skin skin;
-    public PantallaBienvenida(Main game) {
+    public PantallaBienvenida(CubeSquare game) {
         super(game);
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
