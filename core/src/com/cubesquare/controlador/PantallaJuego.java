@@ -12,12 +12,15 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.cubesquare.herramientas.Constantes;
 import com.cubesquare.herramientas.Fabricas;
@@ -73,7 +76,7 @@ public class PantallaJuego extends PantallaBase {
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
         //Creamos el fondo
-        fondo = new Image(game.getManager().get("fondoestrella1.png", Texture.class));
+        fondo = new Image(game.getManager().get("fondoestrella2.png", Texture.class));
         fondo.setFillParent(true);
 
         //ACTIVAMOS SONIDO SI SU VARIABLE DE CONTROL LO INDICA
@@ -86,10 +89,21 @@ public class PantallaJuego extends PantallaBase {
 
         //CREAMOS BOTON MENU Y ASOCIAMOS UN LISTENER QUE PARARA EL JUEGO Y NOS LLEVARA A LA PANTALLA MENU
         btnMenu = new TextButton("Menu", skin);
-        btnMenu.setSize(Constantes.PIXELS_IN_METER_X*1.50f, Constantes.PIXELS_IN_METER_Y*0.6f);
-        btnMenu.setPosition(escenarioControles.getWidth() - (btnMenu.getWidth()+Constantes.PIXELS_IN_METER_X/5), escenarioControles.getHeight() -(btnMenu.getHeight()+Constantes.PIXELS_IN_METER_Y/5) );
+        btnMenu.setSize(Constantes.PIXELS_IN_METER_X * 1.50f, Constantes.PIXELS_IN_METER_Y * 0.6f);
+        btnMenu.setPosition(escenarioControles.getWidth() - (btnMenu.getWidth() + Constantes.PIXELS_IN_METER_X / 5), escenarioControles.getHeight() - (btnMenu.getHeight() + Constantes.PIXELS_IN_METER_Y / 5));
 
-        btnMenu.addCaptureListener(new ChangeListener() {
+        btnMenu.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("clickeado btnMenu");
+                cancionJuego.stop();
+                PantallaMenu.setPantallaMenu(true);
+                PantallaJuego.super.getGame().setScreen(PantallaJuego.super.getGame().getPantallaMenu());
+                return true;
+            }
+        });
+
+        /*btnMenu.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("clickeado btnMenu");
@@ -98,14 +112,14 @@ public class PantallaJuego extends PantallaBase {
                 PantallaJuego.super.getGame().setScreen(PantallaJuego.super.getGame().getPantallaMenu());
 
             }
-        });
+        });*/
 
         //CREAMOS JUGADOR Y MAPA Y LOS AÑADIMOS AL ESCENARIO
         jugador = Fabricas.ActorFactory(mundo, game.getManager().get("cubo.png", Texture.class));
 
         //inicializamos el mapa
-        generadorMapas = new GeneradorMapas( new Vector2(17,3),mundo,game.getManager());
-        arrayMapa = Fabricas.mapaFactory(tipoDeJuego,generadorMapas);
+        generadorMapas = new GeneradorMapas(new Vector2(17, 3), mundo, game.getManager());
+        arrayMapa = Fabricas.mapaFactory(tipoDeJuego, generadorMapas);
 
         //CREAMOS LISTENER PARA CONTROLAR LAS COLISIONES DE LOS ACTORES
         mundo.setContactListener(new ContactListener() {

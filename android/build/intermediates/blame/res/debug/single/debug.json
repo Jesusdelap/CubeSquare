@@ -1,27 +1,35 @@
 [
     {
-        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_icocubesquare_background.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\icocubesquare_background.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_icono_round.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xxxhdpi\\icono_round.png"
     },
     {
         "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_launcher_background.png.flat",
         "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_launcher_background.png"
     },
     {
-        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_icono.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xxhdpi\\icono.png"
     },
     {
         "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_launcher.png.flat",
         "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\drawable-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_foreground.png.flat",
-        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xxhdpi\\ic_launcher_foreground.png"
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_icono_foreground.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xxhdpi\\icono_foreground.png"
     },
     {
-        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_launcher.png.flat",
-        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\drawable-mdpi\\ic_launcher.png"
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_icono_foreground.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-mdpi\\icono_foreground.png"
     },
     {
         "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_foreground.png.flat",
@@ -32,12 +40,12 @@
         "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_launcher.png.flat",
-        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\drawable-xxxhdpi\\ic_launcher.png"
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_icono_background.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\icono_background.png"
     },
     {
-        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_launcher_background.png.flat",
-        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_launcher_background.png"
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_icocubesquare_background.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\icocubesquare_background.png"
     },
     {
         "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_launcher_background.png.flat",
@@ -52,12 +60,132 @@
         "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\drawable-anydpi-v26\\ic_launcher.xml"
     },
     {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_icono_background.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\icono_background.png"
+    },
+    {
         "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v26_ic_launcher_foreground.xml.flat",
         "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\drawable-anydpi-v26\\ic_launcher_foreground.xml"
     },
     {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_icocubesquare_background.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\icocubesquare_background.png"
+    },
+    {
         "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_launcher_background.xml.flat",
         "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_icocubesquare_background.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\icocubesquare_background.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-mdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_icono_background.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\icono_background.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_launcher_background.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_icocubesquare_background.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\icocubesquare_background.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_icono.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xhdpi\\icono.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_icono_foreground.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-hdpi\\icono_foreground.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_icono_background.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\icono_background.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_launcher_background.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_icono.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xxxhdpi\\icono.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_launcher.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\drawable-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_icono_round.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-hdpi\\icono_round.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xxhdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_icono_background.xml.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\icono_background.xml"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_launcher.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\drawable-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_icono_background.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\icono_background.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_icono_round.xml.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-anydpi-v26\\icono_round.xml"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_icono_round.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xhdpi\\icono_round.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_launcher.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\drawable-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_launcher_background.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_icocubesquare_background.xml.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\icocubesquare_background.xml"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_icono_foreground.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xhdpi\\icono_foreground.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_icono_foreground.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xxxhdpi\\icono_foreground.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_icono_background.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\icono_background.png"
+    },
+    {
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_icono_round.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-mdpi\\icono_round.png"
     },
     {
         "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_foreground.png.flat",
@@ -68,35 +196,31 @@
         "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_launcher_background.png"
     },
     {
-        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_foreground.png.flat",
-        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-mdpi\\ic_launcher_foreground.png"
-    },
-    {
-        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_launcher_background.png.flat",
-        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_launcher_background.png"
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_icocubesquare_background.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\icocubesquare_background.png"
     },
     {
         "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xxhdpi\\ic_launcher.png"
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_icono_round.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xxhdpi\\icono_round.png"
     },
     {
         "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
         "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-xxxhdpi\\ic_launcher_foreground.png"
     },
     {
-        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_launcher_background.png.flat",
-        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_launcher_background.png"
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_icono.xml.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-anydpi-v26\\icono.xml"
     },
     {
-        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-mdpi\\ic_launcher.png"
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_icono.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-hdpi\\icono.png"
     },
     {
-        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_launcher.png.flat",
-        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\drawable-xxhdpi\\ic_launcher.png"
+        "merged": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_icono.png.flat",
+        "source": "D:\\Documentos\\ProyectoDAM\\CubeSquare\\android\\res\\mipmap-mdpi\\icono.png"
     }
 ]

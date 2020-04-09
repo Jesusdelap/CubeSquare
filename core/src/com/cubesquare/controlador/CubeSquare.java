@@ -28,7 +28,7 @@ public class CubeSquare extends Game {
         manager.load("gameover.png", Texture.class);
         manager.load("titulo.png", Texture.class);
         manager.load("sueloTransparente.png", Texture.class);
-        manager.load("fondoestrella1.png", Texture.class);
+        //manager.load("fondoestrella1.png", Texture.class);
         manager.load("fondoestrella2.png", Texture.class);
         manager.load("sonidos/cancionmenu.ogg", Music.class);
         manager.load("sonidos/cancionjuego.ogg", Music.class);
