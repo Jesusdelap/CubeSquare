@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -22,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.cubesquare.herramientas.AnimacionFondo;
 import com.cubesquare.herramientas.Constantes;
 import com.cubesquare.herramientas.Fabricas;
 import com.cubesquare.herramientas.GeneradorMapas;
@@ -46,6 +48,8 @@ public class PantallaJuego extends PantallaBase {
     private float distanciaRecorrida;
     private Image fondo;
 
+    SpriteBatch batch;
+    private AnimacionFondo i,j,k;
 
     private int tipoDeJuego; // si el tipo es 0 es infinito, si tiene un numero corresponde al nivel
 
@@ -60,6 +64,10 @@ public class PantallaJuego extends PantallaBase {
         cancionJuego = game.getManager().get("sonidos/cancionjuego.ogg");
         sonidoChoque = game.getManager().get("sonidos/choque.wav");
 
+        //CREAMOS ELEMENTOS PARA LA ANIMACION DE FONDO
+        batch = new SpriteBatch();
+        i = new AnimacionFondo(0,0);
+        j = new AnimacionFondo(0,0);
 
         System.out.println("pixeles por metro en eje x" + Constantes.PIXELS_IN_METER_X);
         System.out.println("pixeles por metro en eje y" + Constantes.PIXELS_IN_METER_Y);
@@ -75,9 +83,9 @@ public class PantallaJuego extends PantallaBase {
         Gdx.input.setInputProcessor(escenarioControles);
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-        //Creamos el fondo
+        /*//Creamos el fondo
         fondo = new Image(game.getManager().get("fondoestrella2.png", Texture.class));
-        fondo.setFillParent(true);
+        fondo.setFillParent(true);*/
 
         //ACTIVAMOS SONIDO SI SU VARIABLE DE CONTROL LO INDICA
         if (PantallaMenu.isSonido()) {
@@ -186,8 +194,7 @@ public class PantallaJuego extends PantallaBase {
             escenario.addActor(a);
         }
         escenario.addActor(jugador);
-
-        escenarioControles.addActor(fondo);
+        //escenarioControles.addActor(fondo);
         escenarioControles.addActor(btnMenu);
     }
 
@@ -195,16 +202,25 @@ public class PantallaJuego extends PantallaBase {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0.2f, 0.8f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
 
+        //DIBUJAMOS LA ANIMACION DE FONDO
+        i.render(batch);
+        j.render(batch);
+
+        //ACTUALIZAMOS ESCENARIO Y MOVEMOS LA CAMARA
         escenario.act();
         mundo.step(delta, 6, 2);
 
-        if (!jugador.isFin() && (!PantallaJuego.getBtnMenu().getClickListener().isPressed())) {
+        if (!jugador.isFin() /*&& (!PantallaJuego.getBtnMenu().getClickListener().isPressed())*/) {
             escenario.getCamera().translate(velocidad * delta, 0, 0);
         }
 
+        //DIBUJAMOS ESCENARIOS
         escenarioControles.draw();
         escenario.draw();
+
+        batch.end();
 
         distanciaRecorrida = velocidad * delta + distanciaRecorrida;
     }
@@ -246,6 +262,7 @@ public class PantallaJuego extends PantallaBase {
         mundo.dispose();
         escenarioControles.dispose();
         cancionJuego.dispose();
+        batch.dispose();
     }
 
     public float getDistanciaRecorrida() {
