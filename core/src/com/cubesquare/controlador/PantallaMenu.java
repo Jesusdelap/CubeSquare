@@ -16,6 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -31,8 +33,10 @@ import com.cubesquare.modelo.entidades.ActorSuelo;
 public class PantallaMenu extends PantallaBase {
 
     private Stage escenario;
-    private TextButton btnJuego,btnJuegoNiveles, btnSalir;
-    private Skin skin;
+    private TextButton btnJuego;
+    private TextButton btnJuegoNiveles,btnPrueba;
+    private ImageTextButton btnSalir;
+    private Skin skin, skin2, skin3, skin4;
     private Music cancionMenu;
 
     private ActorSuelo suelo;
@@ -40,12 +44,12 @@ public class PantallaMenu extends PantallaBase {
     private ActorJugador cubo;
     private Vector2 posicionCubo;
     private Vector2 posicionSuelo;
-    private Image fondo,titulo;
+    private Image fondo, titulo;
 
     private Texture btnSonidoActivado, btnSonidoDesactivado;
     private Button btnSonido;
-    private boolean cayendo=true;
-    private static boolean sonido = true;
+    private boolean cayendo = true;
+    private static boolean sonido = false;
     private static boolean pantallaMenu = true;
 
     public static void setPantallaMenu(boolean pantallaMenu) {
@@ -66,6 +70,9 @@ public class PantallaMenu extends PantallaBase {
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         mundoMenu = new World(new Vector2(0, -15), true);
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        skin2 = new Skin(Gdx.files.internal("skin/comic/skin/comic-ui.json"));
+        skin3 = new Skin(Gdx.files.internal("skin/quantum-horizon/skin/quantum-horizon-ui.json"));
+        skin4 = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
         cancionMenu = game.getManager().get("sonidos/cancionmenu.ogg");
         cancionMenu.setLooping(true);
 
@@ -88,33 +95,52 @@ public class PantallaMenu extends PantallaBase {
         titulo = new Image(game.getManager().get("titulo.png", Texture.class));
         titulo.setPosition((escenario.getWidth() / 2) - titulo.getWidth() / 2, escenario.getHeight() - 360);
 
+        /*atlasUiPadrao = new TextureAtlas("ui/uiPadrao.pack");
+        skinPadrao = new Skin(atlasUiPadrao);
+        fireButtonStyle = new ImageButtonStyle();*/
 
+        //Instaciate fireButtonStyle.up = skinPadrao.getDrawable("uFireUpI");
+        // Set image for not pressed button fireButtonStyle.down = skinPadrao.getDrawable("uFireDownI");
+        // Set image for pressed fireButtonStyle.over = skinPadrao.getDrawable("uFireOverI");
+        // set image for mouse over fireButtonStyle.pressedOffsetX = 1;
+        // fireButtonStyle.pressedOffsetY = -1;
+
+
+        final SelectBox<String> btnJuego=new SelectBox<String>(skin4);
+        btnJuego.setItems("Modo juego","Modo infinito","Por niveles");
         //BOTÓN JUEGO
-        btnJuego = new TextButton("Juego infinito", skin);
+        //btnJuego = new TextButton("Juego infinito", skin2);
         btnJuego.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
-        btnJuego.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, titulo.getY() -Constantes.PIXELS_IN_METER_Y);
+        btnJuego.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, titulo.getY() - Constantes.PIXELS_IN_METER_Y);
 
         btnJuego.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("clickeado btnJuegoInfinito");
-                cancionMenu.stop();
-                pantallaMenu = false;
-                getGame().setScreen(PantallaMenu.super.getGame().getPantallaJuego());
+                if(btnJuego.getSelected().equals("Modo infinito")){
+                    System.out.println("clickeado btnJuegoInfinito");
+                    cancionMenu.stop();
+                    pantallaMenu = false;
+                    getGame().setScreen(PantallaMenu.super.getGame().getPantallaJuego());
+                }else if(btnJuego.getSelected().equals("Por niveles")){
+                    PantallaJuego p = (PantallaJuego) (game.getPantallaJuego());
+                    p.setTipoDeJuego(0);
+                    getGame().setScreen(PantallaMenu.super.getGame().getPantallaSelectorNivel());
+                }
+
             }
 
             ;
         });
         //BOTÓN JUEGONIVELES
-        btnJuegoNiveles = new TextButton("Juego por niveles", skin);
+        btnJuegoNiveles = new TextButton("Juego por niveles", skin3);
         btnJuegoNiveles.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
-        btnJuegoNiveles.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, (btnJuego.getY()-btnJuego.getHeight()) -Constantes.PIXELS_IN_METER_Y/4);
+        btnJuegoNiveles.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, (btnJuego.getY() - btnJuego.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
 
         btnJuegoNiveles.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("clickeado btnJuegoNiveles");
-                PantallaJuego p =(PantallaJuego) (game.getPantallaJuego());
+                PantallaJuego p = (PantallaJuego) (game.getPantallaJuego());
                 p.setTipoDeJuego(0);
                 getGame().setScreen(PantallaMenu.super.getGame().getPantallaSelectorNivel());
             }
@@ -124,9 +150,9 @@ public class PantallaMenu extends PantallaBase {
 
 
         //BOTÓN SALIR
-        btnSalir = new TextButton("Salir", skin);
+        btnSalir = new ImageTextButton("Salir", skin4,"toggle");
         btnSalir.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
-        btnSalir.setPosition(btnJuego.getX(), (btnJuegoNiveles.getY()-btnJuegoNiveles.getHeight()) -Constantes.PIXELS_IN_METER_Y/4);
+        btnSalir.setPosition(btnJuego.getX(), (btnJuegoNiveles.getY() - btnJuegoNiveles.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
 
         btnSalir.addCaptureListener(new ChangeListener() {
             @Override
@@ -135,6 +161,11 @@ public class PantallaMenu extends PantallaBase {
                 Gdx.app.exit();
             }
         });
+
+        //BOTÓN PRUEBA
+        btnPrueba = new TextButton("Prueba", skin2);
+        btnPrueba.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
+        btnPrueba.setPosition(btnSalir.getX(),(btnSalir.getY() - btnSalir.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4) ;
 
 
         //CREAMOS EL BOTÓN DE SONIDO CON DOS TEXTURAS DISTINTAS
@@ -172,15 +203,15 @@ public class PantallaMenu extends PantallaBase {
         }
 
         //CREAMOS SUELO Y CUBO PARA QUE INTERACCIONEN INDEFINIDAMENTE EN LA PANTALLA DE MENÚ
-        if(cayendo){
+        if (cayendo) {
             posicionCubo = new Vector2(5, 10);
-            cayendo=false;
-        }else{
+            cayendo = false;
+        } else {
             posicionCubo = new Vector2(5, 1.6f);
         }
 
         posicionSuelo = new Vector2(0, 1.5f);
-        suelo = Fabricas.sueloFactory(mundoMenu, new Texture("sueloTransparente.png"), Gdx.graphics.getWidth(),0, posicionSuelo);
+        suelo = Fabricas.sueloFactory(mundoMenu, new Texture("sueloTransparente.png"), Gdx.graphics.getWidth(), 0, posicionSuelo);
         cubo = Fabricas.ActorFactory(mundoMenu, game.getManager().get("cubo.png", Texture.class), posicionCubo);
         cubo.setSaltando(true);
 
@@ -220,7 +251,6 @@ public class PantallaMenu extends PantallaBase {
         });
 
 
-
         //AÑADIMOS TODOS LOS ACTORES AL ESCENARIO
         escenario.addActor(fondo);
         escenario.addActor(suelo);
@@ -228,6 +258,7 @@ public class PantallaMenu extends PantallaBase {
         escenario.addActor(btnJuego);
         escenario.addActor(btnJuegoNiveles);
         escenario.addActor(btnSalir);
+        escenario.addActor(btnPrueba);
         escenario.addActor(cubo);
         escenario.addActor(btnSonido);
 
