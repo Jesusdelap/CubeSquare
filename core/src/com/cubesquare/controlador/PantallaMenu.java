@@ -34,8 +34,7 @@ public class PantallaMenu extends PantallaBase {
 
     private Stage escenario;
     private TextButton btnJuego;
-    private TextButton btnJuegoNiveles,btnPrueba;
-    private ImageTextButton btnSalir;
+    private TextButton btnJuegoNiveles, btnSalir;
     private Skin skin, skin2, skin3, skin4;
     private Music cancionMenu;
 
@@ -49,7 +48,7 @@ public class PantallaMenu extends PantallaBase {
     private Texture btnSonidoActivado, btnSonidoDesactivado;
     private Button btnSonido;
     private boolean cayendo = true;
-    private static boolean sonido = false;
+    private static boolean sonido = true;
     private static boolean pantallaMenu = true;
 
     public static void setPantallaMenu(boolean pantallaMenu) {
@@ -106,8 +105,8 @@ public class PantallaMenu extends PantallaBase {
         // fireButtonStyle.pressedOffsetY = -1;
 
 
-        final SelectBox<String> btnJuego=new SelectBox<String>(skin4);
-        btnJuego.setItems("Modo juego","Modo infinito","Por niveles");
+
+        btnJuego = new TextButton("Juego infinito", skin4);
         //BOTÓN JUEGO
         //btnJuego = new TextButton("Juego infinito", skin2);
         btnJuego.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
@@ -116,23 +115,18 @@ public class PantallaMenu extends PantallaBase {
         btnJuego.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(btnJuego.getSelected().equals("Modo infinito")){
-                    System.out.println("clickeado btnJuegoInfinito");
-                    cancionMenu.stop();
-                    pantallaMenu = false;
-                    getGame().setScreen(PantallaMenu.super.getGame().getPantallaJuego());
-                }else if(btnJuego.getSelected().equals("Por niveles")){
-                    PantallaJuego p = (PantallaJuego) (game.getPantallaJuego());
-                    p.setTipoDeJuego(0);
-                    getGame().setScreen(PantallaMenu.super.getGame().getPantallaSelectorNivel());
-                }
-
+                System.out.println("clickeado btnJuego infinito");
+                PantallaJuego p = (PantallaJuego) (game.getPantallaJuego());
+                p.setTipoDeJuego(0);
+                cancionMenu.stop();
+                pantallaMenu = false;
+                getGame().setScreen(PantallaMenu.super.getGame().getPantallaJuego());
             }
 
             ;
         });
         //BOTÓN JUEGONIVELES
-        btnJuegoNiveles = new TextButton("Juego por niveles", skin3);
+        btnJuegoNiveles = new TextButton("Juego por niveles", skin4);
         btnJuegoNiveles.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
         btnJuegoNiveles.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, (btnJuego.getY() - btnJuego.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
 
@@ -141,7 +135,7 @@ public class PantallaMenu extends PantallaBase {
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("clickeado btnJuegoNiveles");
                 PantallaJuego p = (PantallaJuego) (game.getPantallaJuego());
-                p.setTipoDeJuego(0);
+                p.setTipoDeJuego(1);
                 getGame().setScreen(PantallaMenu.super.getGame().getPantallaSelectorNivel());
             }
 
@@ -150,7 +144,7 @@ public class PantallaMenu extends PantallaBase {
 
 
         //BOTÓN SALIR
-        btnSalir = new ImageTextButton("Salir", skin4,"toggle");
+        btnSalir = new TextButton("Salir", skin4);
         btnSalir.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
         btnSalir.setPosition(btnJuego.getX(), (btnJuegoNiveles.getY() - btnJuegoNiveles.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
 
@@ -161,11 +155,6 @@ public class PantallaMenu extends PantallaBase {
                 Gdx.app.exit();
             }
         });
-
-        //BOTÓN PRUEBA
-        btnPrueba = new TextButton("Prueba", skin2);
-        btnPrueba.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
-        btnPrueba.setPosition(btnSalir.getX(),(btnSalir.getY() - btnSalir.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4) ;
 
 
         //CREAMOS EL BOTÓN DE SONIDO CON DOS TEXTURAS DISTINTAS
@@ -197,7 +186,7 @@ public class PantallaMenu extends PantallaBase {
         });
 
         //ACTIVAMOS EL SONIDO SÓLO SI SU VARIABLE DE CONTROL ESTÁ ACTIVA. EN CASO CONTRARIO, EL LOGO DE SONIDO ES EL DE DESACTIVADO
-        //cancionMenu.setVolume(0.1f);
+        cancionMenu.setVolume(0.5f);
         if (sonido) {
             cancionMenu.play();
         }
@@ -258,7 +247,6 @@ public class PantallaMenu extends PantallaBase {
         escenario.addActor(btnJuego);
         escenario.addActor(btnJuegoNiveles);
         escenario.addActor(btnSalir);
-        escenario.addActor(btnPrueba);
         escenario.addActor(cubo);
         escenario.addActor(btnSonido);
 

@@ -32,13 +32,6 @@ public class GeneradorMapas {
     public ArrayList<Actor> mapaFacil(){
         ArrayList<Actor> mapa = new ArrayList<Actor>();
 
-        // -------------FONDO
-        //Image fondo = new Image(manager.get("fondoestrella1.png", Texture.class));
-        //mapa.add(fondo);
-        //Posicion inical recomendada (17,3)
-
-        //creamos suelo base
-
         mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 1000, 2,new Vector2(0,0)));
         //creamos primera fase del nivel, Crescendo
 

@@ -27,7 +27,7 @@ public class PantallaDerrota extends PantallaBase {
     public PantallaDerrota(CubeSquare game) {
         super(game);
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
-        skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
         sonidoGameOver = game.getManager().get("sonidos/gameover.wav");
     }
     @Override
@@ -45,7 +45,7 @@ public class PantallaDerrota extends PantallaBase {
         tituloGameOver.setPosition((escenario.getWidth() / 2) - tituloGameOver.getWidth() / 2, escenario.getHeight() - 360);
 
         textoDerrota = new Label("Distancia recorrida: "+Beans.truncarNumeros(Beans.pxToMetters_X(p.getDistanciaRecorrida())),skin);
-        textoDerrota.setPosition(((escenario.getWidth() / 2 -tituloGameOver.getWidth() / 4)), tituloGameOver.getY() -2);
+        textoDerrota.setPosition(((escenario.getWidth() / 2 -tituloGameOver.getWidth() / 2)), tituloGameOver.getY() -2);
         textoDerrota.setFontScale(3);
         textoDerrota.setColor(1,0,0,1);
 

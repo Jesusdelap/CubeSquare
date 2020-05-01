@@ -16,7 +16,7 @@ public class PantallaCarga extends PantallaBase {
     public PantallaCarga(CubeSquare game) {
         super(game);
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
-        skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
         carga = new Label("¡Cargando! ¡Espere, por favor!", skin);
 
     }

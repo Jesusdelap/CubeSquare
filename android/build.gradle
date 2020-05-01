@@ -100,9 +100,13 @@ task run(type: Exec) {
 }
 
 dependencies {
-    implementation files('libs\\externas\\log4j-api-2.7.jar')
-    implementation files('libs\\externas\\log4j-core-2.7.jar')
-    implementation files('libs\\externas\\mysql-connector-java-8.0.16.jar')
+    //implementation files('libs\\externas\\log4j-api-2.7.jar')
+    //implementation files('libs\\externas\\log4j-core-2.7.jar')
+   //implementation files('libs\\externas\\mysql-connector-java-8.0.16.jar')
+	compile fileTree(dir: 'libs\\externas\\',include: ['*.jar'])
+   compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.16'
+
+
 }
 
 eclipse.project.name = appName + "-android"

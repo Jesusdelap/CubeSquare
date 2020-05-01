@@ -5,6 +5,8 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.cubesquare.herramientas.ConnexionSQL;
+
 //Main
 public class CubeSquare extends Game {
 
@@ -35,7 +37,7 @@ public class CubeSquare extends Game {
         manager.load("sonidos/cancionjuego.ogg", Music.class);
         manager.load("sonidos/choque.wav", Sound.class);
         manager.load("sonidos/gameover.wav", Sound.class);
-
+        ConnexionSQL c = new ConnexionSQL();
         pantallaCarga = new PantallaCarga(this);
         setScreen(pantallaCarga);
     }

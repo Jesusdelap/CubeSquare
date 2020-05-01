@@ -29,7 +29,7 @@ public class PantallaSelectorNivel extends PantallaBase{
         private Stage escenario;
         private TextButton btnNivel1;
         private ImageTextButton btnSalir;
-        private Skin skin,skin2, skin3;
+        private Skin skin,skin2, skin3,skin4;
         private Music cancionMenu;
 
         private ActorSuelo suelo;
@@ -48,6 +48,7 @@ public class PantallaSelectorNivel extends PantallaBase{
             skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
             skin2 = new Skin(Gdx.files.internal("skin/neon/skin/neon-ui.json"));
             skin3 = new Skin(Gdx.files.internal("skin/biological-attack/skin/biological-attack-ui.json"));
+            skin4 = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
             cancionMenu = game.getManager().get("sonidos/cancionmenu.ogg");
             cancionMenu.setLooping(true);
         }
@@ -69,7 +70,7 @@ public class PantallaSelectorNivel extends PantallaBase{
 
 
             //BOTÓN NIVEL
-            btnNivel1 = new TextButton("Nivel 1", skin2);
+            btnNivel1 = new TextButton("Nivel 1", skin4);
             btnNivel1.setSize((float) (escenario.getWidth() * 0.2), (float) (escenario.getHeight() * 0.1));
             btnNivel1.setPosition((escenario.getWidth() / 2) - btnNivel1.getWidth() / 2, titulo.getY() - Constantes.PIXELS_IN_METER_Y);
 
@@ -88,7 +89,7 @@ public class PantallaSelectorNivel extends PantallaBase{
             });
 
             //BOTÓN VOLVER AL MENU
-            btnSalir = new ImageTextButton("Volver al menu", skin3);
+            btnSalir = new ImageTextButton("Volver al menu", skin4);
             btnSalir.setSize((float) (escenario.getWidth() * 0.2), (float) (escenario.getHeight() * 0.1));
             btnSalir.setPosition(btnNivel1.getX(), (btnNivel1.getY()-btnNivel1.getHeight()) -Constantes.PIXELS_IN_METER_Y/4);
             btnSalir.addCaptureListener(new ChangeListener() {
