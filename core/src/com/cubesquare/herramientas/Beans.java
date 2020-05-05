@@ -25,4 +25,24 @@ public class Beans {
     public static float mettersToPx_Y(float metros){
         return metros*Constantes.PIXELS_IN_METER_Y;
     }
+    public static boolean bytearrToBollean(byte[] b){
+
+        try{
+            System.out.println(b[0]);
+        if (b[0] == 0){
+            return true;
+        }else{
+            return false;
+        }
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+
+
+
+
 }
