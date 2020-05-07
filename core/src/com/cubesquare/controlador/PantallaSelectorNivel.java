@@ -53,6 +53,14 @@ public class PantallaSelectorNivel extends PantallaBase{
             cancionMenu.setLooping(true);
         }
 
+    /**
+     * El método show permite mostrar la pantalla del selector de niveles. De momento solo
+     * está disponible el nivel 1. Declara los botones necesarios para volver al menú
+     * o iniciar un nivel. Crea la música de la pantalla. Crea el suelo y por último añade
+     * al cubo y enemigos.
+     *
+     * @author Jesús Jiménez
+     */
         @Override
         public void show() {
             //ACTIVAMOS EL INPUT PROCESSOR PARA EL ESCENARIO
@@ -187,18 +195,33 @@ public class PantallaSelectorNivel extends PantallaBase{
             trianguloEnfadado.destroy();
         }
 
+    /**
+     * El método pausa permite pausar o terminar la música del juego.
+     *
+     * @author Jesús Jiménez
+     */
 
-        @Override
+    @Override
          public void pause() {
               cancionMenu.pause();
         }
 
+    /**
+     * El método resume permite iniciar el sonido de la música.
+     *
+     * @author Jesús Jiménez
+     */
         @Override
         public void resume() {
             cancionMenu.play();
         }
 
-
+    /**
+     * El método dispose pone fin a la pantalla que te permite seleccionar el nivel deseado.
+     * Este método se activa siempre que salgamos de la pantalla.
+     *
+     * @author Jesús Jiménez
+     */
         @Override
         public void dispose() {
             trianguloEnfadado.destroy();

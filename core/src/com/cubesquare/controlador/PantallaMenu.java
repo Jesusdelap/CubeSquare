@@ -63,6 +63,13 @@ public class PantallaMenu extends PantallaBase {
         return sonido;
     }
 
+    /**
+     * El constructor, declaramos los parámetros de la clase PantallaMenu. También iniciamos
+     * las canciones en el menú y la opción de desactivarlas.
+     *
+     * @author Jesús Jiménez
+     * @param game
+     */
     public PantallaMenu(CubeSquare game) {
         super(game);
 
@@ -78,6 +85,15 @@ public class PantallaMenu extends PantallaBase {
         System.out.println("Resolucion: " + Gdx.graphics.getWidth() + " X:" + Gdx.graphics.getHeight());
 
     }
+
+    /**
+     * El método show se encarga de mostrar la pantalla. Carga el escenario, crea el fondo,
+     * pone la imagen del fondo y también  crea los botones del menú. Algo importante que hace
+     * este método es mendiante una variable booleana activar el sonido de la canción de intro
+     * o en su defecto desactivarlo.
+     *
+     * @author Jesús Jiménez
+     */
 
     @Override
     public void show() {
@@ -253,7 +269,7 @@ public class PantallaMenu extends PantallaBase {
     }
 
     /**
-     * Se llama cada vez que se actualiza la pantalla (30 o 60 veces por segundo dependiedo del dispositivo)
+     * Se llama cada vez que se actualiza la pantalla (30 o 60 veces por segundo dependiendo del dispositivo)
      *
      * @param delta tiempo de diferencia entre el anterior fotograma y este
      * @return void
@@ -287,6 +303,13 @@ public class PantallaMenu extends PantallaBase {
         }
     }
 
+    /**
+     * La función del método es poner fin a la pantalla cuando se seleccione una determinada acción.
+     * Cuando eso ocurra, el escenario, el sonido y el menú desaparecerán momentánamente
+     * hasta que volvamos a llamarlos.
+     *
+     * @author Jesús Jiménez
+     */
 
     @Override
     public void dispose() {

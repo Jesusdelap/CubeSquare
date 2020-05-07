@@ -24,12 +24,30 @@ public class PantallaDerrota extends PantallaBase {
     private Label textoDerrota;
     private Sound sonidoGameOver;
 
+    /**
+     * El constructor de la clase PantallaDerrota, carga el mensaje de derrota
+     * y la distancia recorrida por el jugador. El sonido de derrota es inicializado.
+     *
+     * @author Jesús Jiménez
+     * @param game
+     */
+
     public PantallaDerrota(CubeSquare game) {
         super(game);
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
         skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
         sonidoGameOver = game.getManager().get("sonidos/gameover.wav");
     }
+
+    /**
+     * El método show sirve para mostrar la pantalla de derrota.
+     * En este método creamos el fondo de pantalla llamando al escenario.
+     * Creamos un mensaje de deorrta y cargamos el fondo que tendrá la pantalla.
+     * Declaramos los botones que nos permitirán repetir el nivel o ir a la pantalla del menú.
+     *
+     * @author Jesús Jiménez
+     */
+
     @Override
     public void show() {
         p =(PantallaJuego) (game.getPantallaJuego());
@@ -81,7 +99,15 @@ public class PantallaDerrota extends PantallaBase {
         escenario.addActor(btnSalir);
         Gdx.input.setInputProcessor(escenario);
     }
-
+    /**
+     * El método render es el que se encarga de que la pantalla de
+     * derrota haga una imagen (frame).
+     * Llama al parametro delta, que es la cantidad de segundos entre imágenes. (frames)
+     * Se dibuja el escenario.
+     *
+     * @author Jesús Jiménez
+     * @param delta
+     */
     @Override
     public void render (float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -89,6 +115,11 @@ public class PantallaDerrota extends PantallaBase {
         escenario.draw();
     }
 
+    /**
+     * Cuando el método pause se despliega, este permite al sonido de la derrote acabar.
+     *
+     * @author Jesús Jiménez
+     */
     @Override
     public void pause() {
         sonidoGameOver.stop();
@@ -100,7 +131,12 @@ public class PantallaDerrota extends PantallaBase {
         textoDerrota.setText(null);
 
     }
-
+    /**
+     * El método dispose pone fin a la partida cuando el jugador se choca contra un obstáculo.
+     * Te redirige al menú y puedes comenzar de nuevo.
+     *
+     * @author Jesús Jiménez
+     */
     @Override
     public void dispose() {
         skin.dispose();

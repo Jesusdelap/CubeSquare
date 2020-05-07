@@ -23,22 +23,36 @@ public class PantallaBienvenida extends PantallaBase {
     Texture img;
     private OrthographicCamera camera;
 
+    /**
+     * El constructor de la clase PantallaBienvenida, carga el escenario en el que
+     * el jugador se desenvolverá.
+     *
+     * @author Jesús Jiménez
+     * @param game
+     */
+
     public PantallaBienvenida(CubeSquare game) {
         super(game);
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
 
     }
-
+    /**
+     * El método show sirve para mostrar la pantalla.
+     * En este método creamos el fondo de pantalla llamando al escenario.
+     * Además, creamos un mensaje de bienvenida que el usuario verá al iniciar el juego.
+     * También añadimos los "actores". Estos son el cubo y obstáculos
+     * que nos encontraremos en cada nivel.
+     *
+     * @author Jesús Jiménez
+     */
     public void show() {
 
         Gdx.input.setInputProcessor(escenario);
 
-        //CREAMOS FONDO DE PANTALLA
         fondo = new Image(game.getManager().get("fondoestrella2.png", Texture.class));
         fondo.setFillParent(true);
 
-        //Mensaje De Bienvenida
         lblBienvenida = new Label("¡BIENVENIDO A CUBESQUARE!", skin);
         lblBienvenida.setPosition(escenario.getWidth()/2 - lblBienvenida.getWidth(), escenario.getHeight()/2 - lblBienvenida.getHeight()/2);
         lblBienvenida.setFontScale(2);
@@ -46,7 +60,6 @@ public class PantallaBienvenida extends PantallaBase {
         lblBienvenida2.setPosition(escenario.getWidth()/2 - lblBienvenida2.getWidth(), lblBienvenida.getY()-lblBienvenida2.getHeight()*2.4f );
         lblBienvenida2.setFontScale(2);
 
-        //Añadimos los Actores al escenario
         escenario.addActor(fondo);
         escenario.addActor(lblBienvenida);
         escenario.addActor(lblBienvenida2);
@@ -59,9 +72,16 @@ public class PantallaBienvenida extends PantallaBase {
             }
         });
     }
-
+    /**
+     * El método render es el que se encarga de que la pantalla de
+     * bienvenida haga una imagen (frame).
+     * Llama al parametro delta, que es la cantidad de segundos entre imágenes. (frames)
+     *
+     * @author Jesús Jiménez
+     * @param delta
+     */
     public void render(float delta) {
-        // Gdx.gl.glClearColor(0, 2, 1, 1);
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         escenario.act();
@@ -79,12 +99,16 @@ public class PantallaBienvenida extends PantallaBase {
 
     }
 
+    /**
+     * El método dispose pone fin  la pantalla de bienvenida cuando el usuario toca la pantalla.
+     *
+     * @author Jesús Jiménez
+     */
     @Override
     public void dispose() {
         Gdx.input.setInputProcessor(null);
         skin.dispose();
         escenario.dispose();
-        //batch.dispose();
     }
 
 }

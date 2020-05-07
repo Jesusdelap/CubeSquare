@@ -16,11 +16,15 @@ public class CubeSquare extends Game {
     private AccesoDatos accesoDatos;
     private Usuario usuario;
 
+    /**
+     * El método create carga todos los assets del juego, el usuario y la pantalla de carga.
+     * Esto ayudará a Android Studio a procesar toda la información y que podamos ver el juego.
+     *
+     * @author Jesús Jiménez
+     */
 
     @Override
     public void create() {
-
-        //Se cargan los assets
         manager = new AssetManager();
         manager.load("cubo.png", Texture.class);
         manager.load("floor.png", Texture.class);
@@ -33,7 +37,6 @@ public class CubeSquare extends Game {
         manager.load("gameover.png", Texture.class);
         manager.load("titulo.png", Texture.class);
         manager.load("sueloTransparente.png", Texture.class);
-        //manager.load("fondoestrella1.png", Texture.class);
         manager.load("fondoestrella2.png", Texture.class);
         manager.load("fondoparaanimar.png", Texture.class);
         manager.load("sonidos/cancionmenu.ogg", Music.class);
@@ -46,7 +49,12 @@ public class CubeSquare extends Game {
         pantallaCarga = new PantallaCarga(this);
         setScreen(pantallaCarga);
     }
-
+    /**
+     * El método finCarga termina de inicializar las demás pantallas del juego.
+     * También llama al usuario conectado y hace que podamos ver la pantalla de bienvenida.
+     *
+     * @author Jesús Jiménez
+     */
     public void finCarga(){
 
         pantallaMenu = new PantallaMenu(this);
@@ -56,12 +64,23 @@ public class CubeSquare extends Game {
         pantallaSelectorNivel = new PantallaSelectorNivel(this);
         accesoDatos = new AccesoDatos();
         setScreen(pantallaBienvenida);
-        //System.out.println("prueba --"+ accesoDatos.ping());
         accesoDatos.nuevoUsuario(new Usuario(1,"polileo","polileo polilei","FFFF"));
-
-
     }
 
+    /**
+     * Todos los getters y setters y el toString que usaremos más adelante.
+     * @return manager
+     * @return pantallaMenu
+     * @return pantallaJuego
+     * @return pantallaDerrota
+     * @return pantallaSelectorNivel
+     * @return screen
+     * @return pantallaBienvenida
+     * @return pantallaCarga
+     * @return accesoDatos
+     *
+     * @author Jesús Jiménez
+     */
 
     public AssetManager getManager() {
         return manager;

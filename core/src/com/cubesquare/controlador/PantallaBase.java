@@ -10,12 +10,15 @@ public abstract class PantallaBase implements Screen {
      * instance.
      */
     protected CubeSquare game;
-
+    /**
+     * El constructor de la clase. Nos permite declarar los parámetros.
+     *
+     * @author Jesús Jiménez
+     * @param game
+     */
     public PantallaBase(CubeSquare game) {
         this.game = game;
     }
-
-
 
     @Override
     public void show() {
@@ -53,6 +56,12 @@ public abstract class PantallaBase implements Screen {
         // This method is invoked when the game closes.
     }
 
+    /**
+     * El getter y setter de game de la clase CubeSquare. Retorna game y nos sirve como modelo.
+     *
+     * @author Jesús Jiménez
+     * @return game
+     */
     public CubeSquare getGame() {
         return game;
     }
