@@ -1,6 +1,6 @@
 package com.cubesquare.modelo;
 
-public class Record {
+public class  Record {
 
     private int idRecord;
     private int idUsuario;
@@ -22,6 +22,12 @@ public class Record {
         this.idUsuario = idUsuario;
         this.distanciaRecorrida = distanciaRecorrida;
     }
+    public Record( int idUsuario, int distanciaRecorrida) {
+        super();
+        this.idUsuario = idUsuario;
+        this.distanciaRecorrida = distanciaRecorrida;
+    }
+
     public Record() {
         super();
     }
@@ -49,8 +55,4 @@ public class Record {
     public void setAlias(String alias) {
         this.alias = alias;
     }
-
-
-
-
 }

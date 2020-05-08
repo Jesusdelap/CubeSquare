@@ -64,7 +64,12 @@ public class CubeSquare extends Game {
         pantallaSelectorNivel = new PantallaSelectorNivel(this);
         accesoDatos = new AccesoDatos();
         setScreen(pantallaBienvenida);
-        accesoDatos.nuevoUsuario(new Usuario(1,"polileo","polileo polilei","FFFF"));
+        /*
+        System.out.println("ping: "+accesoDatos.ping());
+        System.out.println("Listar Records:"+accesoDatos.listarRecordsConAlias(5));
+        accesoDatos.nuevoUsuario(new Usuario(1,"LESGEREE","eeee","123"));
+
+         */
     }
 
     /**

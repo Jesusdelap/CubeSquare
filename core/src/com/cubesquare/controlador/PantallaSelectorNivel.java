@@ -59,7 +59,9 @@ public class PantallaSelectorNivel extends PantallaBase{
      * o iniciar un nivel. Crea la música de la pantalla. Crea el suelo y por último añade
      * al cubo y enemigos.
      *
-     * @author Jesús Jiménez
+     * @author Jesús de la Peña
+     *
+     * @return void
      */
         @Override
         public void show() {
@@ -198,7 +200,7 @@ public class PantallaSelectorNivel extends PantallaBase{
     /**
      * El método pausa permite pausar o terminar la música del juego.
      *
-     * @author Jesús Jiménez
+     * @author Jesús de la Peña, Diego Corral
      */
 
     @Override
@@ -209,7 +211,7 @@ public class PantallaSelectorNivel extends PantallaBase{
     /**
      * El método resume permite iniciar el sonido de la música.
      *
-     * @author Jesús Jiménez
+     * @author Jesús de la Peña
      */
         @Override
         public void resume() {

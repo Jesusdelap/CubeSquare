@@ -5,14 +5,15 @@ import com.badlogic.gdx.Net;
 
 public class HttpListener implements Net.HttpResponseListener {
 
+    public String resultado;
     private String estado = null;
     private Net.HttpResponse httpResponse;
-    boolean terminada =false;
+    private boolean terminada =false;
+
     @Override
     public void handleHttpResponse(Net.HttpResponse httpResponse) {
         terminada=false;
-        System.out.println(httpResponse.getResultAsString());
-        this.httpResponse = httpResponse;
+        resultado = httpResponse.getResultAsString();
         estado = "exitosa";
         Gdx.app.log("HTTP",estado);
         terminada=true;
