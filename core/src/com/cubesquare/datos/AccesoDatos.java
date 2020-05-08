@@ -71,7 +71,19 @@ public class AccesoDatos {
         esperarRespuesta();
         Gdx.app.log("AccesoDatos/NuevoUsuario","UsuarioAñadido" );
 
-        return null;
+        return Beans.jsonToUsuario(h.resultado);
+    }
+
+    public boolean isUsuarioNombreLibre(String nombreUsuario){
+        HttpListener h = (HttpListener) httpListener;
+        String url= "Usuario/isnombrelibre?nombreUsuario="+nombreUsuario;
+
+        //
+        HttpHerramientas.Connexion(url,httpListener);
+        esperarRespuesta();
+        Gdx.app.log("AccesoDatos/NuevoUsuario","UsuarioAñadido" );
+
+        return Beans.stringtoBolean(h.resultado);
     }
 
 

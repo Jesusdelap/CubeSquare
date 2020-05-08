@@ -2,6 +2,7 @@ package com.cubesquare.herramientas;
 
 import com.badlogic.gdx.Gdx;
 import com.cubesquare.modelo.Record;
+import com.cubesquare.modelo.Usuario;
 
 import java.util.ArrayList;
 
@@ -46,14 +47,8 @@ public class Beans {
         }
     }
     public static Record jsonToRecord(String json){
-        String dsa2 =   "    {\n" +
-                "        \"idRecord\": 14,\n" +
-                "        \"idUsuario\": 3,\n" +
-                "        \"distanciaRecorrida\": 2475,\n" +
-                "        \"alias\": \"KeinBecil\"\n" +
-                "    }";
 
-        String trocitos[] = dsa2.split(":");
+        String trocitos[] = json.split(":");
 
         String idRec[] = trocitos[1].split(",");
         int idRecord = parseint(idRec[0].trim());
@@ -81,4 +76,25 @@ public class Beans {
 
         return recordArrayList;
     }
+
+    public static Usuario jsonToUsuario(String json){
+
+        String trocitos[] = json.split(":");
+
+        String idUsu[] = trocitos[1].split(",");
+        int idusuario = parseint(idUsu[0].trim());
+
+        String ali[] = trocitos[2].split(",");
+        String alias = ali[0].replace("\""," ").trim();
+
+        String nombreU[] = trocitos[3].split(",");
+        String nombreUsuario = nombreU[0].replace("\""," ").trim();
+
+        String cont[] = trocitos[4].split("}");
+        String contrasena = cont[0].replace("\""," ").trim();
+
+        return new Usuario(idusuario,alias,nombreUsuario,contrasena);
+    }
+
+
 }
