@@ -2,6 +2,7 @@ package com.cubesquare.controlador;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -11,12 +12,15 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -29,14 +33,21 @@ import com.cubesquare.herramientas.Fabricas;
 import com.cubesquare.modelo.entidades.ActorJugador;
 import com.cubesquare.modelo.entidades.ActorSuelo;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.color;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+
 
 public class PantallaMenu extends PantallaBase {
 
     private Stage escenario;
     private TextButton btnJuego;
-    private TextButton btnJuegoNiveles, btnSalir;
+    private ImageTextButton btnTutorial;
+    private TextButton btnJuegoNiveles, btnSalir,btnRanking,btnLogIn;
     private Skin skin, skin2, skin3, skin4;
     private Music cancionMenu;
+    private Label creditos;
 
     private ActorSuelo suelo;
     private World mundoMenu;
@@ -48,7 +59,7 @@ public class PantallaMenu extends PantallaBase {
     private Texture btnSonidoActivado, btnSonidoDesactivado;
     private Button btnSonido;
     private boolean cayendo = true;
-    private static boolean sonido = true;
+    private static boolean sonido = false;
     private static boolean pantallaMenu = true;
 
     public static void setPantallaMenu(boolean pantallaMenu) {
@@ -122,47 +133,85 @@ public class PantallaMenu extends PantallaBase {
 
 
 
-        btnJuego = new TextButton("Juego infinito", skin4);
+
         //BOTÓN JUEGO
-        //btnJuego = new TextButton("Juego infinito", skin2);
+        btnJuego = new TextButton("Jugar", skin4);
         btnJuego.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
         btnJuego.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, titulo.getY() - Constantes.PIXELS_IN_METER_Y);
+        btnJuego.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
 
         btnJuego.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("clickeado btnJuego infinito");
                 PantallaJuego p = (PantallaJuego) (game.getPantallaJuego());
-                p.setTipoDeJuego(0);
-                cancionMenu.stop();
-                pantallaMenu = false;
-                getGame().setScreen(PantallaMenu.super.getGame().getPantallaJuego());
+                getGame().setScreen(PantallaMenu.super.getGame().getPantallaTipoJuego());
             }
 
             ;
         });
-        //BOTÓN JUEGONIVELES
-        btnJuegoNiveles = new TextButton("Juego por niveles", skin4);
-        btnJuegoNiveles.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
-        btnJuegoNiveles.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, (btnJuego.getY() - btnJuego.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
 
-        btnJuegoNiveles.addCaptureListener(new ChangeListener() {
+        //BOTÓN TUTORIAL
+        btnTutorial = new ImageTextButton("Tutorial", skin4);
+        btnTutorial.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
+        btnTutorial.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, (btnJuego.getY() - btnJuego.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
+        btnTutorial.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
+
+        btnTutorial.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("clickeado btnJuegoNiveles");
+                System.out.println("clickeado btnTutorial");
                 PantallaJuego p = (PantallaJuego) (game.getPantallaJuego());
-                p.setTipoDeJuego(1);
-                getGame().setScreen(PantallaMenu.super.getGame().getPantallaSelectorNivel());
+                getGame().setScreen(PantallaMenu.super.getGame().getPantallaTutorial());
             }
 
             ;
         });
+
+        //BOTÓN Ranking
+        btnRanking = new TextButton("ranking", skin4);
+        btnRanking.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
+        btnRanking.setPosition((escenario.getWidth() / 2) - btnTutorial.getWidth() / 2, (btnTutorial.getY() - btnTutorial.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
+        btnRanking.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
+        btnRanking.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("clickeado btnRanking");
+                if (game.getAccesoDatos().ping()) {
+                    getGame().setScreen(getGame().getPantallaRanking());
+                }else{
+                    Gdx.app.log("PantallaMenu/btnRanking","no Connexion");
+                }
+            }
+
+            ;
+        });
+        //BOTÓN LogIn
+        btnLogIn = new TextButton("LogIn", skin4);
+        btnLogIn.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
+        btnLogIn.setPosition((escenario.getWidth() / 2) - btnRanking.getWidth() / 2, (btnRanking.getY() - btnRanking.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
+        btnLogIn.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
+        btnLogIn.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("clickeado btnRanking");
+                if (game.getAccesoDatos().ping()) {
+                    getGame().setScreen(getGame().getPantallaLogIn());
+                }else{
+                    Gdx.app.log("PantallaMenu/btnLogIn","no Connexion");
+                }
+            }
+
+            ;
+        });
+
 
 
         //BOTÓN SALIR
         btnSalir = new TextButton("Salir", skin4);
         btnSalir.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
-        btnSalir.setPosition(btnJuego.getX(), (btnJuegoNiveles.getY() - btnJuegoNiveles.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
+        btnSalir.setPosition(btnLogIn.getX(), (btnLogIn.getY() - btnLogIn.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
+        btnSalir.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
 
         btnSalir.addCaptureListener(new ChangeListener() {
             @Override
@@ -254,19 +303,28 @@ public class PantallaMenu extends PantallaBase {
 
             }
         });
-
+        //LABEL ANIMADO DE CRÉDITOS
+        creditos = new Label("Desarrollado por:\nDiego Corral Gonzalez, Jesus de la Peña y Jesus Jimenez Cozar",skin);
+        creditos.setPosition(Gdx.graphics.getWidth(),50);
+        creditos.addAction(sequence(moveTo(5, 0, 3),color(Color.PURPLE, 3), delay(0.5f)));
+        creditos.setFontScale(Constantes.TAMAÑOTEXTO);
 
         //AÑADIMOS TODOS LOS ACTORES AL ESCENARIO
         escenario.addActor(fondo);
         escenario.addActor(suelo);
         escenario.addActor(titulo);
         escenario.addActor(btnJuego);
-        escenario.addActor(btnJuegoNiveles);
         escenario.addActor(btnSalir);
         escenario.addActor(cubo);
         escenario.addActor(btnSonido);
+        escenario.addActor(btnRanking);
+        escenario.addActor(btnLogIn);
+        escenario.addActor(btnTutorial);
+        escenario.addActor(creditos);
 
     }
+
+
 
     /**
      * Se llama cada vez que se actualiza la pantalla (30 o 60 veces por segundo dependiendo del dispositivo)

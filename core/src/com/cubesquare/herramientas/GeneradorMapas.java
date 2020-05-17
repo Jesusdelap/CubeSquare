@@ -35,16 +35,16 @@ public class GeneradorMapas {
         mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 1000, 2,new Vector2(0,0)));
         //creamos primera fase del nivel, Crescendo
 
-        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 20.5f, 3,new Vector2(0, posicionRelatiba.y-3)));
+        mapa.add(Fabricas.sueloFactory(mundo,manager.get("floor.png", Texture.class), 20.5f, 3,new Vector2(0, posicionRelatiba.y-3)));
         mapa.add(Fabricas.pinchoFactory(mundo,manager.get("spike.png",Texture.class), posicionRelatiba));
         posicionRelatiba.x= posicionRelatiba.x+10.5f;
 
-        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 12, 1,new Vector2(posicionRelatiba.x, posicionRelatiba.y-1)));
+        mapa.add(Fabricas.sueloFactory(mundo,manager.get("floor.png", Texture.class), 12, 1,new Vector2(posicionRelatiba.x, posicionRelatiba.y-1)));
         posicionRelatiba.x= posicionRelatiba.x+3f;
         mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 9, 1,posicionRelatiba));
         posicionRelatiba.x= posicionRelatiba.x+3f;
         posicionRelatiba.y++;
-        mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 6, 1,posicionRelatiba));
+        mapa.add(Fabricas.sueloFactory(mundo,manager.get("floor.png", Texture.class), 6, 1,posicionRelatiba));
         posicionRelatiba.y++;
         posicionRelatiba.x= posicionRelatiba.x+3f;
         mapa.add(Fabricas.sueloFactory(mundo, manager.get("floor.png", Texture.class), 3, 1,posicionRelatiba));

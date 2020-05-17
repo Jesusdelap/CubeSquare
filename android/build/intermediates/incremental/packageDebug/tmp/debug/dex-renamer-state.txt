@@ -1,4 +1,4 @@
-#Thu May 07 16:41:15 CEST 2020
+#Sat May 16 12:02:45 CEST 2020
 base.0=D\:\\Estudios\\ProyectoC\\Cliente\\CubeSquare\\android\\build\\intermediates\\dex\\debug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

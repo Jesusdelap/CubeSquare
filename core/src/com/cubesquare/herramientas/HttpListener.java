@@ -24,6 +24,8 @@ public class HttpListener implements Net.HttpResponseListener {
         terminada=true;
         estado = "fallida";
         Gdx.app.error("HTTP",estado);
+        Gdx.app.error("HTTP",t.getMessage());
+        t.printStackTrace();
 
     }
 

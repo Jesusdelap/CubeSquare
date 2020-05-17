@@ -12,15 +12,24 @@ import com.cubesquare.modelo.Usuario;
 public class CubeSquare extends Game {
 
     private AssetManager manager;
-    private PantallaBase pantallaMenu,pantallaJuego,pantallaDerrota,pantallaCarga,pantallaBienvenida,pantallaSelectorNivel;
+    private PantallaBase pantallaMenu;
+    private PantallaBase pantallaJuego;
+    private PantallaBase pantallaDerrota;
+    private PantallaBase pantallaCarga;
+    private PantallaBase pantallaBienvenida;
+    private PantallaBase pantallaSelectorNivel;
+    private PantallaBase pantallaTutorial;
+    private PantallaBase pantallaTipoJuego;
+
+
+    private PantallaBase pantallaRanking,pantallaLogIn;
     private AccesoDatos accesoDatos;
     private Usuario usuario;
 
     /**
      * El método create carga todos los assets del juego, el usuario y la pantalla de carga.
-     * Esto ayudará a Android Studio a procesar toda la información y que podamos ver el juego.
      *
-     * @author Jesús Jiménez
+     * @author JesusPeña,Diego Corral,Jesús Jiménez
      */
 
     @Override
@@ -50,10 +59,9 @@ public class CubeSquare extends Game {
         setScreen(pantallaCarga);
     }
     /**
-     * El método finCarga termina de inicializar las demás pantallas del juego.
-     * También llama al usuario conectado y hace que podamos ver la pantalla de bienvenida.
+     * El método finCarga termina de cargar todos los recursos del juego
      *
-     * @author Jesús Jiménez
+     * @author JesusPeña,Diego Corral,Jesús Jiménez
      */
     public void finCarga(){
 
@@ -62,30 +70,16 @@ public class CubeSquare extends Game {
         pantallaDerrota = new PantallaDerrota(this);
         pantallaBienvenida = new PantallaBienvenida(this);
         pantallaSelectorNivel = new PantallaSelectorNivel(this);
+        pantallaRanking = new PantallaRanking(this);
+        pantallaLogIn = new PantallaLogIn(this);
+        pantallaTutorial = new PantallaTutorial(this);
+        pantallaTipoJuego = new PantallaTipoJuego(this);
         accesoDatos = new AccesoDatos();
-        setScreen(pantallaBienvenida);
-        /*
-        System.out.println("ping: "+accesoDatos.ping());
-        System.out.println("Listar Records:"+accesoDatos.listarRecordsConAlias(5));
-        accesoDatos.nuevoUsuario(new Usuario(1,"LESGEREE","eeee","123"));
 
-         */
+        setScreen(pantallaBienvenida);
+
     }
 
-    /**
-     * Todos los getters y setters y el toString que usaremos más adelante.
-     * @return manager
-     * @return pantallaMenu
-     * @return pantallaJuego
-     * @return pantallaDerrota
-     * @return pantallaSelectorNivel
-     * @return screen
-     * @return pantallaBienvenida
-     * @return pantallaCarga
-     * @return accesoDatos
-     *
-     * @author Jesús Jiménez
-     */
 
     public AssetManager getManager() {
         return manager;
@@ -153,6 +147,46 @@ public class CubeSquare extends Game {
 
     public void setAccesoDatos(AccesoDatos accesoDatos) {
         this.accesoDatos = accesoDatos;
+    }
+
+    public PantallaBase getPantallaRanking() {
+        return pantallaRanking;
+    }
+
+    public void setPantallaRanking(PantallaBase pantallaRanking) {
+        this.pantallaRanking = pantallaRanking;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public PantallaBase getPantallaLogIn() {
+        return pantallaLogIn;
+    }
+
+    public void setPantallaLogIn(PantallaBase pantallaLogIn) {
+        this.pantallaLogIn = pantallaLogIn;
+    }
+
+    public PantallaBase getPantallaTutorial() {
+        return pantallaTutorial;
+    }
+
+    public void setPantallaTutorial(PantallaBase pantallaTutorial) {
+        this.pantallaTutorial = pantallaTutorial;
+    }
+
+    public PantallaBase getPantallaTipoJuego() {
+        return pantallaTipoJuego;
+    }
+
+    public void setPantallaTipoJuego(PantallaBase pantallaTipoJuego) {
+        this.pantallaTipoJuego = pantallaTipoJuego;
     }
 
     @Override

@@ -2,25 +2,31 @@ package com.cubesquare.controlador;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.cubesquare.herramientas.Beans;
+import com.cubesquare.modelo.Record;
+
+import java.util.ArrayList;
 
 
 public class PantallaRanking extends PantallaBase{
-    Label nameLabel;
     private Stage escenario;
-    private Skin skin;
-    //TextField nameText;
-    Label addressLabel;
-    //TextField addressText;
-    Label nameText;
-    Label addressText;
-    Table table;
-    ShapeRenderer borde = new ShapeRenderer();
+    private Skin skin,skin4;
+    private TextButton btnMenu;
+    private Label alias,distanciaRecorrida;
+    private Table table;
+    private Image fondo;
+
 
     /**
      * El constructor que inicia los parámetros de la clase PantallaRanking.
@@ -32,6 +38,8 @@ public class PantallaRanking extends PantallaBase{
         super(game);
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        skin4 = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
+
         //skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
     }
@@ -46,33 +54,52 @@ public class PantallaRanking extends PantallaBase{
     @Override
     public void show() {
 
-        nameLabel = new Label("Jugador:", skin);
-        addressLabel = new Label("Distancia recorrida:", skin);
-        table = new Table();
+        alias = new Label("Jugador:", skin4);
+        distanciaRecorrida = new Label("Distancia:", skin4);
+        alias.setFontScale(2);
+        distanciaRecorrida.setFontScale(2);
+        table = new Table(skin4);
+        table.center();
+        table.align(0);
 
-        table.add(nameLabel).width(100);
-        table.add(addressLabel).width(100);
+        table.add(alias).width(Beans.mettersToPx_X(4));
+        table.add(distanciaRecorrida).width(Beans.mettersToPx_X(5));
         table.row();
-        for(int i = 0; i<10; i++){
-            //nameText = new TextField("keonda", skin);
-            //addressText = new TextField("xd",skin);
-            nameText = new Label("xd",skin);
-            addressText = new Label("el chocu rodrigues",skin);
-            table.add(nameText).center();
-            table.add(addressText).width(100);
-            //table.add(nameText).padLeft(10).width(100);
-            //table.add(addressText).padLeft(10).width(100);
+
+        ArrayList<Record> recordArrayList = game.getAccesoDatos().listarRecordsConAlias(10);
+        for(int i = 0; i<recordArrayList.size(); i++){
+
+            alias = new Label(recordArrayList.get(i).getAlias(),skin4);
+            distanciaRecorrida = new Label(Integer.toString(recordArrayList.get(i).getDistanciaRecorrida()),skin4);
+            alias.setFontScale(3);
+            distanciaRecorrida.setFontScale(3);
+
+            table.add(alias);
+            table.add(distanciaRecorrida);
             table.row();
         }
-        /*table.setSize((float) (escenario.getWidth()*0.2), (float) (escenario.getHeight()*0.1));     // estos dos metodos hacen situarlo en cualquier lado
-        table.setPosition(escenario.getWidth()/2-table.getWidth()-50, escenario.getHeight()*0.3f);*/  // estos dos metodos hacen situarlo en cualquier lado
-        table.setFillParent(true);  // lo centraliza al medio siempre
-        //table.setClip(true);
-        //table.setBackground(skin.getDrawable(""));
-        //borde.rect(30,30,100,100);
-        table.drawDebug(borde);
-        //table.setDebug(true);
 
+        table.setFillParent(true);  // lo centraliza al medio siempre
+
+        btnMenu = new TextButton("Atras", skin4);
+        btnMenu.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
+        btnMenu.setPosition(escenario.getWidth()/30,escenario.getHeight()/14);
+
+        btnMenu.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("clickeado btnMenu");
+                getGame().setScreen(getGame().getPantallaMenu());
+            }
+
+            ;
+        });
+        fondo = new Image(game.getManager().get("fondoEspacio.png", Texture.class));
+        fondo.setFillParent(true);
+
+        Gdx.input.setInputProcessor(escenario);
+        escenario.addActor(fondo);
+        escenario.addActor(btnMenu);
         escenario.addActor(table);
     }
 
@@ -86,7 +113,6 @@ public class PantallaRanking extends PantallaBase{
     public void render (float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         escenario.act();
         escenario.draw();
     }
@@ -110,5 +136,6 @@ public class PantallaRanking extends PantallaBase{
     public void dispose(){
         escenario.clear();
         skin.dispose();
+        skin4.dispose();
     }
 }

@@ -27,8 +27,7 @@ public class PantallaSelectorNivel extends PantallaBase{
 
 
         private Stage escenario;
-        private TextButton btnNivel1;
-        private ImageTextButton btnSalir;
+        private ImageTextButton btnNivel1, btnSalir;
         private Skin skin,skin2, skin3,skin4;
         private Music cancionMenu;
 
@@ -80,9 +79,10 @@ public class PantallaSelectorNivel extends PantallaBase{
 
 
             //BOTÓN NIVEL
-            btnNivel1 = new TextButton("Nivel 1", skin4);
+            btnNivel1 = new ImageTextButton("Nivel 1", skin4);
             btnNivel1.setSize((float) (escenario.getWidth() * 0.2), (float) (escenario.getHeight() * 0.1));
             btnNivel1.setPosition((escenario.getWidth() / 2) - btnNivel1.getWidth() / 2, titulo.getY() - Constantes.PIXELS_IN_METER_Y);
+            btnNivel1.getLabel().setFontScale(escenario.getViewport().getScreenWidth()*0.001f);
 
             btnNivel1.addCaptureListener(new ChangeListener() {
                 @Override
@@ -99,14 +99,16 @@ public class PantallaSelectorNivel extends PantallaBase{
             });
 
             //BOTÓN VOLVER AL MENU
-            btnSalir = new ImageTextButton("Volver al menu", skin4);
+            btnSalir = new ImageTextButton("Volver", skin4);
             btnSalir.setSize((float) (escenario.getWidth() * 0.2), (float) (escenario.getHeight() * 0.1));
             btnSalir.setPosition(btnNivel1.getX(), (btnNivel1.getY()-btnNivel1.getHeight()) -Constantes.PIXELS_IN_METER_Y/4);
+            btnSalir.getLabel().setFontScale(escenario.getViewport().getScreenWidth()*0.001f);
+
             btnSalir.addCaptureListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     System.out.println("clickeado btnSalir");
-                    game.setScreen(game.getPantallaMenu());
+                    game.setScreen(game.getPantallaTipoJuego());
                 }
             });
 
@@ -116,7 +118,7 @@ public class PantallaSelectorNivel extends PantallaBase{
             btnSonidoDesactivado = game.getManager().get("sonidodesactivado.png");
 
             //ACTIVAMOS EL SONIDO SÓLO SI SU VARIABLE DE CONTROL ESTÁ ACTIVA. EN CASO CONTRARIO, EL LOGO DE SONIDO ES EL DE DESACTIVADO
-            if (com.cubesquare.controlador.PantallaMenu.isSonido()) {
+            if (PantallaMenu.isSonido()) {
                 cancionMenu.play();
             }
 
@@ -227,8 +229,6 @@ public class PantallaSelectorNivel extends PantallaBase{
         @Override
         public void dispose() {
             trianguloEnfadado.destroy();
-            btnSonidoActivado.dispose();
-            btnSonidoDesactivado.dispose();
             mundoMenu.dispose();
             escenario.dispose();
             skin.dispose();

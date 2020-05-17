@@ -13,7 +13,6 @@ public abstract class PantallaBase implements Screen {
     /**
      * El constructor de la clase. Nos permite declarar los parámetros.
      *
-     * @author Jesús Jiménez
      * @param game
      */
     public PantallaBase(CubeSquare game) {
@@ -59,7 +58,6 @@ public abstract class PantallaBase implements Screen {
     /**
      * El getter y setter de game de la clase CubeSquare. Retorna game y nos sirve como modelo.
      *
-     * @author Jesús Jiménez
      * @return game
      */
     public CubeSquare getGame() {

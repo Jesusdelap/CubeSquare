@@ -55,4 +55,14 @@ public class  Record {
     public void setAlias(String alias) {
         this.alias = alias;
     }
+
+    @Override
+    public String toString() {
+        return "Record{" +
+                "idRecord=" + idRecord +
+                ", idUsuario=" + idUsuario +
+                ", distanciaRecorrida=" + distanciaRecorrida +
+                ", alias='" + alias + '\'' +
+                '}';
+    }
 }

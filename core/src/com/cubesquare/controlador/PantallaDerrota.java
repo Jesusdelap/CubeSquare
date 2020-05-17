@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.cubesquare.herramientas.Beans;
+import com.cubesquare.modelo.Record;
 
 public class PantallaDerrota extends PantallaBase {
 
@@ -23,6 +24,7 @@ public class PantallaDerrota extends PantallaBase {
     private Image fondo, tituloGameOver;
     private Label textoDerrota;
     private Sound sonidoGameOver;
+    private int distanciarecorrida;
 
     /**
      * El constructor de la clase PantallaDerrota, carga el mensaje de derrota
@@ -51,7 +53,7 @@ public class PantallaDerrota extends PantallaBase {
     @Override
     public void show() {
         p =(PantallaJuego) (game.getPantallaJuego());
-
+        distanciarecorrida = Beans.truncarNumeros(Beans.pxToMetters_X(p.getDistanciaRecorrida()));
         if(PantallaMenu.isSonido()){
             sonidoGameOver.play();
         }
@@ -62,7 +64,7 @@ public class PantallaDerrota extends PantallaBase {
         tituloGameOver = new Image(game.getManager().get("gameover.png", Texture.class));
         tituloGameOver.setPosition((escenario.getWidth() / 2) - tituloGameOver.getWidth() / 2, escenario.getHeight() - 360);
 
-        textoDerrota = new Label("Distancia recorrida: "+Beans.truncarNumeros(Beans.pxToMetters_X(p.getDistanciaRecorrida())),skin);
+        textoDerrota = new Label("Distancia recorrida: "+distanciarecorrida,skin);
         textoDerrota.setPosition(((escenario.getWidth() / 2 -tituloGameOver.getWidth() / 2)), tituloGameOver.getY() -2);
         textoDerrota.setFontScale(3);
         textoDerrota.setColor(1,0,0,1);
@@ -98,6 +100,9 @@ public class PantallaDerrota extends PantallaBase {
         escenario.addActor(btnReinicio);
         escenario.addActor(btnSalir);
         Gdx.input.setInputProcessor(escenario);
+
+        game.getAccesoDatos().addRecord(new Record(game.getUsuario().getIdusuario(),distanciarecorrida));
+
     }
     /**
      * El método render es el que se encarga de que la pantalla de

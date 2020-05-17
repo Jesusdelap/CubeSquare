@@ -40,14 +40,20 @@ public class Beans {
         return metros*Constantes.PIXELS_IN_METER_Y;
     }
     public static boolean stringtoBolean(String s){
-        if (s.trim().equals("true")){
-            return true;
-        }else{
+        try {
+            if (s.trim().equals("true")) {
+                return true;
+            } else {
+                Gdx.app.log("Beans/StringToBoolean","False" );
+                return false;
+            }
+        }catch(Exception e){
+            Gdx.app.log("Beans/StringToBoolean","False" );
             return false;
         }
     }
     public static Record jsonToRecord(String json){
-
+        Gdx.app.log("Beans/jsonToRecord","String: "+json);
         String trocitos[] = json.split(":");
 
         String idRec[] = trocitos[1].split(",");
@@ -57,26 +63,34 @@ public class Beans {
         int idUsuario = parseint(idUsu[0].trim());
 
         String distR[] = trocitos[3].split(",");
-        int distanciaRecorrida = parseint(idUsu[0].trim());
+        int distanciaRecorrida = parseint(distR[0].trim());
+        System.out.println(trocitos[4]);
+        String alias = trocitos[4].replace("}"," ").replace("]"," ").replace("\""," ").trim();
 
-        String ali[] = trocitos[4].split("}");
-        String alias = ali[0].replace("\""," ").trim();
-
-        return new Record(idUsuario,idRecord,distanciaRecorrida,alias);
+        System.out.println(new Record(idRecord,idUsuario,distanciaRecorrida,alias));
+        return new Record(idRecord,idUsuario,distanciaRecorrida,alias);
     }
     public static ArrayList<Record> jsonToRecordArrayList(String json){
-        ArrayList<Record> recordArrayList = null;
+        ArrayList<Record> recordArrayList = new ArrayList<Record>();
+        Gdx.app.log("Beans/jsonToRecordArrayList","Json \n "+json+"\n------");
 
-        String stringarr[] =json.split("\\{");
-        for (String s:stringarr){
-            jsonToRecord(s);
+
+        String stringarr[] =json.split(",\\{");
+        for(int i = 1; i<stringarr.length; i++){
+            try{
+                recordArrayList.add(jsonToRecord(stringarr[i]));
+                Gdx.app.log("Beans/jsonToRecordArrayList",stringarr[i]);
+            }catch (Exception e){
+                Gdx.app.error("Beans/jsonToRecordArrayList",e.getMessage());
+                e.printStackTrace();
+                break;
+            }
+
 
         }
 
-
-        return recordArrayList;
+        return  recordArrayList;
     }
-
     public static Usuario jsonToUsuario(String json){
 
         String trocitos[] = json.split(":");
