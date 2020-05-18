@@ -224,13 +224,13 @@ public class PantallaMenu extends PantallaBase {
             }
         });
 
-
         //ICONO ENLACE GIT
         texturaGit = game.getManager().get("iconoGithub.png");
         SpriteDrawable git = new SpriteDrawable(new Sprite(texturaGit));
         btnGit=new Button(new Button.ButtonStyle(git, git, git));;
-        btnGit.setSize(50,50);
-        btnGit.setPosition(escenario.getWidth()-100, (50));
+        btnGit.setSize(40,40);
+        btnGit.setPosition(10,30);
+        btnGit.addAction(sequence(moveTo(Gdx.graphics.getWidth()-50, 20, 2.5f),color(Color.PURPLE, 3), delay(0.5f)));
         btnGit.addCaptureListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -238,12 +238,24 @@ public class PantallaMenu extends PantallaBase {
             }
         });
 
+        //LABEL ANIMADO DE CRÉDITOS
+        creditos = new Label("Desarrollado por:\nDiego Corral Gonzalez, Jesus de la Peña y Jesus Jimenez Cozar",skin);
+        creditos.setPosition(0,20);
+        creditos.addAction(sequence(moveTo(Gdx.graphics.getWidth()-380, 20, 2.5f),color(Color.PURPLE, 3), delay(0.5f)));
+        creditos.setFontScale(Constantes.TAMAÑOTEXTO);
+        creditos.addCaptureListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                HttpHerramientas.abrirUrl("https://github.com/Jesusdelap/CubeSquare.git");
+            }
+        });
 
         //CREAMOS EL BOTÓN DE SONIDO CON DOS TEXTURAS DISTINTAS
         btnSonidoActivado = game.getManager().get("sonido.png");
         btnSonidoDesactivado = game.getManager().get("sonidodesactivado.png");
         SpriteDrawable activado = new SpriteDrawable(new Sprite(btnSonidoActivado));
         SpriteDrawable desactivado = new SpriteDrawable(new Sprite(btnSonidoDesactivado));
+
 
         //SI LA VARIABLE DE CONTROL DE SONIDO ES TRUE, CREAMOS EL BOTÓN DE SONIDO. EN CASO CONTRARIO, CREAMOS EL BOTÓN MUTE
         if (sonido) {
@@ -320,11 +332,8 @@ public class PantallaMenu extends PantallaBase {
 
             }
         });
-        //LABEL ANIMADO DE CRÉDITOS
-        creditos = new Label("Desarrollado por:\nDiego Corral Gonzalez, Jesus de la Peña y Jesus Jimenez Cozar",skin);
-        creditos.setPosition(Gdx.graphics.getWidth(),50);
-        creditos.addAction(sequence(moveTo(5, 0, 3),color(Color.PURPLE, 3), delay(0.5f)));
-        creditos.setFontScale(Constantes.TAMAÑOTEXTO);
+
+
 
         //AÑADIMOS TODOS LOS ACTORES AL ESCENARIO
         escenario.addActor(fondo);
