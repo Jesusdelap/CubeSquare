@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -30,13 +31,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.cubesquare.herramientas.Constantes;
 import com.cubesquare.herramientas.Fabricas;
+import com.cubesquare.herramientas.HttpHerramientas;
 import com.cubesquare.modelo.entidades.ActorJugador;
 import com.cubesquare.modelo.entidades.ActorSuelo;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.addListener;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.color;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.touchable;
 
 
 public class PantallaMenu extends PantallaBase {
@@ -56,8 +60,8 @@ public class PantallaMenu extends PantallaBase {
     private Vector2 posicionSuelo;
     private Image fondo, titulo;
 
-    private Texture btnSonidoActivado, btnSonidoDesactivado;
-    private Button btnSonido;
+    private Texture btnSonidoActivado, btnSonidoDesactivado, texturaGit;
+    private Button btnSonido, btnGit;
     private boolean cayendo = true;
     private static boolean sonido = false;
     private static boolean pantallaMenu = true;
@@ -131,9 +135,6 @@ public class PantallaMenu extends PantallaBase {
         // set image for mouse over fireButtonStyle.pressedOffsetX = 1;
         // fireButtonStyle.pressedOffsetY = -1;
 
-
-
-
         //BOTÓN JUEGO
         btnJuego = new TextButton("Jugar", skin4);
         btnJuego.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
@@ -186,6 +187,10 @@ public class PantallaMenu extends PantallaBase {
 
             ;
         });
+
+
+
+
         //BOTÓN LogIn
         btnLogIn = new TextButton("LogIn", skin4);
         btnLogIn.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
@@ -205,8 +210,6 @@ public class PantallaMenu extends PantallaBase {
             ;
         });
 
-
-
         //BOTÓN SALIR
         btnSalir = new TextButton("Salir", skin4);
         btnSalir.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
@@ -218,6 +221,20 @@ public class PantallaMenu extends PantallaBase {
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("clickeado btnSalir");
                 Gdx.app.exit();
+            }
+        });
+
+
+        //ICONO ENLACE GIT
+        texturaGit = game.getManager().get("iconoGithub.png");
+        SpriteDrawable git = new SpriteDrawable(new Sprite(texturaGit));
+        btnGit=new Button(new Button.ButtonStyle(git, git, git));;
+        btnGit.setSize(50,50);
+        btnGit.setPosition(escenario.getWidth()-100, (50));
+        btnGit.addCaptureListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                HttpHerramientas.abrirUrl("https://github.com/Jesusdelap/CubeSquare.git");
             }
         });
 
@@ -321,6 +338,7 @@ public class PantallaMenu extends PantallaBase {
         escenario.addActor(btnLogIn);
         escenario.addActor(btnTutorial);
         escenario.addActor(creditos);
+        escenario.addActor(btnGit);
 
     }
 

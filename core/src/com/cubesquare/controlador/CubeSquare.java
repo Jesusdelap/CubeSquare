@@ -35,6 +35,8 @@ public class CubeSquare extends Game {
     @Override
     public void create() {
         manager = new AssetManager();
+        manager.load("iconoGit.png", Texture.class);
+        manager.load("iconoGithub.png", Texture.class);
         manager.load("cubo.png", Texture.class);
         manager.load("floor.png", Texture.class);
         manager.load("spike.png", Texture.class);
