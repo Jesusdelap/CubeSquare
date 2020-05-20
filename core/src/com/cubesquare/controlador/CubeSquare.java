@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.cubesquare.datos.AccesoDatos;
 import com.cubesquare.modelo.Usuario;
 
@@ -35,6 +36,7 @@ public class CubeSquare extends Game {
     @Override
     public void create() {
         manager = new AssetManager();
+        manager.load("iconoLibgdx.png", Texture.class);
         manager.load("iconoGit.png", Texture.class);
         manager.load("iconoGithub.png", Texture.class);
         manager.load("cubo.png", Texture.class);

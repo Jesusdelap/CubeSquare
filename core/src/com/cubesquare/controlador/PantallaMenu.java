@@ -12,17 +12,13 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -40,7 +36,6 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.color;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.touchable;
 
 
 public class PantallaMenu extends PantallaBase {
@@ -60,9 +55,9 @@ public class PantallaMenu extends PantallaBase {
     private Vector2 posicionSuelo;
     private Image fondo, titulo;
 
-    private Texture btnSonidoActivado, btnSonidoDesactivado, texturaGit;
-    private Button btnSonido, btnGit;
-    private boolean cayendo = true;
+    private Texture btnSonidoActivado, btnSonidoDesactivado, texturaGit, texturaLibgdx;
+    private Button btnSonido, btnGit,btnLibgdx;
+    private boolean primerInicio = true;
     private static boolean sonido = false;
     private static boolean pantallaMenu = true;
 
@@ -189,8 +184,6 @@ public class PantallaMenu extends PantallaBase {
         });
 
 
-
-
         //BOTÓN LogIn
         btnLogIn = new TextButton("LogIn", skin4);
         btnLogIn.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
@@ -229,8 +222,6 @@ public class PantallaMenu extends PantallaBase {
         SpriteDrawable git = new SpriteDrawable(new Sprite(texturaGit));
         btnGit=new Button(new Button.ButtonStyle(git, git, git));;
         btnGit.setSize(40,40);
-        btnGit.setPosition(10,30);
-        btnGit.addAction(sequence(moveTo(Gdx.graphics.getWidth()-50, 20, 2.5f),color(Color.PURPLE, 3), delay(0.5f)));
         btnGit.addCaptureListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -238,10 +229,20 @@ public class PantallaMenu extends PantallaBase {
             }
         });
 
-        //LABEL ANIMADO DE CRÉDITOS
+        //ICONO ENLACE LIBGDX
+        texturaLibgdx = game.getManager().get("iconoLibgdx.png");
+        SpriteDrawable libgdx = new SpriteDrawable(new Sprite(texturaLibgdx));
+        btnLibgdx=new Button(new Button.ButtonStyle(libgdx, libgdx, libgdx));;
+        btnLibgdx.setSize(50,20);
+        btnLibgdx.addCaptureListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                HttpHerramientas.abrirUrl("https://libgdx.badlogicgames.com/");
+            }
+        });
+
+        //LABEL DE CRÉDITOS
         creditos = new Label("Desarrollado por:\nDiego Corral Gonzalez, Jesus de la Peña y Jesus Jimenez Cozar",skin);
-        creditos.setPosition(0,20);
-        creditos.addAction(sequence(moveTo(Gdx.graphics.getWidth()-380, 20, 2.5f),color(Color.PURPLE, 3), delay(0.5f)));
         creditos.setFontScale(Constantes.TAMAÑOTEXTO);
         creditos.addCaptureListener(new ClickListener(){
             @Override
@@ -250,6 +251,25 @@ public class PantallaMenu extends PantallaBase {
             }
         });
 
+
+
+        //ANIMAMOS LOS CRÉDITOS EN EL PRIMER INICIO DE LA APP
+        if (primerInicio){
+            creditos.setPosition(0,20);
+            btnGit.setPosition(8,35);
+            btnLibgdx.setPosition(20,35);
+            creditos.addAction(sequence(moveTo(Gdx.graphics.getWidth()-430, 20, 2.5f),color(Color.PURPLE, 3), delay(0.5f)));
+            btnGit.addAction(sequence(moveTo(Gdx.graphics.getWidth()-107, 33, 2.5f),color(Color.PURPLE, 3), delay(0.5f)));
+            btnLibgdx.addAction(sequence(moveTo(Gdx.graphics.getWidth()-60, 33, 2.5f)));
+            primerInicio=false;
+        }else{
+            btnGit.setPosition(Gdx.graphics.getWidth()-107, 20);
+            btnGit.setColor(Color.PURPLE);
+            creditos.setPosition(Gdx.graphics.getWidth()-430,33);
+            creditos.setColor(Color.PURPLE);
+            btnLibgdx.setPosition(Gdx.graphics.getWidth()-60, 33);
+            btnLibgdx.setColor(Color.PURPLE);
+        }
         //CREAMOS EL BOTÓN DE SONIDO CON DOS TEXTURAS DISTINTAS
         btnSonidoActivado = game.getManager().get("sonido.png");
         btnSonidoDesactivado = game.getManager().get("sonidodesactivado.png");
@@ -286,9 +306,9 @@ public class PantallaMenu extends PantallaBase {
         }
 
         //CREAMOS SUELO Y CUBO PARA QUE INTERACCIONEN INDEFINIDAMENTE EN LA PANTALLA DE MENÚ
-        if (cayendo) {
+        if (primerInicio) {
             posicionCubo = new Vector2(5, 10);
-            cayendo = false;
+            primerInicio = false;
         } else {
             posicionCubo = new Vector2(5, 1.6f);
         }
@@ -348,6 +368,7 @@ public class PantallaMenu extends PantallaBase {
         escenario.addActor(btnTutorial);
         escenario.addActor(creditos);
         escenario.addActor(btnGit);
+        escenario.addActor(btnLibgdx);
 
     }
 
