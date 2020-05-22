@@ -21,6 +21,13 @@ public class CubeSquare extends Game {
     private PantallaBase pantallaSelectorNivel;
     private PantallaBase pantallaTutorial;
     private PantallaBase pantallaTipoJuego;
+    private String tipoCubo;
+
+    public PantallaBase getPantallaSkins() {
+        return pantallaSkins;
+    }
+
+    private PantallaBase pantallaSkins;
 
 
     private PantallaBase pantallaRanking,pantallaLogIn;
@@ -36,6 +43,7 @@ public class CubeSquare extends Game {
     @Override
     public void create() {
         manager = new AssetManager();
+        manager.load("cuboEnfadado.png", Texture.class);
         manager.load("iconoLibgdx.png", Texture.class);
         manager.load("iconoGit.png", Texture.class);
         manager.load("iconoGithub.png", Texture.class);
@@ -69,6 +77,7 @@ public class CubeSquare extends Game {
      */
     public void finCarga(){
 
+        pantallaSkins = new PantallaSkins(this);
         pantallaMenu = new PantallaMenu(this);
         pantallaJuego = new PantallaJuego(this);
         pantallaDerrota = new PantallaDerrota(this);

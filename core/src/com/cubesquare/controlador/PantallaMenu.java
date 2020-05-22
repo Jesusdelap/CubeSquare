@@ -16,10 +16,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -31,7 +33,6 @@ import com.cubesquare.herramientas.HttpHerramientas;
 import com.cubesquare.modelo.entidades.ActorJugador;
 import com.cubesquare.modelo.entidades.ActorSuelo;
 
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.addListener;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.color;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
@@ -43,8 +44,8 @@ public class PantallaMenu extends PantallaBase {
     private Stage escenario;
     private TextButton btnJuego;
     private ImageTextButton btnTutorial;
-    private TextButton btnJuegoNiveles, btnSalir,btnRanking,btnLogIn;
-    private Skin skin, skin2, skin3, skin4;
+    private TextButton btnSalir, btnRanking, btnLogIn;
+    private Skin skin, skin4;
     private Music cancionMenu;
     private Label creditos;
 
@@ -56,10 +57,13 @@ public class PantallaMenu extends PantallaBase {
     private Image fondo, titulo;
 
     private Texture btnSonidoActivado, btnSonidoDesactivado, texturaGit, texturaLibgdx;
-    private Button btnSonido, btnGit,btnLibgdx;
+    private Button btnSonido, btnGit, btnLibgdx;
     private boolean primerInicio = true;
     private static boolean sonido = false;
     private static boolean pantallaMenu = true;
+
+    private Container contenedor;
+    private Table tablaMenu;
 
     public static void setPantallaMenu(boolean pantallaMenu) {
         PantallaMenu.pantallaMenu = pantallaMenu;
@@ -77,8 +81,8 @@ public class PantallaMenu extends PantallaBase {
      * El constructor, declaramos los parámetros de la clase PantallaMenu. También iniciamos
      * las canciones en el menú y la opción de desactivarlas.
      *
-     * @author Jesús Jiménez
      * @param game
+     * @author Jesús Jiménez
      */
     public PantallaMenu(CubeSquare game) {
         super(game);
@@ -86,8 +90,6 @@ public class PantallaMenu extends PantallaBase {
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         mundoMenu = new World(new Vector2(0, -15), true);
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-        skin2 = new Skin(Gdx.files.internal("skin/comic/skin/comic-ui.json"));
-        skin3 = new Skin(Gdx.files.internal("skin/quantum-horizon/skin/quantum-horizon-ui.json"));
         skin4 = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
         cancionMenu = game.getManager().get("sonidos/cancionmenu.ogg");
         cancionMenu.setLooping(true);
@@ -110,30 +112,21 @@ public class PantallaMenu extends PantallaBase {
         //ACTIVAMOS EL INPUT PROCESSOR PARA EL ESCENARIO
         Gdx.input.setInputProcessor(escenario);
 
-
         //CREAMOS FONDO DE PANTALLA
         fondo = new Image(game.getManager().get("fondoEspacio.png", Texture.class));
         fondo.setFillParent(true);
 
+        //TABLA QUE CONTENDRA TODOS LOS ACTORES DEL MENU
+        tablaMenu = new Table();
+        tablaMenu.setFillParent(true);
+        tablaMenu.center();
 
         //IMAGEN CON EL TÍTULO DEL JUEGO
         titulo = new Image(game.getManager().get("titulo.png", Texture.class));
-        titulo.setPosition((escenario.getWidth() / 2) - titulo.getWidth() / 2, escenario.getHeight() - 360);
-
-        /*atlasUiPadrao = new TextureAtlas("ui/uiPadrao.pack");
-        skinPadrao = new Skin(atlasUiPadrao);
-        fireButtonStyle = new ImageButtonStyle();*/
-
-        //Instaciate fireButtonStyle.up = skinPadrao.getDrawable("uFireUpI");
-        // Set image for not pressed button fireButtonStyle.down = skinPadrao.getDrawable("uFireDownI");
-        // Set image for pressed fireButtonStyle.over = skinPadrao.getDrawable("uFireOverI");
-        // set image for mouse over fireButtonStyle.pressedOffsetX = 1;
-        // fireButtonStyle.pressedOffsetY = -1;
 
         //BOTÓN JUEGO
         btnJuego = new TextButton("Jugar", skin4);
-        btnJuego.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
-        btnJuego.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, titulo.getY() - Constantes.PIXELS_IN_METER_Y);
+        btnJuego.setSize(tablaMenu.getWidth() * 0.2f, tablaMenu.getHeight() * 0.1f);
         btnJuego.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
 
         btnJuego.addCaptureListener(new ChangeListener() {
@@ -141,16 +134,13 @@ public class PantallaMenu extends PantallaBase {
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("clickeado btnJuego infinito");
                 PantallaJuego p = (PantallaJuego) (game.getPantallaJuego());
-                getGame().setScreen(PantallaMenu.super.getGame().getPantallaTipoJuego());
+                getGame().setScreen(PantallaMenu.super.getGame().getPantallaSkins());
             }
-
-            ;
         });
 
         //BOTÓN TUTORIAL
         btnTutorial = new ImageTextButton("Tutorial", skin4);
         btnTutorial.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
-        btnTutorial.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, (btnJuego.getY() - btnJuego.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
         btnTutorial.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
 
         btnTutorial.addCaptureListener(new ChangeListener() {
@@ -167,7 +157,6 @@ public class PantallaMenu extends PantallaBase {
         //BOTÓN Ranking
         btnRanking = new TextButton("ranking", skin4);
         btnRanking.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
-        btnRanking.setPosition((escenario.getWidth() / 2) - btnTutorial.getWidth() / 2, (btnTutorial.getY() - btnTutorial.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
         btnRanking.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
         btnRanking.addCaptureListener(new ChangeListener() {
             @Override
@@ -175,8 +164,8 @@ public class PantallaMenu extends PantallaBase {
                 System.out.println("clickeado btnRanking");
                 if (game.getAccesoDatos().ping()) {
                     getGame().setScreen(getGame().getPantallaRanking());
-                }else{
-                    Gdx.app.log("PantallaMenu/btnRanking","no Connexion");
+                } else {
+                    Gdx.app.log("PantallaMenu/btnRanking", "no Connexion");
                 }
             }
 
@@ -187,7 +176,6 @@ public class PantallaMenu extends PantallaBase {
         //BOTÓN LogIn
         btnLogIn = new TextButton("LogIn", skin4);
         btnLogIn.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
-        btnLogIn.setPosition((escenario.getWidth() / 2) - btnRanking.getWidth() / 2, (btnRanking.getY() - btnRanking.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
         btnLogIn.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
         btnLogIn.addCaptureListener(new ChangeListener() {
             @Override
@@ -195,8 +183,8 @@ public class PantallaMenu extends PantallaBase {
                 System.out.println("clickeado btnRanking");
                 if (game.getAccesoDatos().ping()) {
                     getGame().setScreen(getGame().getPantallaLogIn());
-                }else{
-                    Gdx.app.log("PantallaMenu/btnLogIn","no Connexion");
+                } else {
+                    Gdx.app.log("PantallaMenu/btnLogIn", "no Connexion");
                 }
             }
 
@@ -206,7 +194,6 @@ public class PantallaMenu extends PantallaBase {
         //BOTÓN SALIR
         btnSalir = new TextButton("Salir", skin4);
         btnSalir.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
-        btnSalir.setPosition(btnLogIn.getX(), (btnLogIn.getY() - btnLogIn.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
         btnSalir.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
 
         btnSalir.addCaptureListener(new ChangeListener() {
@@ -217,12 +204,23 @@ public class PantallaMenu extends PantallaBase {
             }
         });
 
+        //LABEL DE CRÉDITOS
+        creditos = new Label("Desarrollado por:\nDIEGO CORRAL GONZALEZ, JESUS DE LA PENA Y JESUS JIMENEZ COZAR", skin);
+        creditos.setFontScale(Constantes.TAMAÑOTEXTO / 1.75f);
+        creditos.addCaptureListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                HttpHerramientas.abrirUrl("https://github.com/Jesusdelap/CubeSquare.git");
+            }
+        });
+
         //ICONO ENLACE GIT
         texturaGit = game.getManager().get("iconoGithub.png");
         SpriteDrawable git = new SpriteDrawable(new Sprite(texturaGit));
-        btnGit=new Button(new Button.ButtonStyle(git, git, git));;
-        btnGit.setSize(40,40);
-        btnGit.addCaptureListener(new ClickListener(){
+        btnGit = new Button(new Button.ButtonStyle(git, git, git));
+        ;
+        btnGit.setSize(40, 40);
+        btnGit.addCaptureListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 HttpHerramientas.abrirUrl("https://github.com/Jesusdelap/CubeSquare.git");
@@ -232,43 +230,28 @@ public class PantallaMenu extends PantallaBase {
         //ICONO ENLACE LIBGDX
         texturaLibgdx = game.getManager().get("iconoLibgdx.png");
         SpriteDrawable libgdx = new SpriteDrawable(new Sprite(texturaLibgdx));
-        btnLibgdx=new Button(new Button.ButtonStyle(libgdx, libgdx, libgdx));;
-        btnLibgdx.setSize(50,20);
-        btnLibgdx.addCaptureListener(new ClickListener(){
+        btnLibgdx = new Button(new Button.ButtonStyle(libgdx, libgdx, libgdx));
+        ;
+        btnLibgdx.setSize(60, 20);
+        btnLibgdx.addCaptureListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 HttpHerramientas.abrirUrl("https://libgdx.badlogicgames.com/");
             }
         });
 
-        //LABEL DE CRÉDITOS
-        creditos = new Label("Desarrollado por:\nDiego Corral Gonzalez, Jesus de la Peña y Jesus Jimenez Cozar",skin);
-        creditos.setFontScale(Constantes.TAMAÑOTEXTO);
-        creditos.addCaptureListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                HttpHerramientas.abrirUrl("https://github.com/Jesusdelap/CubeSquare.git");
-            }
-        });
-
-
-
         //ANIMAMOS LOS CRÉDITOS EN EL PRIMER INICIO DE LA APP
-        if (primerInicio){
-            creditos.setPosition(0,20);
-            btnGit.setPosition(8,35);
-            btnLibgdx.setPosition(20,35);
-            creditos.addAction(sequence(moveTo(Gdx.graphics.getWidth()-430, 20, 2.5f),color(Color.PURPLE, 3), delay(0.5f)));
-            btnGit.addAction(sequence(moveTo(Gdx.graphics.getWidth()-107, 33, 2.5f),color(Color.PURPLE, 3), delay(0.5f)));
-            btnLibgdx.addAction(sequence(moveTo(Gdx.graphics.getWidth()-60, 33, 2.5f)));
-            primerInicio=false;
-        }else{
-            btnGit.setPosition(Gdx.graphics.getWidth()-107, 20);
-            btnGit.setColor(Color.PURPLE);
-            creditos.setPosition(Gdx.graphics.getWidth()-430,33);
-            creditos.setColor(Color.PURPLE);
-            btnLibgdx.setPosition(Gdx.graphics.getWidth()-60, 33);
-            btnLibgdx.setColor(Color.PURPLE);
+        if (primerInicio) {
+            creditos.addAction(sequence(moveTo(Gdx.graphics.getWidth() - (creditos.getMinWidth() + btnGit.getWidth() + btnLibgdx.getWidth()+15), 10, 2.5f), color(new Color(1.08f,0.7f,1.17f,1), 3), delay(0.5f)));
+            btnGit.addAction(sequence(moveTo((Gdx.graphics.getWidth() - (btnGit.getWidth() + btnLibgdx.getWidth()+15)), 23, 2.5f), color(new Color(1.08f,0.7f,1.17f,1), 3), delay(0.5f)));
+            btnLibgdx.addAction(sequence(moveTo(Gdx.graphics.getWidth() - (btnLibgdx.getWidth() + 10), 23, 2.5f)));
+            primerInicio = false;
+        } else {
+            creditos.setPosition(Gdx.graphics.getWidth() - (creditos.getMinWidth() + btnGit.getWidth() + btnLibgdx.getWidth()+15), 10);
+            creditos.setColor(1.08f,0.7f,1.17f,1);
+            btnGit.setPosition(Gdx.graphics.getWidth() - (btnGit.getWidth() + btnLibgdx.getWidth()+15), 23);
+            btnGit.setColor(1.08f,0.7f,1.17f,1);
+            btnLibgdx.setPosition(Gdx.graphics.getWidth() - (btnLibgdx.getWidth()+10), 23);
         }
         //CREAMOS EL BOTÓN DE SONIDO CON DOS TEXTURAS DISTINTAS
         btnSonidoActivado = game.getManager().get("sonido.png");
@@ -283,8 +266,6 @@ public class PantallaMenu extends PantallaBase {
         } else {
             btnSonido = new Button(new Button.ButtonStyle(desactivado, activado, activado));
         }
-        btnSonido.setSize(50, 50);
-        btnSonido.setPosition(btnSalir.getX() + 580, btnSalir.getY());
 
         btnSonido.addListener(new ClickListener() {
             @Override
@@ -298,6 +279,33 @@ public class PantallaMenu extends PantallaBase {
                 }
             }
         });
+
+        contenedor = new Container(tablaMenu);
+        contenedor.setActor(tablaMenu);
+        contenedor.setActor(creditos);
+        contenedor.setActor(btnLibgdx);
+        contenedor.setActor(btnGit);
+        contenedor.setFillParent(true);
+        contenedor.center();
+
+       tablaMenu.setFillParent(true);
+        tablaMenu.add(titulo).colspan(2);
+        tablaMenu.row();
+        tablaMenu.add(btnJuego).width(escenario.getWidth() * 0.2f).height(escenario.getHeight() * 0.1f).colspan(2);
+        tablaMenu.row();
+        tablaMenu.add(btnTutorial).width(escenario.getWidth() * 0.2f).height(escenario.getHeight() * 0.1f).colspan(2);
+        tablaMenu.row();
+        tablaMenu.add(btnLogIn).width(escenario.getWidth() * 0.2f).height(escenario.getHeight() * 0.1f).colspan(2);
+        tablaMenu.row();
+        tablaMenu.add(btnRanking).width(escenario.getWidth() * 0.2f).height(escenario.getHeight() * 0.1f).expandX().padLeft(350);
+        tablaMenu.add(btnSonido).width(50).height(50).padRight(300);
+        tablaMenu.row();
+        tablaMenu.add(btnSalir).width(escenario.getWidth() * 0.2f).height(escenario.getHeight() * 0.1f).colspan(2);
+        tablaMenu.row();
+
+       /* btnSonido.setSize(50,50);
+        btnSonido.setPosition(titulo.getWidth()-(titulo.getX()-titulo.getOriginX()),tablaMenu.getRowMinHeight(3));*/
+
 
         //ACTIVAMOS EL SONIDO SÓLO SI SU VARIABLE DE CONTROL ESTÁ ACTIVA. EN CASO CONTRARIO, EL LOGO DE SONIDO ES EL DE DESACTIVADO
         cancionMenu.setVolume(0.5f);
@@ -315,7 +323,7 @@ public class PantallaMenu extends PantallaBase {
 
         posicionSuelo = new Vector2(0, 1.5f);
         suelo = Fabricas.sueloFactory(mundoMenu, new Texture("sueloTransparente.png"), Gdx.graphics.getWidth(), 0, posicionSuelo);
-        cubo = Fabricas.ActorFactory(mundoMenu, game.getManager().get("cubo.png", Texture.class), posicionCubo);
+        cubo = Fabricas.ActorFactory(mundoMenu, game.getManager().get(PantallaSkins.getTipoCubo(), Texture.class), posicionCubo);
         cubo.setSaltando(true);
 
         mundoMenu.setContactListener(new ContactListener() {
@@ -353,25 +361,20 @@ public class PantallaMenu extends PantallaBase {
             }
         });
 
-
-
         //AÑADIMOS TODOS LOS ACTORES AL ESCENARIO
+        escenario.addActor(contenedor);
         escenario.addActor(fondo);
         escenario.addActor(suelo);
-        escenario.addActor(titulo);
-        escenario.addActor(btnJuego);
-        escenario.addActor(btnSalir);
+        escenario.addActor(tablaMenu);
+        escenario.setDebugAll(true);
         escenario.addActor(cubo);
-        escenario.addActor(btnSonido);
-        escenario.addActor(btnRanking);
-        escenario.addActor(btnLogIn);
-        escenario.addActor(btnTutorial);
         escenario.addActor(creditos);
         escenario.addActor(btnGit);
         escenario.addActor(btnLibgdx);
+        //escenario.addActor(btnSonido);
+
 
     }
-
 
 
     /**
@@ -383,8 +386,6 @@ public class PantallaMenu extends PantallaBase {
      */
     @Override
     public void render(float delta) {
-        //LIMPIAMOS PANTALLA Y ACTUALIZAMOS EL ESCENARIO EN CADA FOTOGRAMA PARA DIBUJARLO
-        //Gdx.gl.glClearColor(0, 0.2f, 0.8f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         escenario.act();
         mundoMenu.step(delta, 6, 2);
@@ -429,3 +430,32 @@ public class PantallaMenu extends PantallaBase {
 
     }
 }
+
+//titulo.setPosition((escenario.getWidth() / 2) - titulo.getWidth() / 2, escenario.getHeight() - 360);
+//btnJuego.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, titulo.getY() - Constantes.PIXELS_IN_METER_Y);
+//btnTutorial.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, (btnJuego.getY() - btnJuego.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
+//btnLogIn.setPosition((escenario.getWidth() / 2) - btnRanking.getWidth() / 2, (btnRanking.getY() - btnRanking.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
+//btnSalir.setPosition(btnLogIn.getX(), (btnLogIn.getY() - btnLogIn.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
+//btnRanking.setPosition((escenario.getWidth() / 2) - btnTutorial.getWidth() / 2, (btnTutorial.getY() - btnTutorial.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
+//btnSonido.setSize(50, 50);
+//btnSonido.setPosition(Gdx.graphics.getWidth() - 200, 150);
+
+        /**/
+        /*escenario.addActor(btnSonido);
+        escenario.addActor(creditos);
+        escenario.addActor(btnGit);
+        escenario.addActor(btnLibgdx);
+        escenario.addActor(btnJuego);
+        escenario.addActor(btnSalir);
+        escenario.addActor(titulo);
+        escenario.addActor(btnRanking);
+        escenario.addActor(btnLogIn);
+        escenario.addActor(btnTutorial);*/
+//tabla.add(btnSonido.right());
+//tabla.row();
+//tabla.add(creditos,btnGit,btnLibgdx).right();
+//LIMPIAMOS PANTALLA Y ACTUALIZAMOS EL ESCENARIO EN CADA FOTOGRAMA PARA DIBUJARLO
+//Gdx.gl.glClearColor(0, 0.2f, 0.8f, 1);
+/*tablaMenu.add(creditos).width(30).height(30).right();
+        tablaMenu.add(btnGit).width(40).height(40).right();
+        tablaMenu.add(btnLibgdx).width(60).height(20).right();*/

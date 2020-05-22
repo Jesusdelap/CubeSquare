@@ -116,7 +116,7 @@ public class PantallaTipoJuego extends PantallaBase{
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("clickeado btnSalir");
-                game.setScreen(game.getPantallaMenu());
+                game.setScreen(game.getPantallaSkins());
             }
         });
 
@@ -131,7 +131,7 @@ public class PantallaTipoJuego extends PantallaBase{
         posicionTriangulo = new Vector2(11,1.6f);
 
         suelo = Fabricas.sueloFactory(mundoMenu, new Texture("sueloTransparente.png"), Gdx.graphics.getWidth(),0, posicionSuelo);
-        cubo = Fabricas.ActorFactory(mundoMenu, game.getManager().get("cubo.png", Texture.class), posicionCubo);
+        cubo = Fabricas.ActorFactory(mundoMenu, game.getManager().get(PantallaSkins.getTipoCubo(), Texture.class), posicionCubo);
         trianguloEnfadado = Fabricas.ActorFactory(mundoMenu, game.getManager().get("trianguloenfadado.png", Texture.class), posicionTriangulo);
         cubo.setSaltando(true);
         trianguloEnfadado.setSaltando(true);

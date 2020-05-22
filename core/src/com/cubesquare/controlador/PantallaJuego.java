@@ -115,7 +115,7 @@ public class PantallaJuego extends PantallaBase {
         });*/
 
         //CREAMOS JUGADOR Y MAPA Y LOS AÑADIMOS AL ESCENARIO
-        jugador = Fabricas.ActorFactory(mundo, game.getManager().get("cubo.png", Texture.class));
+        jugador = Fabricas.ActorFactory(mundo, game.getManager().get(PantallaSkins.getTipoCubo(), Texture.class));
 
         //inicializamos el mapa
         generadorMapas = new GeneradorMapas(new Vector2(17, 3), mundo, game.getManager());
