@@ -51,9 +51,7 @@ public class PantallaTipoJuego extends PantallaBase{
      * está disponible el nivel 1. Declara los botones necesarios para volver al menú
      * o iniciar un nivel. Crea la música de la pantalla. Crea el suelo y por último añade
      * al cubo y enemigos.
-     *
      * @author Jesús de la Peña
-     *
      * @return void
      */
     @Override

@@ -1,6 +1,9 @@
 package com.cubesquare.herramientas;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.cubesquare.modelo.Record;
 import com.cubesquare.modelo.Usuario;
 
@@ -108,6 +111,14 @@ public class Beans {
         String contrasena = cont[0].replace("\""," ").trim();
 
         return new Usuario(idusuario,alias,nombreUsuario,contrasena);
+    }
+
+
+    public static void popUp(Stage escenario,Skin skin, String texto){
+        new Dialog(" ", skin, "dialog") {
+            protected void result (Object object) {
+            }
+        }.text(texto).button("OK", false).key(1, true).show(escenario);
     }
 
 

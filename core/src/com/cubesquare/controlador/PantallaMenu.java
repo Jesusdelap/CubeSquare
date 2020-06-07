@@ -29,6 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.cubesquare.herramientas.Beans;
 import com.cubesquare.herramientas.Constantes;
 import com.cubesquare.herramientas.Fabricas;
 import com.cubesquare.herramientas.HttpHerramientas;
@@ -181,6 +182,7 @@ public class PantallaMenu extends PantallaBase {
                 if (game.getAccesoDatos().ping()) {
                     getGame().setScreen(getGame().getPantallaRanking());
                 }else{
+                    Beans.popUp(escenario,skin,"Sin Conexion");
                     Gdx.app.log("PantallaMenu/btnRanking","no Connexion");
                 }
             }
@@ -204,6 +206,7 @@ public class PantallaMenu extends PantallaBase {
                     getGame().setScreen(getGame().getPantallaLogIn());
                 }else{
                     Gdx.app.log("PantallaMenu/btnLogIn","no Connexion");
+                    Beans.popUp(escenario,skin,"Sin Conexion");
                 }
             }
 

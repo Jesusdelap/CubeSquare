@@ -72,7 +72,7 @@ public class AccesoDatos {
         String url= "Usuario/add?idusuario=1&alias="+u.getAlias()+"&nombreUsuario="+u.getNombreUsuario()+"&contrasena="+u.getContrasena();
         HttpHerramientas.Connexion(url,httpListener);
         esperarRespuesta();
-        Gdx.app.log("AccesoDatos/AddUsuario", h.resultado );
+        Gdx.app.log("AccesoDatos/AddUsuario", h.resultado);
 
     }
     public Usuario logIn(String nombreUsuario,String contraseña){

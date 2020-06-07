@@ -47,7 +47,6 @@ public class PantallaRanking extends PantallaBase{
     /**
      * El método show muestra ala tabla de usuarios con máxima puntuación. Crea la tabla y
      * los textos de cada columna.
-     *
      * @author Jesús Jiménez
      */
 
