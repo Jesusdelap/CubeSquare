@@ -66,6 +66,7 @@ public class PantallaRanking extends PantallaBase{
         table.row();
 
         ArrayList<Record> recordArrayList = game.getAccesoDatos().listarRecordsConAlias(10);
+        System.out.println(recordArrayList+" arr");
         for(int i = 0; i<recordArrayList.size(); i++){
 
             alias = new Label(recordArrayList.get(i).getAlias(),skin4);

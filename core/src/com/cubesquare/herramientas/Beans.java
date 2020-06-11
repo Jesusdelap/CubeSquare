@@ -79,9 +79,10 @@ public class Beans {
 
 
         String stringarr[] =json.split(",\\{");
-        for(int i = 1; i<stringarr.length; i++){
+        for(int i = 0; i<stringarr.length; i++){
             try{
                 recordArrayList.add(jsonToRecord(stringarr[i]));
+                System.out.println(jsonToRecord(stringarr[i]));
                 Gdx.app.log("Beans/jsonToRecordArrayList",stringarr[i]);
             }catch (Exception e){
                 Gdx.app.error("Beans/jsonToRecordArrayList",e.getMessage());
@@ -91,34 +92,38 @@ public class Beans {
 
 
         }
-
+        System.out.println(recordArrayList+"aarb");
         return  recordArrayList;
     }
     public static Usuario jsonToUsuario(String json){
+        try {
+            String trocitos[] = json.split(":");
 
-        String trocitos[] = json.split(":");
+            String idUsu[] = trocitos[1].split(",");
+            int idusuario = parseint(idUsu[0].trim());
 
-        String idUsu[] = trocitos[1].split(",");
-        int idusuario = parseint(idUsu[0].trim());
+            String ali[] = trocitos[2].split(",");
+            String alias = ali[0].replace("\"", " ").trim();
 
-        String ali[] = trocitos[2].split(",");
-        String alias = ali[0].replace("\""," ").trim();
+            String nombreU[] = trocitos[3].split(",");
+            String nombreUsuario = nombreU[0].replace("\"", " ").trim();
 
-        String nombreU[] = trocitos[3].split(",");
-        String nombreUsuario = nombreU[0].replace("\""," ").trim();
+            String cont[] = trocitos[4].split("}");
+            String contrasena = cont[0].replace("\"", " ").trim();
 
-        String cont[] = trocitos[4].split("}");
-        String contrasena = cont[0].replace("\""," ").trim();
-
-        return new Usuario(idusuario,alias,nombreUsuario,contrasena);
+            return new Usuario(idusuario, alias, nombreUsuario, contrasena);
+        }catch (Exception e){
+            return  new Usuario(1,"unknown","unknownUser","42");
+        }
     }
 
 
-    public static void popUp(Stage escenario,Skin skin, String texto){
-        new Dialog(" ", skin, "dialog") {
+    public static void popUp(Stage escenario,Skin skin,String titulo, String texto){
+        Dialog d = new Dialog(titulo, skin, "dialog") {
             protected void result (Object object) {
             }
-        }.text(texto).button("OK", false).key(1, true).show(escenario);
+        }.text("  "+texto+"  ").button("OK", false).key(1, true).show(escenario);
+        d.getTitleLabel().setAlignment(1);
     }
 
 

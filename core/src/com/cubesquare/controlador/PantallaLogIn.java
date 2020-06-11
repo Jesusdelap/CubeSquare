@@ -5,13 +5,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.cubesquare.datos.AccesoDatos;
@@ -19,11 +17,9 @@ import com.cubesquare.herramientas.Beans;
 import com.cubesquare.herramientas.Constantes;
 import com.cubesquare.modelo.Usuario;
 
-import javax.rmi.CORBA.Util;
-
 public class PantallaLogIn extends PantallaBase {
     private Stage escenario;
-    private Label lblLogIn,lblRegister;
+    private Label lblLogIn,lblRegister,lblusuario;
     private TextField logInName,logInPass, registerName, registerAlias, registerPass;
     private Skin skin;
     private Image fondo;
@@ -69,10 +65,10 @@ public class PantallaLogIn extends PantallaBase {
                 System.out.println("clickeado btnLogIn");
                 game.setUsuario(accesoDatos.logIn(logInName.getText().trim(),logInPass.getText().trim()));
                 if(!game.getUsuario().getNombreUsuario().equals("unknownUser")){
-                    Beans.popUp(escenario,skin,"LogIn exitoso "+game.getUsuario().getNombreUsuario());
-                    System.out.println(game.getUsuario().getNombreUsuario());
+                    Beans.popUp(escenario,skin,"LogIn exitoso ","Bienvenido "+game.getUsuario().getNombreUsuario());
+                    System.out.println(logInName.getText()+"   "+logInPass.getText());
                 }else{
-                    Beans.popUp(escenario,skin,"Nombre de usuario o contraseña incorrecta");
+                    Beans.popUp(escenario,skin,"ERROR","Nombre de usuario o contraseña incorrecta");
                 }
             }
         });
@@ -101,10 +97,10 @@ public class PantallaLogIn extends PantallaBase {
                 System.out.println("clickeado btnRegister");
                 if(accesoDatos.isUsuarioNombreLibre(registerName.getText())){
                     accesoDatos.addUsuario(new Usuario(0,registerAlias.getText(),registerName.getText(),registerPass.getText()));
-                    game.setUsuario(accesoDatos.logIn(registerName.getText().trim(),registerPass.getText().trim()));
-                    Beans.popUp(escenario,skin,"Registro exitoso "+game.getUsuario().getNombreUsuario());
+                    //game.setUsuario(accesoDatos.logIn(registerName.getText().trim(),registerPass.getText().trim()));
+                    Beans.popUp(escenario,skin,"Registro exitoso ","Bienvenido "+game.getUsuario().getNombreUsuario());
                 }else{
-                    Beans.popUp(escenario,skin,"Nombre no disponible");
+                    Beans.popUp(escenario,skin,"ERROR","Nombre de usuario o contraseña incorrecta");
                 }
 
             }
@@ -123,6 +119,10 @@ public class PantallaLogIn extends PantallaBase {
             }
         });
 
+        lblusuario = new Label("Bienvenido "+game.getUsuario().getNombreUsuario(),skin);
+        lblusuario.setFontScale(Constantes.TAMAÑOTEXTO);
+        lblusuario.setPosition(escenario.getWidth()-lblusuario.getWidth()-Constantes.PIXELS_IN_METER_X/2,escenario.getHeight()/14);
+
         Gdx.input.setInputProcessor(escenario);
         escenario.addActor(fondo);
         escenario.addActor(lblLogIn);
@@ -135,6 +135,7 @@ public class PantallaLogIn extends PantallaBase {
         escenario.addActor(registerAlias);
         escenario.addActor(registerPass);
         escenario.addActor(btnRegister);
+        escenario.addActor(lblusuario);
 
     }
 
