@@ -55,7 +55,7 @@ public class PantallaJuego extends PantallaBase {
 
         escenario = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         escenarioControles = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        mundo = new World(new Vector2(0, -12), true); // Nuevo mundo de gravedad en eje Y = -10
+        mundo = new World(new Vector2(0, -12), true); // Nuevo mundo de gravedad en eje Y = -12
 
         cancionJuego = game.getManager().get("sonidos/cancionjuego.ogg");
         sonidoChoque = game.getManager().get("sonidos/choque.wav");
@@ -98,6 +98,7 @@ public class PantallaJuego extends PantallaBase {
                 System.out.println("clickeado btnMenu");
                 cancionJuego.stop();
                 PantallaMenu.setPantallaMenu(true);
+                PantallaMenu.primerInicio=false;
                 PantallaJuego.super.getGame().setScreen(PantallaJuego.super.getGame().getPantallaMenu());
                 return true;
             }

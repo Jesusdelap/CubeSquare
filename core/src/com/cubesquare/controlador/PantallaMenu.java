@@ -59,7 +59,7 @@ public class PantallaMenu extends PantallaBase {
 
     private Texture btnSonidoActivado, btnSonidoDesactivado, texturaGit, texturaLibgdx;
     private Button btnSonido, btnGit, btnLibgdx;
-    private boolean primerInicio = true;
+    public static boolean primerInicio = true;
     private static boolean sonido = false;
     private static boolean pantallaMenu = true;
 
@@ -292,7 +292,7 @@ public class PantallaMenu extends PantallaBase {
         contenedor.setFillParent(true);
         contenedor.center();
 
-       tablaMenu.setFillParent(true);
+        tablaMenu.setFillParent(true);
         tablaMenu.add(titulo).colspan(2);
         tablaMenu.row();
         tablaMenu.add(btnJuego).width(escenario.getWidth() * 0.2f).height(escenario.getHeight() * 0.1f).colspan(2);
