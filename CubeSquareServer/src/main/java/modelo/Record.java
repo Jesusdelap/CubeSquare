@@ -1,5 +1,9 @@
 package modelo;
-
+/**
+ * Modelo Record
+ *
+ *
+ */
 public class Record {
 	
 	private int idRecord;
@@ -8,7 +12,7 @@ public class Record {
 	private String alias;
 	
 	
-	
+
 	public Record(int idRecord, int idUsuario, int distanciaRecorrida, String alias) {
 		super();
 		this.idRecord = idRecord;
@@ -50,7 +54,16 @@ public class Record {
 		this.alias = alias;
 	}
 	
-	
+
+    @Override
+    public String toString() {
+        return "Record{" +
+                "idRecord=" + idRecord +
+                ", idUsuario=" + idUsuario +
+                ", distanciaRecorrida=" + distanciaRecorrida +
+                ", alias='" + alias + '\'' +
+                '}';
+    }
 	
 
 }

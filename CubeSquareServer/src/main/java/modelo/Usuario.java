@@ -1,5 +1,7 @@
 package modelo;
-
+/**
+ * Modelo de Usuario
+ */
 public class Usuario {
 	
 	private int idusuario;

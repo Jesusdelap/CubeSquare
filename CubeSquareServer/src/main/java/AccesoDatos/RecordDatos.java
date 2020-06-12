@@ -65,9 +65,9 @@ public class RecordDatos<E> implements InterfazDatos {
 		c.getConnection();
 		
 		st = c.getConnection().createStatement();
-		rs = st.executeQuery("SELECT idRecord, u.idUsuario,  distanciaRecorrida , alias FROM usuario u, record r WHERE u.idusuario =r.idusuario");
+		rs = st.executeQuery("SELECT * FROM record");
 		while(rs.next()) {
-		arr.add(new Record( rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4)));
+		arr.add(new Record( rs.getInt(1),rs.getInt(2),rs.getInt(3)));
 		}
 		st.close();
 		rs.close();
@@ -94,13 +94,13 @@ public class RecordDatos<E> implements InterfazDatos {
 	}
 	
 	
-	public ArrayList<Record> listarRecords() throws SQLException{
+	public ArrayList<Record> listarRecords(int limit) throws SQLException{
 		ConnexionSQL c = new ConnexionSQL();
 		ArrayList<Record> arr = new ArrayList<Record>();
 		c.getConnection();
 		
 		st = c.getConnection().createStatement();
-		rs = st.executeQuery("SELECT idRecord,u.idUsuario, distanciaRecorrida, alias FROM `db_a5772b_cubesqu`.usuario u, `db_a5772b_cubesqu`.record r WHERE u.idusuario =r.idusuario ORDER BY distanciaRecorrida DESC");
+		rs = st.executeQuery("SELECT idrecord,u.idusuario,distanciaRecorrida, alias   FROM usuario u JOIN  record r ON u.idusuario =r.idusuario ORDER BY distanciaRecorrida DESC LIMIT "+limit);
 		while(rs.next()) {
 		arr.add(new Record( rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4)));
 		}

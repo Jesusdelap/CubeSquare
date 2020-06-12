@@ -26,7 +26,6 @@ public class HttpListener implements Net.HttpResponseListener {
         Gdx.app.error("HTTP",estado);
         Gdx.app.error("HTTP",t.getMessage());
         t.printStackTrace();
-
     }
 
     @Override

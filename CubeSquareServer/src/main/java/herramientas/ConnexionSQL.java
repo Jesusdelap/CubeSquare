@@ -8,24 +8,13 @@ import java.sql.SQLException;
 
 
 public class ConnexionSQL {
-    /* Logger
-    private static Logger logger;
-    static {
-        try {
-            logger = LogManager.getLogger(ConnexionSQL.class);
-        } catch (Throwable e) {
-            System.out.println("Logger no funciona");
-        }
-    }
 
-     */
 
     Connection connection = null;
-
-
-    String url = "jdbc:mysql://mysql5017.site4now.net:3306/db_a5772b_cubesqu?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    String user = "a5772b_cubesqu";
-    String password = "CubeSqu42";
+    
+    String url = "jdbc:mysql://localhost:3306/cubesquare?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    String user = "root";
+    String password = "root";
 
 
     public ConnexionSQL() {
@@ -43,11 +32,7 @@ public class ConnexionSQL {
 
 
         } catch (Exception e) {
-            System.out.println("error: "+ e);
-            /*
-            logger.error("Otro problema: " + E);
-
-             */
+            System.out.println("NO SQL ERROR :\n "+ e);
 
         }
     }

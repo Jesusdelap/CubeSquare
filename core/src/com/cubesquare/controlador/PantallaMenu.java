@@ -444,7 +444,7 @@ public class PantallaMenu extends PantallaBase {
 //btnSonido.setSize(50, 50);
 //btnSonido.setPosition(Gdx.graphics.getWidth() - 200, 150);
 
-        /**/
+/**/
         /*escenario.addActor(btnSonido);
         escenario.addActor(creditos);
         escenario.addActor(btnGit);
