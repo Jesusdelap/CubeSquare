@@ -9,7 +9,7 @@ public class HttpHerramientas {
 
 
         Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.GET);
-        request.setUrl("http://192.168.1.36:8080/"+url);
+        request.setUrl("http://localhost:8080/"+url);
         Gdx.net.sendHttpRequest(request, lisener);
     }
 

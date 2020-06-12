@@ -27,6 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.cubesquare.herramientas.Beans;
 import com.cubesquare.herramientas.Constantes;
 import com.cubesquare.herramientas.Fabricas;
 import com.cubesquare.herramientas.HttpHerramientas;
@@ -81,6 +82,7 @@ public class PantallaMenu extends PantallaBase {
      * El constructor, declaramos los parámetros de la clase PantallaMenu. También iniciamos
      * las canciones en el menú y la opción de desactivarlas.
      *
+     * @author Jesús Jiménez
      * @param game
      * @author Jesús Jiménez
      */
@@ -164,8 +166,9 @@ public class PantallaMenu extends PantallaBase {
                 System.out.println("clickeado btnRanking");
                 if (game.getAccesoDatos().ping()) {
                     getGame().setScreen(getGame().getPantallaRanking());
-                } else {
-                    Gdx.app.log("PantallaMenu/btnRanking", "no Connexion");
+                }else{
+                    Beans.popUp(escenario,skin,"ERROR","Sin Conexion");
+                    Gdx.app.log("PantallaMenu/btnRanking","no Connexion");
                 }
             }
 
@@ -183,8 +186,9 @@ public class PantallaMenu extends PantallaBase {
                 System.out.println("clickeado btnRanking");
                 if (game.getAccesoDatos().ping()) {
                     getGame().setScreen(getGame().getPantallaLogIn());
-                } else {
-                    Gdx.app.log("PantallaMenu/btnLogIn", "no Connexion");
+                }else{
+                    Gdx.app.log("PantallaMenu/btnLogIn","no Connexion");
+                    Beans.popUp(escenario,skin,"ERROR","Sin Conexion");
                 }
             }
 

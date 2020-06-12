@@ -47,7 +47,6 @@ public class PantallaRanking extends PantallaBase{
     /**
      * El método show muestra ala tabla de usuarios con máxima puntuación. Crea la tabla y
      * los textos de cada columna.
-     *
      * @author Jesús Jiménez
      */
 
@@ -67,6 +66,7 @@ public class PantallaRanking extends PantallaBase{
         table.row();
 
         ArrayList<Record> recordArrayList = game.getAccesoDatos().listarRecordsConAlias(10);
+        System.out.println(recordArrayList+" arr");
         for(int i = 0; i<recordArrayList.size(); i++){
 
             alias = new Label(recordArrayList.get(i).getAlias(),skin4);
