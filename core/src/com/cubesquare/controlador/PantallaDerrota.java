@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.cubesquare.herramientas.Beans;
+import com.cubesquare.herramientas.Constantes;
 import com.cubesquare.modelo.Record;
 
 public class PantallaDerrota extends PantallaBase {
@@ -70,7 +71,8 @@ public class PantallaDerrota extends PantallaBase {
         textoDerrota.setColor(1,0,0,1);
 
         btnReinicio = new TextButton("Reintentar",skin);
-        btnReinicio.setSize((float) (escenario.getWidth()*0.2), (float) (escenario.getHeight()*0.1));
+        btnReinicio.setSize((float) (escenario.getWidth()*0.3), (float) (escenario.getHeight()*0.1));
+        btnReinicio.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
         btnReinicio.setPosition(escenario.getWidth()/2-btnReinicio.getWidth()-50, escenario.getHeight()*0.3f);
 
         btnReinicio.addCaptureListener(new ChangeListener() {
@@ -82,7 +84,8 @@ public class PantallaDerrota extends PantallaBase {
         });
 
         btnSalir = new TextButton("Salir al menu",skin);
-        btnSalir.setSize((float) (escenario.getWidth()*0.2), (float) (escenario.getHeight()*0.1));
+        btnSalir.setSize((float) (escenario.getWidth()*0.3), (float) (escenario.getHeight()*0.1));
+        btnSalir.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
         btnSalir.setPosition(btnReinicio.getX() + btnSalir.getWidth()+50, escenario.getHeight()*0.3f);
 
         btnSalir.addCaptureListener(new ChangeListener() {

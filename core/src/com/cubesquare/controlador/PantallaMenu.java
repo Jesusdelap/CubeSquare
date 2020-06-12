@@ -370,7 +370,7 @@ public class PantallaMenu extends PantallaBase {
         escenario.addActor(fondo);
         escenario.addActor(suelo);
         escenario.addActor(tablaMenu);
-        escenario.setDebugAll(true);
+        //escenario.setDebugAll(true);
         escenario.addActor(cubo);
         escenario.addActor(creditos);
         escenario.addActor(btnGit);

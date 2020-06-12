@@ -5,42 +5,33 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Manifold;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.cubesquare.herramientas.Constantes;
-import com.cubesquare.herramientas.Fabricas;
-import com.cubesquare.modelo.entidades.ActorJugador;
-import com.cubesquare.modelo.entidades.ActorSuelo;
 
-public class PantallaSkins extends PantallaBase{
+public class PantallaSkins extends PantallaBase {
 
 
-    private static String tipoCubo="cubo.png";
+    private static String tipoCubo = "cubo.png";
     private Stage escenario;
     private Button btnSkin1, btnSkin2;
     private ImageTextButton btnSalir;
     private Skin skin;
     private Music cancionMenu;
-    private Image fondo,titulo;
+    private Image fondo, titulo;
     private Texture texturaSkin1, texturaSkin2;
     private Label textoSkin;
-    private Table tabla;
+    private Table tabla, tablaSkin1, tablaSkin2, tabla4;
 
     public static String getTipoCubo() {
         return tipoCubo;
@@ -60,9 +51,8 @@ public class PantallaSkins extends PantallaBase{
      * o iniciar un nivel. Crea la música de la pantalla. Crea el suelo y por último añade
      * al cubo y enemigos.
      *
-     * @author Jesús de la Peña
-     *
      * @return void
+     * @author Jesús de la Peña
      */
     @Override
     public void show() {
@@ -75,23 +65,21 @@ public class PantallaSkins extends PantallaBase{
 
         //IMAGEN CON EL TÍTULO DEL JUEGO
         titulo = new Image(game.getManager().get("titulo.png", Texture.class));
-        //titulo.setPosition((escenario.getWidth() / 2) - titulo.getWidth() / 2, escenario.getHeight() - 360);
 
         //LABEL SKINS
-        textoSkin = new Label("Selecciona un skin ",skin);
-        //textoSkin.setPosition(((escenario.getWidth() / 2 -titulo.getWidth() / 2)), titulo.getY() -2);
+        textoSkin = new Label("Selecciona un cubo ", skin);
         textoSkin.setFontScale(2);
 
         //BOTÓN SKIN 1
         texturaSkin1 = new Texture("cuboEnfadado.png");
         SpriteDrawable cuboEnfadado = new SpriteDrawable(new Sprite(texturaSkin1));
-        btnSkin1 = new Button(new Button.ButtonStyle(cuboEnfadado,cuboEnfadado,cuboEnfadado));
+        btnSkin1 = new Button(new Button.ButtonStyle(cuboEnfadado, cuboEnfadado, cuboEnfadado));
         btnSkin1.setSize(64, 64);
-        btnSkin1.setPosition(escenario.getWidth()/2-btnSkin1.getWidth()-50, escenario.getHeight()*0.3f);
+        btnSkin1.setPosition(escenario.getWidth() / 2 - btnSkin1.getWidth() - 50, escenario.getHeight() * 0.3f);
         btnSkin1.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                tipoCubo="cuboEnfadado.png";
+                tipoCubo = "cuboEnfadado.png";
                 game.setScreen(game.getPantallaTipoJuego());
             }
         });
@@ -99,13 +87,13 @@ public class PantallaSkins extends PantallaBase{
         //BOTÓN SKIN 2
         texturaSkin2 = new Texture("cubo.png");
         SpriteDrawable cubeSquare = new SpriteDrawable(new Sprite(texturaSkin2));
-        btnSkin2 = new Button(new Button.ButtonStyle(cubeSquare,cubeSquare,cubeSquare));
+        btnSkin2 = new Button(new Button.ButtonStyle(cubeSquare, cubeSquare, cubeSquare));
         btnSkin2.setSize(64, 64);
-        btnSkin2.setPosition(btnSkin1.getX() + btnSkin2.getWidth()+50, escenario.getHeight()*0.3f);
+        btnSkin2.setPosition(btnSkin1.getX() + btnSkin2.getWidth() + 50, escenario.getHeight() * 0.3f);
         btnSkin2.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                tipoCubo="cubo.png";
+                tipoCubo = "cubo.png";
                 game.setScreen(game.getPantallaTipoJuego());
             }
         });
@@ -113,8 +101,8 @@ public class PantallaSkins extends PantallaBase{
         //BOTÓN VOLVER AL MENU
         btnSalir = new ImageTextButton("Volver", skin);
         btnSalir.setSize((float) (escenario.getWidth() * 0.25), (float) (escenario.getHeight() * 0.1));
-        btnSalir.setPosition(btnSkin2.getX(), (btnSkin2.getY()- btnSkin2.getHeight()) -Constantes.PIXELS_IN_METER_Y/4);
-        btnSalir.getLabel().setFontScale(escenario.getViewport().getScreenWidth()*0.001f);
+        btnSalir.setPosition(btnSkin2.getX(), (btnSkin2.getY() - btnSkin2.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
+        btnSalir.getLabel().setFontScale(escenario.getViewport().getScreenWidth() * 0.001f);
 
         btnSalir.addCaptureListener(new ChangeListener() {
             @Override
@@ -125,17 +113,38 @@ public class PantallaSkins extends PantallaBase{
         });
 
 
+       // titulo.setAlign(Align.center);
+
         tabla = new Table();
-        tabla.setFillParent(true);
         tabla.center();
-        tabla.add(titulo);
+        tabla.setFillParent(true);
+        //tabla.defaults().pad(10F);
+
+        tablaSkin1 = new Table();
+        tablaSkin1.add(btnSkin1);
+
+        tablaSkin2 = new Table();
+        tablaSkin2.add(btnSkin2);
+
+        tabla.add(titulo).colspan(2).align(Align.center).expand();
         tabla.row();
-        tabla.add(textoSkin);
+        tabla.add(textoSkin).colspan(2).align(Align.center).expand();
         tabla.row();
-        tabla.add(btnSkin1).left();
-        tabla.add(btnSkin2);
+        tabla.add(tablaSkin1).right().padRight(50f).expand();
+        tabla.add(tablaSkin2).left().padLeft(50f).expand();
         tabla.row();
-        tabla.add(btnSalir);
+        tabla.add(btnSalir).colspan(2).align(Align.center).expand();
+
+
+        /*tabla.center();
+        tabla.add(titulo).expand();
+        tabla.row();
+        tabla.add(textoSkin).expand();
+        tabla.row();
+        tabla.add(btnSkin1);
+        tabla.add(btnSkin2).colspan(1);
+        tabla.row();
+        tabla.add(btnSalir);*/
 
         //ACTIVAMOS EL SONIDO SÓLO SI SU VARIABLE DE CONTROL ESTÁ ACTIVA. EN CASO CONTRARIO, EL LOGO DE SONIDO ES EL DE DESACTIVADO
         if (PantallaMenu.isSonido()) {
@@ -145,6 +154,7 @@ public class PantallaSkins extends PantallaBase{
         //AÑADIMOS TODOS LOS ACTORES AL ESCENARIO
         escenario.addActor(fondo);
         escenario.addActor(tabla);
+        //escenario.setDebugAll(true);
 
     }
 
