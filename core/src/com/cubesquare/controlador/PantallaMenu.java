@@ -1,6 +1,7 @@
 package com.cubesquare.controlador;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Net;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -27,6 +28,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.cubesquare.datos.ConectarMySQL;
 import com.cubesquare.herramientas.Beans;
 import com.cubesquare.herramientas.Constantes;
 import com.cubesquare.herramientas.Fabricas;
@@ -164,15 +166,18 @@ public class PantallaMenu extends PantallaBase {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("clickeado btnRanking");
-                if (game.getAccesoDatos().ping()) {
+                ConectarMySQL con = new ConectarMySQL();
+                    con.create();
+                    con.render();
+
+                /*if (game.getAccesoDatos().ping()) {
                     getGame().setScreen(getGame().getPantallaRanking());
                 }else{
                     Beans.popUp(escenario,skin,"ERROR","Sin Conexion");
                     Gdx.app.log("PantallaMenu/btnRanking","no Connexion");
-                }
+                }*/
             }
 
-            ;
         });
 
 
@@ -370,7 +375,7 @@ public class PantallaMenu extends PantallaBase {
         escenario.addActor(fondo);
         escenario.addActor(suelo);
         escenario.addActor(tablaMenu);
-        //escenario.setDebugAll(true);
+        escenario.setDebugAll(true);
         escenario.addActor(cubo);
         escenario.addActor(creditos);
         escenario.addActor(btnGit);
