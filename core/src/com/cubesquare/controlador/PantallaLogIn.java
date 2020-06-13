@@ -97,10 +97,9 @@ public class PantallaLogIn extends PantallaBase {
                 System.out.println("clickeado btnRegister");
                 if(accesoDatos.isUsuarioNombreLibre(registerName.getText())){
                     accesoDatos.addUsuario(new Usuario(0,registerAlias.getText(),registerName.getText(),registerPass.getText()));
-                    //game.setUsuario(accesoDatos.logIn(registerName.getText().trim(),registerPass.getText().trim()));
                     Beans.popUp(escenario,skin,"Registro exitoso ","Bienvenido "+game.getUsuario().getNombreUsuario());
                 }else{
-                    Beans.popUp(escenario,skin,"ERROR","Nombre de usuario o contraseña incorrecta");
+                    Beans.popUp(escenario,skin,"ERROR","Nombre de usuario no disponible");
                 }
 
             }

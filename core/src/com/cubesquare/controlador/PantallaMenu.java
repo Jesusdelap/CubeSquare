@@ -168,7 +168,7 @@ public class PantallaMenu extends PantallaBase {
                 if (game.getAccesoDatos().ping()) {
                     getGame().setScreen(getGame().getPantallaRanking());
                 }else{
-                    Beans.popUp(escenario,skin,"ERROR","Sin Conexion");
+                    Beans.popUp(escenario,skin4,"ERROR","Sin Conexion");
                     Gdx.app.log("PantallaMenu/btnRanking","no Connexion");
                 }
             }
@@ -188,7 +188,7 @@ public class PantallaMenu extends PantallaBase {
                     getGame().setScreen(getGame().getPantallaLogIn());
                 }else{
                     Gdx.app.log("PantallaMenu/btnLogIn","no Connexion");
-                    Beans.popUp(escenario,skin,"ERROR","Sin Conexion");
+                    Beans.popUp(escenario,skin4,"ERROR","Sin Conexion");
                 }
             }
 
