@@ -12,13 +12,6 @@ public class PantallaCarga extends PantallaBase {
     private Label carga;
     private Skin skin;
 
-    /**
-     * Constructor de la clase PantallaCarga. Nos permite declarar todos los parámetros,
-     * siendo el parámetro que se hereda game. Cargamos también el gráfico de la pantalla.
-     *
-     * @autor Jesús Jiménez
-     * @param game
-     */
 
     public PantallaCarga(CubeSquare game) {
         super(game);
@@ -27,13 +20,6 @@ public class PantallaCarga extends PantallaBase {
         carga = new Label("¡Cargando! ¡Espere, por favor!", skin);
 
     }
-
-    /**
-     * El método show muestra la pantalla de carga. Añade el escenario y escala
-     * las letras y botones que se puedan poner en la pantalla.
-     *
-     * @author Jesús Jiménez
-     */
 
     @Override
     public void show() {
@@ -68,5 +54,7 @@ public class PantallaCarga extends PantallaBase {
         skin.dispose();
         escenario.dispose();
     }
+
+
 
 }

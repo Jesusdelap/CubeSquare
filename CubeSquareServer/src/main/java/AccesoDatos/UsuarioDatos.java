@@ -97,14 +97,19 @@ public class UsuarioDatos<E> implements InterfazDatos{
 		Usuario u;
 		st = c.getConnection().createStatement();
 		rs = st.executeQuery("SELECT * FROM usuario where nombreUsuario = '"+nombreUsuario+"' and contrasena = '"+contrasena+"' " );
-		
-		if(rs.next()) {
-			System.out.println("Usuario Encontrado");
-			u = new Usuario( rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4));
-		}else {
-			System.out.println("Usuario no encontrado");
+		try {
+			if(rs.next()) {
+				System.out.println("Usuario Encontrado");
+				u = new Usuario( rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4));
+			}else {
+				System.out.println("Usuario no encontrado");
+				 u = new Usuario( 1,"unknown","unknownUser","42");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
 			 u = new Usuario( 1,"unknown","unknownUser","42");
 		}
+
 		
 		c.desconectar();
 		st.close();
@@ -120,12 +125,9 @@ public class UsuarioDatos<E> implements InterfazDatos{
 		st = c.getConnection().createStatement();
 		rs = st.executeQuery("SELECT COUNT(idusuario) FROM usuario WHERE nombreUsuario = '"+nombre+"'" );
 		rs.next();
-		if(rs.getInt(1)==1) {
+		if(rs.getInt(1)>=1) {
 			System.out.println("nombre utilizado");
 			respuesta = false;
-		}else if (rs.getInt(1)>1){
-			System.out.println("ERROR nombre repetido");
-			 respuesta = true;
 		}else {
 			System.out.println("Nombre libre");
 			respuesta = true;

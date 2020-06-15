@@ -38,11 +38,11 @@ public class PantallaLogIn extends PantallaBase {
         //fondo y lvls
         fondo = new Image(game.getManager().get("fondoestrella2.png", Texture.class));
         fondo.setFillParent(true);
-        lblLogIn = new Label("Log In", skin);
+        lblLogIn = new Label("Log in", skin);
         lblLogIn.setPosition(escenario.getWidth()/4 - lblLogIn.getWidth(),escenario.getHeight()*0.90f - lblLogIn.getHeight()/2);
         lblLogIn.setFontScale(Constantes.TAMAÑOTEXTO);
 
-        lblRegister = new Label("Register", skin);
+        lblRegister = new Label("Registro" , skin);
         lblRegister.setPosition(escenario.getWidth()*0.75f - lblRegister.getWidth(),escenario.getHeight()*0.90f - lblRegister.getHeight()/2);
         lblRegister.setFontScale(Constantes.TAMAÑOTEXTO);
 
@@ -51,11 +51,11 @@ public class PantallaLogIn extends PantallaBase {
         logInName.setSize(escenario.getWidth() * 0.15f, escenario.getHeight() * 0.07f);
         logInName.setPosition(lblLogIn.getX()-Constantes.PIXELS_IN_METER_X*0.75f, lblLogIn.getY()-(Constantes.PIXELS_IN_METER_Y/2+logInName.getWidth()/2));
 
-        logInPass = new TextField("Contraseña",skin);
+        logInPass = new TextField("Contrasena",skin);
         logInPass.setSize(escenario.getWidth()*0.15f, escenario.getHeight()*0.07f);
         logInPass.setPosition(lblLogIn.getX()-Constantes.PIXELS_IN_METER_X*0.75f, logInName.getY()-(Constantes.PIXELS_IN_METER_Y/2+logInName.getWidth()/2));
 
-        btnLogIn = new TextButton("LogIn", skin);
+        btnLogIn = new TextButton("Confirmar", skin);
         btnLogIn.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
         btnLogIn.setPosition(lblLogIn.getX()-Constantes.PIXELS_IN_METER_X*1.1f, logInPass.getY()-(logInName.getWidth()/2));
         btnLogIn.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
@@ -64,11 +64,13 @@ public class PantallaLogIn extends PantallaBase {
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("clickeado btnLogIn");
                 game.setUsuario(accesoDatos.logIn(logInName.getText().trim().toUpperCase(),logInPass.getText().trim()));
-                if(!game.getUsuario().getNombreUsuario().equals("unknownUser")){
+                game.setUsuario(accesoDatos.logIn(logInName.getText().trim().toUpperCase(),logInPass.getText().trim()));
+                if(!game.getUsuario().getNombreUsuario().equals("unknownUser") ){
                     Beans.popUp(escenario,skin,"LogIn exitoso ","Bienvenido "+game.getUsuario().getNombreUsuario());
                     System.out.println(logInName.getText()+"   "+logInPass.getText());
                     lblusuario.setText("Bienvenido "+game.getUsuario().getNombreUsuario());
                     lblusuario.setWidth(escenario.getWidth()-(lblusuario.getWidth()));
+
                 }else{
                     Beans.popUp(escenario,skin,"ERROR","Nombre de usuario o contraseña incorrecta");
                 }
@@ -84,11 +86,11 @@ public class PantallaLogIn extends PantallaBase {
         registerAlias.setSize(escenario.getWidth()*0.15f,escenario.getHeight()*0.07f);
         registerAlias.setPosition(lblRegister.getX()-Constantes.PIXELS_IN_METER_X*0.75f, registerName.getY()-(Constantes.PIXELS_IN_METER_Y/3+logInName.getWidth()/2));
 
-        registerPass = new TextField("Password",skin);
+        registerPass = new TextField("Contrasena",skin);
         registerPass.setSize(escenario.getWidth()*0.15f, escenario.getHeight()*0.07f);
         registerPass.setPosition(lblRegister.getX()-Constantes.PIXELS_IN_METER_X*0.75f, registerAlias.getY()-(Constantes.PIXELS_IN_METER_Y/3+logInName.getWidth()/2));
 
-        btnRegister = new TextButton("Register", skin);
+        btnRegister = new TextButton("Confirmar", skin);
         btnRegister.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
         btnRegister.setPosition(lblRegister.getX()-Constantes.PIXELS_IN_METER_X*1.1f, registerPass.getY()-(logInName.getWidth()/2));
         btnRegister.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
@@ -150,7 +152,15 @@ public class PantallaLogIn extends PantallaBase {
     @Override
     public void hide() {
     }
+    @Override
+    public void pause() {
+        game.getPantallaMenu().pause();
+    }
 
+    @Override
+    public void resume() {
+        game.getPantallaMenu().resume();
+    }
 
     @Override
     public void dispose() {

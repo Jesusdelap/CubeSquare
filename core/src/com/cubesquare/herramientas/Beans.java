@@ -1,5 +1,6 @@
 package com.cubesquare.herramientas;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
@@ -125,6 +126,8 @@ public class Beans {
         }.text("  "+texto+"  ").button("OK", false).key(1, true).show(escenario);
         d.getTitleLabel().setAlignment(1);
     }
+
+
 
 
 }

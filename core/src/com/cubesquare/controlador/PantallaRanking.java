@@ -111,6 +111,16 @@ public class PantallaRanking extends PantallaBase{
             ex.printStackTrace();
         }
     }
+    @Override
+    public void pause() {
+        game.getPantallaMenu().pause();
+    }
+
+    @Override
+    public void resume() {
+        game.getPantallaMenu().resume();
+    }
+
 
 
     @Override

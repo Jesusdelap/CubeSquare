@@ -142,9 +142,9 @@ public class PantallaMenu extends PantallaBase {
         });
 
         //BOTÓN Ranking
-        btnRanking = new TextButton("ranking", skin4);
+        btnRanking = new TextButton("Clasificacion", skin4);
         btnRanking.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
-        btnRanking.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
+        btnRanking.getLabel().setFontScale(Constantes.TAMAÑOTEXTO*0.75f);
         btnRanking.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -163,9 +163,9 @@ public class PantallaMenu extends PantallaBase {
 
 
         //BOTÓN LogIn
-        btnLogIn = new TextButton("LogIn", skin4);
+        btnLogIn = new TextButton("Inicio de sesion", skin4);
         btnLogIn.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
-        btnLogIn.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
+        btnLogIn.getLabel().setFontScale(Constantes.TAMAÑOTEXTO*0.75f);
         btnLogIn.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -196,7 +196,7 @@ public class PantallaMenu extends PantallaBase {
 
         //LABEL DE CRÉDITOS
         creditos = new Label("Desarrollado por:\nDIEGO CORRAL GONZALEZ, JESUS DE LA PENA Y JESUS JIMENEZ COZAR", skin);
-        creditos.setFontScale(Constantes.TAMAÑOTEXTO / 1.50f);
+        creditos.setFontScale(Constantes.TAMAÑOTEXTO / 2);
         creditos.addCaptureListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -209,7 +209,7 @@ public class PantallaMenu extends PantallaBase {
         SpriteDrawable git = new SpriteDrawable(new Sprite(texturaGit));
         btnGit = new Button(new Button.ButtonStyle(git, git, git));
         ;
-        btnGit.setSize(Constantes.PIXELS_IN_METER_X*0.75f, Constantes.PIXELS_IN_METER_Y*0.75f);
+        btnGit.setSize(Constantes.PIXELS_IN_METER_X*0.70f, Constantes.PIXELS_IN_METER_Y*0.75f);
         btnGit.addCaptureListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -405,32 +405,3 @@ public class PantallaMenu extends PantallaBase {
 
     }
 }
-
-//titulo.setPosition((escenario.getWidth() / 2) - titulo.getWidth() / 2, escenario.getHeight() - 360);
-//btnJuego.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, titulo.getY() - Constantes.PIXELS_IN_METER_Y);
-//btnTutorial.setPosition((escenario.getWidth() / 2) - btnJuego.getWidth() / 2, (btnJuego.getY() - btnJuego.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
-//btnLogIn.setPosition((escenario.getWidth() / 2) - btnRanking.getWidth() / 2, (btnRanking.getY() - btnRanking.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
-//btnSalir.setPosition(btnLogIn.getX(), (btnLogIn.getY() - btnLogIn.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
-//btnRanking.setPosition((escenario.getWidth() / 2) - btnTutorial.getWidth() / 2, (btnTutorial.getY() - btnTutorial.getHeight()) - Constantes.PIXELS_IN_METER_Y / 4);
-//btnSonido.setSize(50, 50);
-//btnSonido.setPosition(Gdx.graphics.getWidth() - 200, 150);
-
-/**/
-        /*escenario.addActor(btnSonido);
-        escenario.addActor(creditos);
-        escenario.addActor(btnGit);
-        escenario.addActor(btnLibgdx);
-        escenario.addActor(btnJuego);
-        escenario.addActor(btnSalir);
-        escenario.addActor(titulo);
-        escenario.addActor(btnRanking);
-        escenario.addActor(btnLogIn);
-        escenario.addActor(btnTutorial);*/
-//tabla.add(btnSonido.right());
-//tabla.row();
-//tabla.add(creditos,btnGit,btnLibgdx).right();
-//LIMPIAMOS PANTALLA Y ACTUALIZAMOS EL ESCENARIO EN CADA FOTOGRAMA PARA DIBUJARLO
-//Gdx.gl.glClearColor(0, 0.2f, 0.8f, 1);
-/*tablaMenu.add(creditos).width(30).height(30).right();
-        tablaMenu.add(btnGit).width(40).height(40).right();
-        tablaMenu.add(btnLibgdx).width(60).height(20).right();*/
