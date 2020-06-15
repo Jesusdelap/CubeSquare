@@ -56,17 +56,19 @@ public class PantallaLogIn extends PantallaBase {
         logInPass.setPosition(lblLogIn.getX()-Constantes.PIXELS_IN_METER_X*0.75f, logInName.getY()-(Constantes.PIXELS_IN_METER_Y/2+logInName.getWidth()/2));
 
         btnLogIn = new TextButton("LogIn", skin);
-        btnLogIn.setSize(escenario.getWidth()*0.15f,escenario.getHeight()*0.1f);
-        btnLogIn.setPosition(lblLogIn.getX()-Constantes.PIXELS_IN_METER_X*0.75f, logInPass.getY()-(logInName.getWidth()/2));
+        btnLogIn.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
+        btnLogIn.setPosition(lblLogIn.getX()-Constantes.PIXELS_IN_METER_X*1.1f, logInPass.getY()-(logInName.getWidth()/2));
         btnLogIn.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
         btnLogIn.addCaptureListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("clickeado btnLogIn");
-                game.setUsuario(accesoDatos.logIn(logInName.getText().trim(),logInPass.getText().trim()));
+                game.setUsuario(accesoDatos.logIn(logInName.getText().trim().toUpperCase(),logInPass.getText().trim()));
                 if(!game.getUsuario().getNombreUsuario().equals("unknownUser")){
                     Beans.popUp(escenario,skin,"LogIn exitoso ","Bienvenido "+game.getUsuario().getNombreUsuario());
                     System.out.println(logInName.getText()+"   "+logInPass.getText());
+                    lblusuario.setText("Bienvenido "+game.getUsuario().getNombreUsuario());
+                    lblusuario.setWidth(escenario.getWidth()-(lblusuario.getWidth()));
                 }else{
                     Beans.popUp(escenario,skin,"ERROR","Nombre de usuario o contraseña incorrecta");
                 }
@@ -87,17 +89,18 @@ public class PantallaLogIn extends PantallaBase {
         registerPass.setPosition(lblRegister.getX()-Constantes.PIXELS_IN_METER_X*0.75f, registerAlias.getY()-(Constantes.PIXELS_IN_METER_Y/3+logInName.getWidth()/2));
 
         btnRegister = new TextButton("Register", skin);
-        btnRegister.setSize(escenario.getWidth()*0.15f, escenario.getHeight()*0.1f);
-        btnRegister.setPosition(lblRegister.getX()-Constantes.PIXELS_IN_METER_X*0.75f, registerPass.getY()-(logInName.getWidth()/2));
+        btnRegister.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
+        btnRegister.setPosition(lblRegister.getX()-Constantes.PIXELS_IN_METER_X*1.1f, registerPass.getY()-(logInName.getWidth()/2));
         btnRegister.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
         btnRegister.addCaptureListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
                 System.out.println("clickeado btnRegister");
+                accesoDatos.isUsuarioNombreLibre(registerName.getText());
                 if(accesoDatos.isUsuarioNombreLibre(registerName.getText())){
-                    accesoDatos.addUsuario(new Usuario(0,registerAlias.getText(),registerName.getText(),registerPass.getText()));
-                    Beans.popUp(escenario,skin,"Registro exitoso ","Bienvenido "+game.getUsuario().getNombreUsuario());
+                    accesoDatos.addUsuario(new Usuario(0,registerAlias.getText().toUpperCase(),registerName.getText().toUpperCase(),registerPass.getText().toUpperCase()));
+                    Beans.popUp(escenario,skin,"Registro exitoso ","Bienvenido "+registerAlias.getText().toUpperCase()+"\n Haz log in para poder jugar con tu cuenta");
                 }else{
                     Beans.popUp(escenario,skin,"ERROR","Nombre de usuario no disponible");
                 }
@@ -106,7 +109,7 @@ public class PantallaLogIn extends PantallaBase {
         });
 
         //BOTÓN VOLVER AL MENU
-        btnSalir = new TextButton("Volver al menu", skin);
+        btnSalir = new TextButton("Atras", skin);
         btnSalir.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
         btnSalir.setPosition(escenario.getWidth()/30,escenario.getHeight()/14);
         btnSalir.getLabel().setFontScale(Constantes.TAMAÑOTEXTO);
@@ -120,7 +123,7 @@ public class PantallaLogIn extends PantallaBase {
 
         lblusuario = new Label("Bienvenido "+game.getUsuario().getNombreUsuario(),skin);
         lblusuario.setFontScale(Constantes.TAMAÑOTEXTO);
-        lblusuario.setPosition(escenario.getWidth()-lblusuario.getWidth()-Constantes.PIXELS_IN_METER_X/2,escenario.getHeight()/14);
+        lblusuario.setPosition(escenario.getWidth()-(lblusuario.getWidth()*2),escenario.getHeight()/14);
 
         Gdx.input.setInputProcessor(escenario);
         escenario.addActor(fondo);

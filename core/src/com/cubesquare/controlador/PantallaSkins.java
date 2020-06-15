@@ -45,15 +45,7 @@ public class PantallaSkins extends PantallaBase {
         cancionMenu.setLooping(true);
     }
 
-    /**
-     * El método show permite mostrar la pantalla del selector de niveles. De momento solo
-     * está disponible el nivel 1. Declara los botones necesarios para volver al menú
-     * o iniciar un nivel. Crea la música de la pantalla. Crea el suelo y por último añade
-     * al cubo y enemigos.
-     *
-     * @return void
-     * @author Jesús de la Peña
-     */
+
     @Override
     public void show() {
         //ACTIVAMOS EL INPUT PROCESSOR PARA EL ESCENARIO
@@ -73,8 +65,9 @@ public class PantallaSkins extends PantallaBase {
         //BOTÓN SKIN 1
         texturaSkin1 = new Texture("cuboEnfadado.png");
         SpriteDrawable cuboEnfadado = new SpriteDrawable(new Sprite(texturaSkin1));
+        cuboEnfadado.setMinSize(Constantes.PIXELS_IN_METER_X*1.5f, Constantes.PIXELS_IN_METER_Y*1.5f);
         btnSkin1 = new Button(new Button.ButtonStyle(cuboEnfadado, cuboEnfadado, cuboEnfadado));
-        btnSkin1.setSize(64, 64);
+        btnSkin1.setSize(Constantes.PIXELS_IN_METER_X*2, Constantes.PIXELS_IN_METER_Y*2);
         btnSkin1.setPosition(escenario.getWidth() / 2 - btnSkin1.getWidth() - 50, escenario.getHeight() * 0.3f);
         btnSkin1.addCaptureListener(new ChangeListener() {
             @Override
@@ -87,8 +80,9 @@ public class PantallaSkins extends PantallaBase {
         //BOTÓN SKIN 2
         texturaSkin2 = new Texture("cubo.png");
         SpriteDrawable cubeSquare = new SpriteDrawable(new Sprite(texturaSkin2));
+        cubeSquare.setMinSize(Constantes.PIXELS_IN_METER_X*1.5f, Constantes.PIXELS_IN_METER_Y*1.5f);
         btnSkin2 = new Button(new Button.ButtonStyle(cubeSquare, cubeSquare, cubeSquare));
-        btnSkin2.setSize(64, 64);
+        btnSkin2.setSize(Constantes.PIXELS_IN_METER_X*2, Constantes.PIXELS_IN_METER_Y*2);
         btnSkin2.setPosition(btnSkin1.getX() + btnSkin2.getWidth() + 50, escenario.getHeight() * 0.3f);
         btnSkin2.addCaptureListener(new ChangeListener() {
             @Override
@@ -136,15 +130,7 @@ public class PantallaSkins extends PantallaBase {
         tabla.add(btnSalir).colspan(2).align(Align.center).expand();
 
 
-        /*tabla.center();
-        tabla.add(titulo).expand();
-        tabla.row();
-        tabla.add(textoSkin).expand();
-        tabla.row();
-        tabla.add(btnSkin1);
-        tabla.add(btnSkin2).colspan(1);
-        tabla.row();
-        tabla.add(btnSalir);*/
+
 
         //ACTIVAMOS EL SONIDO SÓLO SI SU VARIABLE DE CONTROL ESTÁ ACTIVA. EN CASO CONTRARIO, EL LOGO DE SONIDO ES EL DE DESACTIVADO
         if (PantallaMenu.isSonido()) {
@@ -158,13 +144,7 @@ public class PantallaSkins extends PantallaBase {
 
     }
 
-    /**
-     * Se llama cada vez que se actualiza la pantalla (30 o 60 veces por segundo dependiedo del dispositivo)
-     *
-     * @param delta tiempo de diferencia entre el anterior fotograma y este
-     * @return void
-     * @author Jesús Peña
-     */
+
     @Override
     public void render(float delta) {
         //LIMPIAMOS PANTALLA Y ACTUALIZAMOS EL ESCENARIO EN CADA FOTOGRAMA PARA DIBUJARLO
@@ -178,22 +158,14 @@ public class PantallaSkins extends PantallaBase {
         Gdx.input.setInputProcessor(null);
     }
 
-    /**
-     * El método pausa permite pausar o terminar la música del juego.
-     *
-     * @author Jesús de la Peña, Diego Corral
-     */
+
 
     @Override
     public void pause() {
         cancionMenu.pause();
     }
 
-    /**
-     * El método resume permite iniciar el sonido de la música.
-     *
-     * @author Jesús de la Peña
-     */
+
     @Override
     public void resume() {
         if (PantallaMenu.isSonido()) {
@@ -201,12 +173,7 @@ public class PantallaSkins extends PantallaBase {
         }
     }
 
-    /**
-     * El método dispose pone fin a la pantalla que te permite seleccionar el nivel deseado.
-     * Este método se activa siempre que salgamos de la pantalla.
-     *
-     * @author Jesús Jiménez
-     */
+
     @Override
     public void dispose() {
         escenario.dispose();

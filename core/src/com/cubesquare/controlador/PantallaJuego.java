@@ -91,7 +91,7 @@ public class PantallaJuego extends PantallaBase {
         btnMenu = new TextButton("Menu", skin);
         btnMenu.setSize(Constantes.PIXELS_IN_METER_X * 1.50f, Constantes.PIXELS_IN_METER_Y * 0.8f);
         btnMenu.setPosition(escenarioControles.getWidth() - (btnMenu.getWidth() + Constantes.PIXELS_IN_METER_X / 5), escenarioControles.getHeight() - (btnMenu.getHeight() + Constantes.PIXELS_IN_METER_Y / 5));
-
+        btnMenu.getLabel().setFontScale(Constantes.TAMAÑOTEXTO/2);
         btnMenu.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -104,16 +104,6 @@ public class PantallaJuego extends PantallaBase {
             }
         });
 
-        /*btnMenu.addCaptureListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("clickeado btnMenu");
-                cancionJuego.stop();
-                PantallaMenu.setPantallaMenu(true);
-                PantallaJuego.super.getGame().setScreen(PantallaJuego.super.getGame().getPantallaMenu());
-
-            }
-        });*/
 
         //CREAMOS JUGADOR Y MAPA Y LOS AÑADIMOS AL ESCENARIO
         jugador = Fabricas.ActorFactory(mundo, game.getManager().get(PantallaSkins.getTipoCubo(), Texture.class));

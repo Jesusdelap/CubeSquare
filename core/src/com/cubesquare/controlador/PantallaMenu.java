@@ -78,14 +78,6 @@ public class PantallaMenu extends PantallaBase {
         return sonido;
     }
 
-    /**
-     * El constructor, declaramos los parámetros de la clase PantallaMenu. También iniciamos
-     * las canciones en el menú y la opción de desactivarlas.
-     *
-     * @author Jesús Jiménez
-     * @param game
-     * @author Jesús Jiménez
-     */
     public PantallaMenu(CubeSquare game) {
         super(game);
 
@@ -100,14 +92,7 @@ public class PantallaMenu extends PantallaBase {
 
     }
 
-    /**
-     * El método show se encarga de mostrar la pantalla. Carga el escenario, crea el fondo,
-     * pone la imagen del fondo y también  crea los botones del menú. Algo importante que hace
-     * este método es mendiante una variable booleana activar el sonido de la canción de intro
-     * o en su defecto desactivarlo.
-     *
-     * @author Jesús Jiménez
-     */
+
 
     @Override
     public void show() {
@@ -176,6 +161,7 @@ public class PantallaMenu extends PantallaBase {
         });
 
 
+
         //BOTÓN LogIn
         btnLogIn = new TextButton("LogIn", skin4);
         btnLogIn.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
@@ -210,7 +196,7 @@ public class PantallaMenu extends PantallaBase {
 
         //LABEL DE CRÉDITOS
         creditos = new Label("Desarrollado por:\nDIEGO CORRAL GONZALEZ, JESUS DE LA PENA Y JESUS JIMENEZ COZAR", skin);
-        creditos.setFontScale(Constantes.TAMAÑOTEXTO / 1.75f);
+        creditos.setFontScale(Constantes.TAMAÑOTEXTO / 1.50f);
         creditos.addCaptureListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -223,7 +209,7 @@ public class PantallaMenu extends PantallaBase {
         SpriteDrawable git = new SpriteDrawable(new Sprite(texturaGit));
         btnGit = new Button(new Button.ButtonStyle(git, git, git));
         ;
-        btnGit.setSize(40, 40);
+        btnGit.setSize(Constantes.PIXELS_IN_METER_X*0.75f, Constantes.PIXELS_IN_METER_Y*0.75f);
         btnGit.addCaptureListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -236,7 +222,7 @@ public class PantallaMenu extends PantallaBase {
         SpriteDrawable libgdx = new SpriteDrawable(new Sprite(texturaLibgdx));
         btnLibgdx = new Button(new Button.ButtonStyle(libgdx, libgdx, libgdx));
         ;
-        btnLibgdx.setSize(60, 20);
+        btnLibgdx.setSize(Constantes.PIXELS_IN_METER_X*1.5f, Constantes.PIXELS_IN_METER_Y*0.75f);
         btnLibgdx.addCaptureListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -307,8 +293,6 @@ public class PantallaMenu extends PantallaBase {
         tablaMenu.add(btnSalir).width(escenario.getWidth() * 0.2f).height(escenario.getHeight() * 0.1f).colspan(2);
         tablaMenu.row();
 
-       /* btnSonido.setSize(50,50);
-        btnSonido.setPosition(titulo.getWidth()-(titulo.getX()-titulo.getOriginX()),tablaMenu.getRowMinHeight(3));*/
 
 
         //ACTIVAMOS EL SONIDO SÓLO SI SU VARIABLE DE CONTROL ESTÁ ACTIVA. EN CASO CONTRARIO, EL LOGO DE SONIDO ES EL DE DESACTIVADO
@@ -370,24 +354,17 @@ public class PantallaMenu extends PantallaBase {
         escenario.addActor(fondo);
         escenario.addActor(suelo);
         escenario.addActor(tablaMenu);
-        escenario.setDebugAll(true);
+
         escenario.addActor(cubo);
         escenario.addActor(creditos);
         escenario.addActor(btnGit);
         escenario.addActor(btnLibgdx);
-        //escenario.addActor(btnSonido);
 
 
     }
 
 
-    /**
-     * Se llama cada vez que se actualiza la pantalla (30 o 60 veces por segundo dependiendo del dispositivo)
-     *
-     * @param delta tiempo de diferencia entre el anterior fotograma y este
-     * @return void
-     * @author Jesús Peña
-     */
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -414,13 +391,7 @@ public class PantallaMenu extends PantallaBase {
         }
     }
 
-    /**
-     * La función del método es poner fin a la pantalla cuando se seleccione una determinada acción.
-     * Cuando eso ocurra, el escenario, el sonido y el menú desaparecerán momentánamente
-     * hasta que volvamos a llamarlos.
-     *
-     * @author Jesús Jiménez
-     */
+
 
     @Override
     public void dispose() {

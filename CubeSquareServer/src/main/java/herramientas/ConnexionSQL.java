@@ -6,7 +6,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
+/*
+ * Connexion SQL
+ * <br/>
+ * en esta clase se crea la conexion
+ */
 public class ConnexionSQL {
 
 
@@ -40,9 +44,8 @@ public class ConnexionSQL {
     /*
      * Este metodo obtiene la conexion con la base de datos
      *
-     * @param none
      *
-     * @return Connection
+     * @return Connection 
      */
     public Connection getConnection() {
         return connection;

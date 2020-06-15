@@ -28,11 +28,7 @@ public class PantallaRanking extends PantallaBase{
     private Image fondo;
 
 
-    /**
-     * El constructor que inicia los parámetros de la clase PantallaRanking.
-     *
-     * @param game
-     */
+
 
     public PantallaRanking(CubeSquare game) {
         super(game);
@@ -44,11 +40,6 @@ public class PantallaRanking extends PantallaBase{
 
     }
 
-    /**
-     * El método show muestra ala tabla de usuarios con máxima puntuación. Crea la tabla y
-     * los textos de cada columna.
-     * @author Jesús Jiménez
-     */
 
     @Override
     public void show() {
@@ -103,13 +94,7 @@ public class PantallaRanking extends PantallaBase{
         escenario.addActor(table);
     }
 
-    /**
-     * Crea el color de las letras que tendrá la tabla y además se encarga de los frames
-     * de la clase.
-     *
-     * @author Jesús Jiménez
-     * @param delta
-     */
+
     public void render (float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -126,12 +111,7 @@ public class PantallaRanking extends PantallaBase{
         }
     }
 
-    /**
-     * El método dispose de esta clase permite ir a otra pantalla y limpiar todos
-     * los campos de esta clase.
-     *
-     * @author Jesús Jiménez
-     */
+
     @Override
     public void dispose(){
         escenario.clear();

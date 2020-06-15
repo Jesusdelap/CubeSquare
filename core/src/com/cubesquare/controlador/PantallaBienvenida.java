@@ -23,13 +23,7 @@ public class PantallaBienvenida extends PantallaBase {
     Texture img;
     private OrthographicCamera camera;
 
-    /**
-     * El constructor de la clase PantallaBienvenida, carga el escenario en el que
-     * el jugador se desenvolverá.
-     *
-     * @author Jesús Jiménez
-     * @param game
-     */
+
 
     public PantallaBienvenida(CubeSquare game) {
         super(game);
@@ -37,15 +31,7 @@ public class PantallaBienvenida extends PantallaBase {
         skin = new Skin(Gdx.files.internal("skin/star-soldier/skin/star-soldier-ui.json"));
 
     }
-    /**
-     * El método show sirve para mostrar la pantalla.
-     * En este método creamos el fondo de pantalla llamando al escenario.
-     * Además, creamos un mensaje de bienvenida que el usuario verá al iniciar el juego.
-     * También añadimos los "actores". Estos son el cubo y obstáculos
-     * que nos encontraremos en cada nivel.
-     *
-     * @author Jesús Jiménez
-     */
+
     public void show() {
 
         Gdx.input.setInputProcessor(escenario);
@@ -72,14 +58,7 @@ public class PantallaBienvenida extends PantallaBase {
             }
         });
     }
-    /**
-     * El método render es el que se encarga de que la pantalla de
-     * bienvenida haga una imagen (frame).
-     * Llama al parametro delta, que es la cantidad de segundos entre imágenes. (frames)
-     *
-     * @author Jesús Jiménez
-     * @param delta
-     */
+
     public void render(float delta) {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -99,11 +78,6 @@ public class PantallaBienvenida extends PantallaBase {
 
     }
 
-    /**
-     * El método dispose pone fin  la pantalla de bienvenida cuando el usuario toca la pantalla.
-     *
-     * @author Jesús Jiménez
-     */
     @Override
     public void dispose() {
         Gdx.input.setInputProcessor(null);

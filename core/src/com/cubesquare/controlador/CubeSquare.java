@@ -9,7 +9,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.cubesquare.datos.AccesoDatos;
 import com.cubesquare.modelo.Usuario;
 
-//Main
+/**
+ * Cube Square (game)
+ * <br/><br/>
+ * En esta clase se crean, inicializan y cargan todos los recursos necesarios
+ * que se utilizaran a lo largo de la ejecucion del juego
+ *
+ *
+ */
 public class CubeSquare extends Game {
 
     private AssetManager manager;
@@ -34,12 +41,10 @@ public class CubeSquare extends Game {
     private AccesoDatos accesoDatos;
     private Usuario usuario;
 
-    /**
-     * El método create carga todos los assets del juego, el usuario y la pantalla de carga.
-     *
-     * @author JesusPeña,Diego Corral,Jesús Jiménez
-     */
 
+    /**
+     * Este metodo se llama al inicar el juego
+     */
     @Override
     public void create() {
         manager = new AssetManager();
@@ -71,9 +76,10 @@ public class CubeSquare extends Game {
         setScreen(pantallaCarga);
     }
     /**
-     * El método finCarga termina de cargar todos los recursos del juego
+     * Este metodo se llama al terminar de cargar todos los objetos del
+     * AssetManager, aqui se carga la pantalla de bienvenida y se terminan
+     * de inicializar algunas clases
      *
-     * @author JesusPeña,Diego Corral,Jesús Jiménez
      */
     public void finCarga(){
 

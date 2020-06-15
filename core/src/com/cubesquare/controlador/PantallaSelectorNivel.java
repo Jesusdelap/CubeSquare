@@ -52,16 +52,7 @@ public class PantallaSelectorNivel extends PantallaBase{
             cancionMenu.setLooping(true);
         }
 
-    /**
-     * El método show permite mostrar la pantalla del selector de niveles. De momento solo
-     * está disponible el nivel 1. Declara los botones necesarios para volver al menú
-     * o iniciar un nivel. Crea la música de la pantalla. Crea el suelo y por último añade
-     * al cubo y enemigos.
-     *
-     * @author Jesús de la Peña
-     *
-     * @return void
-     */
+
         @Override
         public void show() {
             //ACTIVAMOS EL INPUT PROCESSOR PARA EL ESCENARIO
@@ -176,13 +167,6 @@ public class PantallaSelectorNivel extends PantallaBase{
 
         }
 
-        /**
-         * Se llama cada vez que se actualiza la pantalla (30 o 60 veces por segundo dependiedo del dispositivo)
-         *
-         * @param delta tiempo de diferencia entre el anterior fotograma y este
-         * @return void
-         * @author Jesús Peña
-         */
         @Override
         public void render(float delta) {
             //LIMPIAMOS PANTALLA Y ACTUALIZAMOS EL ESCENARIO EN CADA FOTOGRAMA PARA DIBUJARLO
@@ -199,33 +183,16 @@ public class PantallaSelectorNivel extends PantallaBase{
             trianguloEnfadado.destroy();
         }
 
-    /**
-     * El método pausa permite pausar o terminar la música del juego.
-     *
-     * @author Jesús de la Peña, Diego Corral
-     */
-
-    @Override
+        @Override
          public void pause() {
               cancionMenu.pause();
         }
 
-    /**
-     * El método resume permite iniciar el sonido de la música.
-     *
-     * @author Jesús de la Peña
-     */
         @Override
         public void resume() {
             cancionMenu.play();
         }
 
-    /**
-     * El método dispose pone fin a la pantalla que te permite seleccionar el nivel deseado.
-     * Este método se activa siempre que salgamos de la pantalla.
-     *
-     * @author Jesús Jiménez
-     */
         @Override
         public void dispose() {
             trianguloEnfadado.destroy();

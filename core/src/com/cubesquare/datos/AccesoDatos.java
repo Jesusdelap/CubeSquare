@@ -92,7 +92,7 @@ public class AccesoDatos {
         //
         HttpHerramientas.Connexion(url,httpListener);
         esperarRespuesta();
-        Gdx.app.log("AccesoDatos/NuevoUsuario","UsuarioAñadido" );
+        Gdx.app.log("AccesoDatos/NuevoUsuario","es libre: "+Beans.stringtoBolean(h.resultado) );
 
         return Beans.stringtoBolean(h.resultado);
     }
