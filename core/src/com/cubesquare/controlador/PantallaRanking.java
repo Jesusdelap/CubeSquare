@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.cubesquare.herramientas.Beans;
+import com.cubesquare.herramientas.Constantes;
 import com.cubesquare.modelo.Record;
 
 import java.util.ArrayList;
@@ -46,8 +47,8 @@ public class PantallaRanking extends PantallaBase{
 
         alias = new Label("Jugador:", skin4);
         distanciaRecorrida = new Label("Distancia:", skin4);
-        alias.setFontScale(2);
-        distanciaRecorrida.setFontScale(2);
+        alias.setFontScale(Constantes.TAMAÑOTEXTO*1.5f);
+        distanciaRecorrida.setFontScale(Constantes.TAMAÑOTEXTO*1.5f);
         table = new Table(skin4);
         table.center();
         table.align(0);
@@ -62,8 +63,8 @@ public class PantallaRanking extends PantallaBase{
 
             alias = new Label(recordArrayList.get(i).getAlias(),skin4);
             distanciaRecorrida = new Label(Integer.toString(recordArrayList.get(i).getDistanciaRecorrida()),skin4);
-            alias.setFontScale(3);
-            distanciaRecorrida.setFontScale(3);
+            alias.setFontScale(Constantes.TAMAÑOTEXTO*2);
+            distanciaRecorrida.setFontScale(Constantes.TAMAÑOTEXTO*2);
 
             table.add(alias);
             table.add(distanciaRecorrida);

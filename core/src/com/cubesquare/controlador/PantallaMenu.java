@@ -60,7 +60,7 @@ public class PantallaMenu extends PantallaBase {
     private Texture btnSonidoActivado, btnSonidoDesactivado, texturaGit, texturaLibgdx;
     private Button btnSonido, btnGit, btnLibgdx;
     public static boolean primerInicio = true;
-    private static boolean sonido = false;
+    private static boolean sonido = true;
     private static boolean pantallaMenu = true;
 
     private Container contenedor;
