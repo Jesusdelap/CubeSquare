@@ -163,7 +163,7 @@ public class PantallaMenu extends PantallaBase {
 
 
         //BOTÓN LogIn
-        btnLogIn = new TextButton("Inicia sesion", skin4);
+        btnLogIn = new TextButton("Iniciar sesion", skin4);
         btnLogIn.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
         btnLogIn.getLabel().setFontScale(Constantes.TAMAÑOTEXTO*0.75f);
         btnLogIn.addCaptureListener(new ChangeListener() {
