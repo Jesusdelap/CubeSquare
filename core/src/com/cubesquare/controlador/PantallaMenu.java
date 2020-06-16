@@ -142,7 +142,7 @@ public class PantallaMenu extends PantallaBase {
         });
 
         //BOTÓN Ranking
-        btnRanking = new TextButton("Clasificacion", skin4);
+        btnRanking = new TextButton("Ranking", skin4);
         btnRanking.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
         btnRanking.getLabel().setFontScale(Constantes.TAMAÑOTEXTO*0.75f);
         btnRanking.addCaptureListener(new ChangeListener() {
@@ -163,7 +163,7 @@ public class PantallaMenu extends PantallaBase {
 
 
         //BOTÓN LogIn
-        btnLogIn = new TextButton("Inicio de sesion", skin4);
+        btnLogIn = new TextButton("Inicia sesion", skin4);
         btnLogIn.setSize(escenario.getWidth() * 0.2f, escenario.getHeight() * 0.1f);
         btnLogIn.getLabel().setFontScale(Constantes.TAMAÑOTEXTO*0.75f);
         btnLogIn.addCaptureListener(new ChangeListener() {
